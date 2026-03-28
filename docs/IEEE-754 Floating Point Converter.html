@@ -75,7 +75,6 @@
     .btns{ display:flex; gap:8px; flex-wrap:wrap; }
     .sep{ height:1px; background:var(--line); margin:10px 0; }
 
-    /* checkbox bits row */
     .bitrow{
       margin-top:10px;
       border:1px solid var(--line);
@@ -106,7 +105,6 @@
       accent-color:#444;
     }
 
-    /* Footer */
     .footer{
       max-width:980px;
       margin:10px auto 28px;
@@ -117,7 +115,6 @@
     }
     .footer .dot{ margin:0 6px; color:var(--line); }
 
-    /* License button + dialog */
     .licenseLink{
       border:none;
       background:transparent;
@@ -215,6 +212,7 @@
       <div class="row">
         <div>
           <label>Decimal</label>
+          <!-- 保持 text：允许输入 3.14 / 1e-3 / NaN / Infinity -->
           <input id="dec" type="text" placeholder="e.g. 3.1415926, -0, NaN, Infinity, -Infinity" />
           <div class="hint">Typing here converts to IEEE-754 and updates Hex/Binary immediately.</div>
         </div>
@@ -413,7 +411,7 @@ SOFTWARE.</pre>
     else if(/^[-+]?inf(inity)?$/i.test(s)) num = s.startsWith("-") ? -Infinity : Infinity;
     else if(/^-\s*0(\.0*)?([eE][-+]?\d+)?$/.test(s)) num = -0;
     else {
-      num = Number(s);
+      num = Number(s); // 支持 3.14 / 1e-3 / -2.5
       if(Number.isNaN(num)) throw new Error("Decimal cannot be parsed.");
     }
 
@@ -540,8 +538,6 @@ SOFTWARE.</pre>
     const want = el.byteOrder.value;
     const arr = Array.from(bytes);
     const show = (want === "BE") ? arr : arr.slice().reverse();
-    el.outBytes.textContent = show.map(b => b.toString(16).padStart(2,"0")).toUpperCase ? "" : "";
-    // Fix: keep original formatting
     el.outBytes.textContent = show.map(b => b.toString(16).padStart(2,"0").toUpperCase()).join(" ");
 
     el.hex.value = hx;
@@ -646,7 +642,7 @@ SOFTWARE.</pre>
     updating = false;
   });
 
-  // --- License dialog bindings (FIX) ---
+  // --- License dialog bindings ---
   const licenseBtn = document.getElementById("licenseBtn");
   const licenseDialog = document.getElementById("licenseDialog");
   const licenseCloseBtn = document.getElementById("licenseCloseBtn");
