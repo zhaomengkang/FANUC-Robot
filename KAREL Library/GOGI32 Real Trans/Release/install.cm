@@ -1,0 +1,9 @@
+IF VAR $APPLICATION[2] "V8.**P/**"
+@7DC\ap.com
+ELSE
+IF VAR $APPLICATION[2] "V9.**P/**"
+@7DF\ap.com
+ELSE
+PRINT "The robot version is not V8 or V9"
+ENDIF
+ENDIF
