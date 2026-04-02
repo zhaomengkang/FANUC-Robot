@@ -1,0 +1,956 @@
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-- A_COMMENT
+-- 【Description】: 
+-- This is a free lightweight annotation
+-- import/export tool FOR:
+-- 'R, SR, PR, DI/DO, RI/RO,AI/AO, GI/GO, F, M, UALM
+-- 【Author】: Mengk
+-- 【E-mail】: 964210817z@gmail.com
+-- 【Version】: V25.7.28  28/JUL/2025
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+PROGRAM A_COMMENT
+%COMMENT = 'CommentTool'
+%NOSCANSVARS
+%RWACCESS
+%SYSTEM
+%POWERFAIL
+%NOLOCKGROUP
+%NOBUSYLAMP
+%NOPAUSE = ERROR + COMMAND + TPENABLE
+%NOABORT = ERROR + COMMAND + TPENABLE
+%NOPAUSESHFT
+%STACKSIZE = 3000
+%INCLUDE kliotyps
+
+CONST
+TERM 	= '$#$'
+SPLIT	= ','
+MAX_CMD = 15
+
+CONST 
+CMT_TYP_DI   = 101
+CMT_TYP_DO   = 102
+CMT_TYP_RI   = 103
+CMT_TYP_RO   = 104
+CMT_TYP_F    = 105
+CMT_TYP_M    = 106
+CMT_TYP_GI   = 107
+CMT_TYP_GO   = 108
+CMT_TYP_AI   = 109
+CMT_TYP_AO   = 110
+
+CMT_TYP_R	 = 201
+CMT_TYP_PR   = 202
+CMT_TYP_SR   = 203
+
+CMT_TYP_UALM = 301
+
+VAR
+csv_file	:FILE
+have_err	:BOOLEAN
+option_sel	:INTEGER
+file_path	:STRING[200]
+
+ROUTINE CLR_WND
+BEGIN
+	WRITE TPDISPLAY(CHR(128),CHR(137))
+	WRITE TPPROMPT(CHR(128),CHR(137))
+	WRITE TPSTATUS(CHR(128),CHR(137))
+    WRITE TPFUNC(CHR(128),CHR(137))
+END CLR_WND
+
+ROUTINE CNV_INT2STR(in_int:INTEGER):STRING
+VAR
+ret_str	:STRING[100]
+BEGIN
+	CNV_INT_STR(in_int,0,0,ret_str)
+	RETURN(SUB_STR(ret_str,2,STR_LEN(ret_str)-1))
+END CNV_INT2STR
+
+ROUTINE CNV_REAL2STR(in_real:REAL):STRING
+VAR
+ret_str	:STRING[100]
+BEGIN
+	CNV_REAL_STR(in_real,0,5,ret_str)
+	ret_str = SUB_STR(ret_str,2,STR_LEN(ret_str)-1)
+	IF(SUB_STR(ret_str,1,2)= '-.')THEN
+		ret_str = '-0.' + SUB_STR(ret_str,3,STR_LEN(ret_str)-2)
+		RETURN(ret_str)
+	ENDIF
+	
+	IF(SUB_STR(ret_str,1,1)= '.')THEN
+		ret_str = '0' + ret_str
+		RETURN(ret_str)
+	ENDIF
+	
+	RETURN(ret_str)
+END CNV_REAL2STR
+
+ROUTINE GET_COMMENT(in_type:INTEGER;in_index:INTEGER;out_cmt:STRING;status:INTEGER)
+VAR
+entry	:INTEGER
+temp_str	:STRING[100]
+
+BEGIN
+	SELECT in_type OF
+		-- Signal comment
+		CASE(CMT_TYP_DI):-- DI
+				GET_PORT_CMT(io_din,in_index,out_cmt,status)
+		CASE(CMT_TYP_DO):-- DO
+				GET_PORT_CMT(io_dout,in_index,out_cmt,status)
+		CASE(CMT_TYP_RI):-- RI
+				GET_PORT_CMT(io_rdi,in_index,out_cmt,status)
+		CASE(CMT_TYP_RO):-- RO
+				GET_PORT_CMT(io_rdo,in_index,out_cmt,status)
+		CASE(CMT_TYP_F):-- F
+				GET_PORT_CMT(io_flag,in_index,out_cmt,status)
+		CASE(CMT_TYP_M):-- M
+				GET_PORT_CMT(io_marker,in_index,out_cmt,status)
+		CASE(CMT_TYP_GI):-- GI
+				GET_PORT_CMT(io_gpin,in_index,out_cmt,status)
+		CASE(CMT_TYP_GO):-- GO
+				GET_PORT_CMT(io_gpout,in_index,out_cmt,status)
+		CASE(CMT_TYP_AI):-- AI
+				GET_PORT_CMT(io_anin,in_index,out_cmt,status)
+		CASE(CMT_TYP_AO):-- AO
+				GET_PORT_CMT(io_anout,in_index,out_cmt,status)
+				
+		
+		-- Register comment						
+		CASE(CMT_TYP_R):-- R
+				GET_REG_CMT(in_index,out_cmt,status)
+		CASE(CMT_TYP_PR):-- PR
+				GET_PREG_CMT(in_index,out_cmt,status)
+		CASE(CMT_TYP_SR):-- SR
+				GET_SREG_CMT(in_index,out_cmt,status)				
+				
+		CASE(CMT_TYP_UALM):-- Ualram
+				CNV_INT_STR(in_index,0,0,temp_str)
+				temp_str = SUB_STR(temp_str,INDEX(temp_str,' ')+1,STR_LEN(temp_str)-INDEX(temp_str,' '))
+				GET_VAR(0,'*SYSTEM*','$UALRM_MSG['+temp_str+']',out_cmt,status)
+	ELSE:
+		POST_ERR(38092,'[GET_COMMENT] invalid type',0,2)
+	ENDSELECT
+END GET_COMMENT
+
+ROUTINE GET_MAX(in_type:INTEGER):INTEGER
+VAR
+status	:INTEGER
+number	:INTEGER
+BEGIN
+	SELECT in_type OF
+		-- Signal comment
+		CASE(CMT_TYP_DI):-- DI
+				RETURN($MAX_DIG_PRT)
+		CASE(CMT_TYP_DO):-- DO
+				RETURN($MAX_DIG_PRT)
+		CASE(CMT_TYP_RI):-- RI
+				RETURN(8)
+		CASE(CMT_TYP_RO):-- RO
+				RETURN(8)
+		CASE(CMT_TYP_F):-- F
+				GET_VAR(0,'*SYSTEM*','$MIX_LOGIC.$NUM_FLG',number,status)
+				RETURN(number)
+		CASE(CMT_TYP_M):-- M
+				GET_VAR(0,'*SYSTEM*','$MIX_LOGIC.$NUM_MKR',number,status)
+				RETURN(number)
+		CASE(CMT_TYP_GI):-- GI
+				RETURN(100)
+		CASE(CMT_TYP_GO):-- GO
+				RETURN(100)
+		CASE(CMT_TYP_AI):-- AI
+				RETURN(64)
+		CASE(CMT_TYP_AO):-- AO
+				RETURN(64)
+				
+		-- Register comment						
+		CASE(CMT_TYP_R):-- R
+				GET_VAR(0,'*NUMREG*','$MAXREGNUM',number,status)
+				RETURN(number)
+		CASE(CMT_TYP_PR):-- PR
+				GET_VAR(0,'*POSREG*','$MAXPREGNUM',number,status)
+				RETURN(number)
+		CASE(CMT_TYP_SR):-- SR
+				GET_VAR(0,'*STRREG*','$MAXSREGNUM',number,status)
+				RETURN(number)		
+		
+		CASE(CMT_TYP_UALM):-- User Alarm
+				RETURN($MAXUALRMNUM)
+	ELSE:
+		POST_ERR(38092,'[GET_COMMENT] invalid type',0,2)
+	ENDSELECT
+
+END GET_MAX
+
+
+ROUTINE output_cmt
+VAR
+--signal
+max_dig_prt  :INTEGER
+max_rbt_prt	 :INTEGER
+max_grp_prt	 :INTEGER
+max_flg_prt	 :INTEGER
+max_mrk_prt	 :INTEGER
+max_ualarm	 :INTEGER
+max_analog	 :INTEGER
+
+--register
+max_reg_num	 :INTEGER
+max_sreg_num :INTEGER
+max_preg_num :INTEGER
+
+--get_reg
+real_flag	:BOOLEAN
+int_value	:INTEGER
+real_value	:REAL
+str_value	:STRING[100]
+temp_str	:STRING[100]
+
+--temp
+indexi		:INTEGER
+comment		:STRING[100]
+
+--Path file name
+out_dev_path:STRING[200]
+
+--status
+status		:INTEGER 
+
+dev_index	:INTEGER
+
+BEGIN
+	-- get max
+	max_dig_prt = GET_MAX(101)
+	max_rbt_prt = GET_MAX(103)	
+	max_flg_prt = GET_MAX(105)
+	max_mrk_prt = GET_MAX(106)
+	max_grp_prt = GET_MAX(107)
+	max_analog = GET_MAX(109)
+	
+	max_reg_num = GET_MAX(201)
+	max_preg_num = GET_MAX(202)
+	max_sreg_num = GET_MAX(203)
+	
+	max_ualarm = GET_MAX(301)
+	
+	sel_dev::
+	FORCE_SPMENU(TP_PANEL,SPI_TPUSER,1)
+	WRITE TPDISPLAY(CHR(128),CHR(137))
+	WRITE TPPROMPT(CHR(128),CHR(137))
+	WRITE TPSTATUS(CHR(128),CHR(137))
+	WRITE TPSTATUS('Comment Tool V25.7.28')
+	WRITE TPDISPLAY('Select save device:',CR)
+	WRITE TPDISPLAY('1 :Mem Card  (MC: )',CR)
+	WRITE TPDISPLAY('2 :USB Disk  (UD1:)',CR)
+	WRITE TPDISPLAY('3 :USB on TP (UT1:)',CR,CR)
+	WRITE TPDISPLAY('4 :Exit',CR)
+	WRITE TPPROMPT('Your select: ')
+	READ TPPROMPT(dev_index)
+	IF(UNINIT(dev_index))THEN dev_index = 0;ENDIF
+	SELECT dev_index OF
+		CASE(1):out_dev_path = 'MC:\'
+		CASE(2):out_dev_path = 'UD1:\'
+		CASE(3):out_dev_path = 'UT1:\'
+		CASE(4):
+				RETURN
+	ELSE:
+		POST_ERR(38092,'Device invalid',0,0)
+		GOTO sel_dev
+	ENDSELECT
+	file_path = out_dev_path + 'RobotComment.CSV'
+	WRITE TPERROR(CHR(128),CHR(137))	
+	WRITE TPERROR(file_path+' file start output')
+	
+	CLOSE FILE csv_file
+	OPEN FILE csv_file('RW',file_path)	
+	IF(IO_STATUS(csv_file)<>0)THEN
+		CLOSE FILE csv_file
+		POST_ERR(IO_STATUS(csv_file),'',0,0)
+	ENDIF
+		
+	-- R
+	WRITE csv_file('REM',SPLIT,'Register (R)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT,'INT/REAL',SPLIT,'value',SPLIT,TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_reg_num DO
+		GET_COMMENT(CMT_TYP_R,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF		
+		GET_REG(indexi,real_flag,int_value,real_value,status)
+		IF(status = 0)THEN
+			IF (real_flag = FALSE)THEN
+				WRITE csv_file('REG',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,'INT',SPLIT,CNV_INT2STR(int_value),SPLIT,TERM,CR)
+			ELSE
+				WRITE csv_file('REG',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,'REAL',SPLIT,CNV_REAL2STR(real_value),SPLIT,TERM,CR)
+			ENDIF
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+		
+	-- PR
+	WRITE csv_file('REM',SPLIT,'Position register (PR)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT,TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_preg_num DO
+		GET_COMMENT(CMT_TYP_PR,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF		
+		IF(status = 0)THEN
+			WRITE csv_file('PREG',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('PREG',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF	
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	-- SR
+	WRITE csv_file('REM',SPLIT,'STRING register (SR)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT,'value',SPLIT,TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_sreg_num DO
+		GET_COMMENT(CMT_TYP_SR,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF
+		GET_STR_REG(indexi,str_value,status)
+		IF(status = 0)THEN
+			WRITE csv_file('SREG',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,str_value,SPLIT,TERM,CR)
+		ENDIF	
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+
+	-- User Alarm
+	WRITE csv_file('REM',SPLIT,'User alarm (Ualrm)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Alarm message,','Alarm severity(0-WARING 1-PAUSE 2-ABORT),','' + TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_ualarm DO
+		GET_COMMENT(CMT_TYP_UALM,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF
+		CNV_INT_STR(indexi,0,0,temp_str)
+		temp_str = SUB_STR(temp_str,INDEX(temp_str,' ')+1,STR_LEN(temp_str)-INDEX(temp_str,' '))
+		GET_VAR(0,'*SYSTEM*','$UALRM_SEV['+temp_str+']',int_value,status)
+		IF(status = 0)THEN			
+			IF(UNINIT(comment))THEN
+				WRITE csv_file('UALM',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,int_value,SPLIT,TERM,CR)
+			ELSE
+				WRITE csv_file('UALM',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,CNV_INT2STR(int_value),SPLIT,TERM,CR)
+			ENDIF
+		ENDIF		
+	ENDFOR	
+	WRITE csv_file(CR,CR,CR)
+	
+	-- RI
+	WRITE csv_file('REM',SPLIT,'I/O Comment (RI)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT, TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_rbt_prt DO
+		GET_COMMENT(CMT_TYP_RI,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF		
+		IF(status = 0)THEN
+			WRITE csv_file('RI',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('RI',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	-- RO
+	WRITE csv_file('REM',SPLIT,'I/O Comment (RO)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT,TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_rbt_prt DO
+		GET_COMMENT(CMT_TYP_RO,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF	
+		IF(status = 0)THEN
+			WRITE csv_file('RO',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('RO',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	-- DI
+	WRITE csv_file('REM',SPLIT,'I/O Comment (DI)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT, TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_dig_prt DO
+		GET_COMMENT(CMT_TYP_DI,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF		
+		IF(status = 0)THEN
+			WRITE csv_file('DI',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('DI',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	-- DO
+	WRITE csv_file('REM',SPLIT,'I/O Comment (DO)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT, TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_dig_prt DO
+		GET_COMMENT(CMT_TYP_DO,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF
+		IF(status = 0)THEN
+			WRITE csv_file('DO',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('DO',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	
+	-- GI
+	WRITE csv_file('REM',SPLIT,'I/O Comment (GI)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT, TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_grp_prt DO
+		GET_COMMENT(CMT_TYP_GI,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF	
+		IF(status = 0)THEN
+			WRITE csv_file('GI',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('GI',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	-- GO
+	WRITE csv_file('REM',SPLIT,'I/O Comment (GO)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT, TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_grp_prt DO
+		GET_COMMENT(CMT_TYP_GO,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF		
+		IF(status = 0)THEN
+			WRITE csv_file('GO',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('GO',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	-- AI
+	WRITE csv_file('REM',SPLIT,'I/O Comment (AI)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT, TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_analog DO
+		GET_COMMENT(CMT_TYP_AI,indexi,comment,status)	
+		IF(UNINIT(comment))THEN comment = '';ENDIF	
+		IF(status = 0)THEN
+			WRITE csv_file('AI',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('AI',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	-- AO
+	WRITE csv_file('REM',SPLIT,'I/O Comment (AO)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT, TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_analog DO
+		GET_COMMENT(CMT_TYP_AO,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF		
+		IF(status = 0)THEN
+			WRITE csv_file('AO',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('AO',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	-- Flag
+	WRITE csv_file('REM',SPLIT,'I/O Comment (F)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT, TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_flg_prt DO
+		GET_COMMENT(CMT_TYP_F,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF		
+		IF(status = 0)THEN
+			WRITE csv_file('F',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('F',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	
+	-- Mark
+	WRITE csv_file('REM',SPLIT,'I/O Comment (M)',CR)
+	WRITE csv_file('REM',SPLIT,'Index',SPLIT,'Comment',SPLIT, TERM,'(Terminator)',CR)
+	FOR indexi = 1 TO max_mrk_prt DO
+		GET_COMMENT(CMT_TYP_M,indexi,comment,status)
+		IF(UNINIT(comment))THEN comment = '';ENDIF		
+		IF(status = 0)THEN
+			WRITE csv_file('M',SPLIT,CNV_INT2STR(indexi),SPLIT,comment,SPLIT,TERM,CR)
+		ELSE
+			WRITE csv_file('M',SPLIT,CNV_INT2STR(indexi),SPLIT,SPLIT,TERM,CR)
+		ENDIF		
+	ENDFOR
+	WRITE csv_file(CR,CR,CR)
+	CLOSE FILE csv_file
+	WRITE TPERROR(CHR(128),CHR(137))
+	WRITE TPERROR(file_path+' file saved.')
+END output_cmt
+
+ROUTINE E_SPLIT(in_str:STRING;split_str:STRING;no_ctrl_code:BOOLEAN;out :ARRAY OF STRING;count:INTEGER):INTEGER
+VAR
+indexi    :INTEGER
+arr_len   :INTEGER
+s_str	  :STRING[1]
+c_str     :STRING[254]
+temp      :STRING[254]
+str_lenth :INTEGER
+BEGIN
+	count = 0
+	arr_len = ARRAY_LEN(out)
+	IF arr_len = 0 THEN RETURN(-1);ENDIF
+	FOR indexi = 1 TO arr_len DO
+		out[indexi] = ''
+	ENDFOR
+	IF (UNINIT(in_str))THEN RETURN(-2);ENDIF
+	IF (UNINIT(split_str))THEN RETURN(-3);ENDIF
+	IF (STR_LEN(in_str) = 0)THEN RETURN(-4);ENDIF
+	IF (STR_LEN(split_str)= 0)THEN RETURN(-5);ENDIF
+	s_str = ''
+	c_str = ''
+	temp = in_str
+	FOR indexi = 1 TO STR_LEN(in_str) DO
+		s_str = SUB_STR(temp,indexi,1)
+		IF (no_ctrl_code = TRUE)THEN
+			-- 检查第一个字符是否为控制符（0-31 或 127）
+		    IF (ORD(s_str,1) <= 31) OR (ORD(s_str,1) = 127) THEN
+		        s_str = ''
+		    ENDIF
+		ENDIF
+		IF (s_str <> split_str)THEN
+			c_str = c_str + s_str
+		ELSE
+			out[count+1] = c_str
+			c_str = ''
+			s_str = ''
+			count = count + 1
+			IF (count > arr_len )THEN
+				RETURN(-6)
+			ENDIF
+		ENDIF
+	ENDFOR
+	count = count+1
+	out[count] = c_str
+	RETURN (0)
+END E_SPLIT
+
+ROUTINE read_line(file_var:FILE):STRING
+VAR
+s_str		:STRING[1]
+c_str		:STRING[254]
+file_sta	:INTEGER
+s_len		:INTEGER
+is_cr		:BOOLEAN
+BEGIN
+	s_len = 0
+	is_cr = FALSE
+	c_str = ''	
+	file_sta = IO_STATUS(csv_file)
+	IF(file_sta<>0)THEN
+		RETURN('')
+	ENDIF	
+	REPEAT
+		READ csv_file(s_str::1)		
+		file_sta = IO_STATUS(csv_file)
+		IF (file_sta = 0)THEN
+			IF(s_str <> CHR(13)) AND (s_str <> CHR(10))THEN
+				c_str = c_str + s_str
+				s_len = s_len + 1
+			ENDIF
+			
+			IF(s_str = CHR(10))THEN
+				is_cr = TRUE
+			ENDIF
+		ENDIF
+	-- 2021- 文件末端  
+	UNTIL  (file_sta = 2021) OR(s_len = 254) OR is_cr
+	IF(s_len>0)THEN
+		RETURN (c_str)
+	ELSE
+		RETURN('')
+	ENDIF	
+END read_line
+
+ROUTINE input_cmt
+VAR
+file_path	:STRING[200]
+root_path	:STRING[200]
+sel_path	:STRING[200]
+db_ret		:INTEGER
+
+csv_data	:STRING[254]
+out_param	:ARRAY[10] OF STRING[200]
+param_count	:INTEGER
+param_valid :BOOLEAN
+cfg_valid	:INTEGER
+csv_linenum	:INTEGER
+
+type_list	:ARRAY[50] OF STRING[10]
+
+comment		:STRING[100]
+data_index	:INTEGER
+int_val		:INTEGER
+rel_val		:REAL
+
+def_item,term_char:INTEGER
+indexi	:INTEGER
+indexs	:STRING[10]
+status	:INTEGER
+
+
+dev_index	:INTEGER
+BEGIN
+	type_list[1] = 'REG'
+	type_list[2] = 'PREG'
+	type_list[3] = 'SREG'
+	type_list[4] = 'DO'
+	type_list[5] = 'DI'
+	type_list[6] = 'GO'
+	type_list[7] = 'GI'
+	type_list[8] = 'RO'
+	type_list[9] = 'RI'
+	type_list[10] = 'F'
+	type_list[11] = 'M'
+	type_list[12] = 'AO'
+	type_list[13] = 'AI'
+	type_list[14] = 'UALM'
+	type_list[15] = 'REM'
+	csv_linenum = 0
+	have_err = FALSE
+	
+    WRITE TPSTATUS('Comment Tool V25.7.28')
+	WRITE TPDISPLAY('Select Read RobotComment.CSV device:',CR)
+	WRITE TPDISPLAY('1 :Mem Card  (MC: )',CR)
+	WRITE TPDISPLAY('2 :USB Disk  (UD1:)',CR)
+	WRITE TPDISPLAY('3 :USB on TP (UT1:)',CR,CR)
+	WRITE TPDISPLAY('4 :Exit',CR)
+	WRITE TPPROMPT('Your select: ')
+	READ TPPROMPT(dev_index)
+	IF(UNINIT(dev_index))THEN dev_index = 0;ENDIF
+	SELECT dev_index OF
+		CASE(1):file_path = 'MC:\'
+		CASE(2):file_path = 'UD1:\'
+		CASE(3):file_path = 'UT1:\'
+		CASE(4):
+				RETURN
+	ELSE:
+		POST_ERR(38092,'Device invalid',0,0)
+		GOTO sel_dev
+	ENDSELECT
+	file_path = file_path + 'RobotComment.CSV'
+
+	
+	CLOSE FILE csv_file
+	OPEN FILE csv_file('RO',file_path)
+	WRITE TPERROR(CHR(128),CHR(137))	
+	WRITE TPERROR('Comment tool: import file starting.')
+	REPEAT 
+		param_valid = FALSE
+		csv_data = read_line(csv_file)	
+		IF(E_SPLIT(csv_data,SPLIT,FALSE,out_param,param_count)=0)THEN	
+			csv_linenum = csv_linenum + 1				
+			FOR indexi = 1 TO MAX_CMD DO
+				IF(out_param[1] = type_list[indexi])THEN
+					param_valid = TRUE
+				ENDIF
+			ENDFOR
+			
+			cfg_valid = 0
+			IF (param_valid)THEN	
+				
+				-- Comment
+				IF(out_param[1] = 'REM')THEN
+					cfg_valid = 1
+				ENDIF
+						
+				-- REG
+				IF(out_param[1] = 'REG') AND (out_param[6] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+						 IF(UNINIT(data_index) = FALSE)THEN
+							 -- Set comment
+							 	SET_REG_CMT(data_index,out_param[3],status)	
+							 	IF(status <> 0)THEN cfg_valid = 0;ENDIF					 					 
+							 -- Set value
+							 IF (out_param[4] = 'INT')AND(cfg_valid = 1)THEN
+							 	CNV_STR_INT(out_param[5],int_val)
+							 	IF(UNINIT(int_val)= FALSE)THEN
+							 		SET_INT_REG(data_index,int_val,status)
+							 		IF(status <> 0)THEN cfg_valid = 0;ENDIF	 		
+							 	ENDIF
+							 ELSE
+							 	IF (out_param[4] = 'REAL')THEN
+								 	CNV_STR_REAL(out_param[5],rel_val)
+								 	IF(UNINIT(int_val)= FALSE)THEN
+								 		SET_REAL_REG(data_index,rel_val,status)
+								 		IF(status <> 0)THEN cfg_valid = 0;ENDIF	
+								 	ENDIF
+							 	ENDIF
+							 ENDIF
+						 ELSE
+						 	cfg_valid = 0
+						 ENDIF			 
+				ENDIF
+				
+				-- PREG
+				IF(out_param[1] = 'PREG') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 	SET_PREG_CMT(data_index,out_param[3],status)
+						 	IF(status <> 0)THEN cfg_valid = 0;ENDIF	
+					 ELSE
+					 	cfg_valid = 0
+					 ENDIF
+					 
+				ENDIF
+				
+				-- SREG
+				IF(out_param[1] = 'SREG') AND (out_param[5] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 	SET_SREG_CMT(data_index,out_param[3],status)
+						 	IF(status <> 0)THEN cfg_valid = 0;ENDIF							 					 
+						 -- Set value
+						 	SET_STR_REG(data_index,out_param[4],status)	
+						 	IF(status <> 0)THEN cfg_valid = 0;ENDIF	
+					 ELSE
+					 	cfg_valid = 0
+				 	 ENDIF
+				ENDIF
+				
+				-- Ualarm
+				IF(out_param[1] = 'UALM') AND (out_param[5] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 	SET_VAR(0,'*SYSTEM*','$UALRM_MSG['+out_param[2]+']',out_param[3],status)
+						 	IF(status <> 0)THEN cfg_valid = 0;ENDIF	
+						 -- Set severity
+						 	CNV_STR_INT(out_param[4],int_val)
+						 	IF(UNINIT(int_val)= FALSE)THEN
+						 		SET_VAR(0,'*SYSTEM*','$UALRM_SEV['+out_param[2]+']',int_val,status)
+						 		IF(status <> 0)THEN cfg_valid = 0;ENDIF	
+						 	ENDIF
+					 ELSE
+					 	cfg_valid = 0
+					 ENDIF
+				ENDIF
+				
+				-- RI
+				IF(out_param[1] = 'RI') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_rdi,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF
+					 ELSE
+					 	cfg_valid = 0
+				 	 ENDIF
+				ENDIF
+				
+				-- RO
+				IF(out_param[1] = 'RO') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_rdo,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF
+					ELSE
+					 	 cfg_valid = 0
+				 	ENDIF
+				ENDIF
+				
+				-- DI
+				IF(out_param[1] = 'DI') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_din,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF	
+					 ELSE
+					 	cfg_valid = 0
+				 	ENDIF
+				ENDIF
+				
+				-- DO
+				IF(out_param[1] = 'DO') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_dout,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF	
+					 ELSE
+					 	cfg_valid = 0
+				 	ENDIF
+				ENDIF
+				
+				-- GI
+				IF(out_param[1] = 'GI') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_gpin,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF	
+					 ELSE
+					 	cfg_valid = 0
+				 	ENDIF
+				ENDIF
+				
+				-- GO
+				IF(out_param[1] = 'GO') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_gpout,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF	
+					 ELSE
+					 	cfg_valid = 0
+				 	ENDIF
+				ENDIF
+				
+				-- AI
+				IF(out_param[1] = 'AI') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_anin,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF	
+					 ELSE
+					 	cfg_valid = 0
+				 	ENDIF
+				ENDIF
+				
+				-- AO
+				IF(out_param[1] = 'AO') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_anout,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF
+					 ELSE
+					 	cfg_valid = 0
+				 	ENDIF
+				ENDIF
+				
+				-- Flag
+				IF(out_param[1] = 'F') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_flag,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF
+					 ELSE
+					 	cfg_valid = 0
+				 	ENDIF
+				ENDIF
+				
+				-- Mark
+				IF(out_param[1] = 'M') AND (out_param[4] = TERM)THEN
+					 cfg_valid = 1
+					 -- index
+					 CNV_STR_INT(out_param[2],data_index)
+					 IF(UNINIT(data_index) = FALSE)THEN
+						 -- Set comment
+						 SET_PORT_CMT(io_marker,data_index,out_param[3],status)
+						 IF(status <> 0)AND(status <>13030)THEN cfg_valid = 0;ENDIF
+					 ELSE
+					 	cfg_valid = 0
+				 	ENDIF
+				ENDIF
+				
+				IF(cfg_valid = 0)THEN
+					have_err = TRUE
+					CNV_INT_STR(csv_linenum,0,0,indexs)
+					POST_ERR(38092,'csv file Error,At Line '+indexs,0,0)
+				ENDIF
+			ELSE
+				-- Undefine command
+				IF(STR_LEN(out_param[1])>1)THEN
+					IF(cfg_valid = 0)THEN
+						have_err = TRUE
+						CNV_INT_STR(csv_linenum,0,0,indexs)
+						POST_ERR(38092,'csv file Error,At Line '+indexs,0,0)
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	UNTIL (csv_data ='') OR (have_err=TRUE)
+	CLOSE FILE csv_file	
+	WRITE TPDISPLAY(CHR(128),CHR(137))
+	WRITE TPPROMPT(CHR(128),CHR(137))
+	WRITE TPSTATUS(CHR(128),CHR(137))
+	IF(csv_linenum > 0)AND (have_err = FALSE)THEN
+		WRITE TPERROR(CHR(128),CHR(137))
+		WRITE TPERROR('import file done.')
+	ENDIF
+END input_cmt
+
+BEGIN	
+	-- info show
+	FORCE_LINK(TP_PANEL,'/SOFTPART/GENLINK?prim=menupage,37,1&config=single&focus=prim')
+	
+	FORCE_SPMENU(TP_PANEL,SPI_TPUSER,1)
+	CLR_WND
+	
+	WRITE TPSTATUS('Comment Tool V25.7.28  Info')
+	WRITE TPDISPLAY('******************************************',CR)
+	WRITE TPDISPLAY('Import/export tool FOR:',CR)
+	WRITE TPDISPLAY('R, SR, PR, DI/DO, RI/RO,',CR)
+	WRITE TPDISPLAY('AI/AO, GI/GO, F, M, UALM',CR,CR)
+	WRITE TPDISPLAY('Author: Mengk',CR)
+	WRITE TPDISPLAY('E-mail: 964210817z@gmail.com',CR)
+	WRITE TPDISPLAY('Version: V25.7.28  28/JUL/2025',CR)
+	WRITE TPDISPLAY('******************************************',CR)
+	WRITE TPPROMPT('Please Enter 1:  ')
+	READ TPPROMPT(option_sel)
+	
+	-- Select window
+	sel_optn::
+	FORCE_SPMENU(TP_PANEL,SPI_TPUSER,1)
+	WRITE TPDISPLAY(CHR(128),CHR(137))
+	WRITE TPPROMPT(CHR(128),CHR(137))
+	WRITE TPSTATUS(CHR(128),CHR(137))
+	WRITE TPSTATUS('Comment Tool V25.7.28')
+	WRITE TPDISPLAY('Select Option:',CR)
+	WRITE TPDISPLAY('1 :Export comment -> (*.csv)',CR)
+	WRITE TPDISPLAY('2 :Import comment <-(*.csv)',CR)
+	WRITE TPDISPLAY('3 :Exit',CR)
+	WRITE TPPROMPT('Your select: ')
+	READ TPPROMPT(option_sel)
+	IF(UNINIT(option_sel))THEN option_sel = 0;ENDIF
+	SELECT option_sel OF
+		CASE(1):
+				output_cmt
+				FORCE_SPMENU(TP_PANEL,SPI_TPSELECT,1)
+		CASE(2):
+				input_cmt
+				IF(have_err)THEN
+					FORCE_SPMENU(TP_PANEL,18,4)
+				ELSE					
+					FORCE_SPMENU(TP_PANEL,SPI_TPSELECT,1)
+				ENDIF
+		CASE(3):
+				FORCE_SPMENU(TP_PANEL,SPI_TPSELECT,1)
+	ELSE:
+		POST_ERR(38092,'Select invalid',0,0)
+		GOTO sel_optn
+	ENDSELECT
+	
+	CLR_WND
+END A_COMMENT
