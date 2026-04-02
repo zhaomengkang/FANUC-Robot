@@ -1,0 +1,97 @@
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-- Program : MON_AXIS
+-- Function: Monitor and record the maximum and minimum angles of 6 robot axes in real-time.
+--           Continuously updates the max and min angles during program execution.
+--
+-- Author : Zhao, Mengkang
+-- Date   : 2026/03/12
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+PROGRAM MON_AXIS
+%NOLOCKGROUP
+%NOBUSYLAMP
+%NOPAUSESHFT
+%NOPAUSE = ERROR + COMMAND + TPENABLE
+%SYSTEM
+
+TYPE
+    AXIS_ANGL_T = STRUCTURE
+        max_angle   : REAL          -- Maximum recorded angle of axis
+        min_angle   : REAL          -- Minimum recorded angle of axis
+    ENDSTRUCTURE
+
+VAR
+    axis_angle      : ARRAY[6] OF AXIS_ANGL_T   -- Array to store max/min angles per axis
+    curjpos_arry   : ARRAY[6] OF REAL           -- Current joint positions array
+    indexi          : INTEGER                     -- Loop counter/index
+    test			: JOINTPOS5
+  
+
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-- Routine : GET_CURJPOS
+-- Function: Retrieves the current joint positions of the robot's 6 axes
+--           and converts them to a relative angle array.
+-- Returns : ARRAY[6] OF REAL, representing the current angles of all 6 joints
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ROUTINE GET_CURJPOS: ARRAY OF REAL
+VAR
+    curjpos_val  :  JOINTPOS6              -- Raw joint position type
+    status       :  INTEGER                 -- Conversion status
+    real_array   :  ARRAY[6] OF REAL       -- Output array to hold real joint angles
+BEGIN
+    curjpos_val = CURJPOS(0, 0)                     -- Get current joint positions (system function)
+    CNV_JPOS_REL(curjpos_val, real_array, status)    -- Convert positions to relative angles
+    RETURN(real_array)
+END GET_CURJPOS
+
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-- Routine : MAX
+-- Function: Return the maximum of two REAL values.
+-- Parameters:
+--    in1 : REAL - first input value
+--    in2 : REAL - second input value
+-- Returns : REAL - the larger of in1 and in2
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ROUTINE MAX(in1: REAL; in2: REAL): REAL
+BEGIN
+    IF (in1 >= in2) THEN
+        RETURN(in1)
+    ELSE
+        RETURN(in2)
+    ENDIF
+END MAX
+
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-- Routine : MIN
+-- Function: Return the minimum of two REAL values.
+-- Parameters:
+--    in1 : REAL - first input value
+--    in2 : REAL - second input value
+-- Returns : REAL - the smaller of in1 and in2
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ROUTINE MIN(in1: REAL; in2: REAL): REAL
+BEGIN
+    IF (in1 <= in2) THEN
+        RETURN(in1)
+    ELSE
+        RETURN(in2)
+    ENDIF
+END MIN
+
+BEGIN
+    -- Initialize axis angles with current joint positions
+    curjpos_arry = GET_CURJPOS
+    FOR indexi = 1 TO 6 DO
+        axis_angle[indexi].max_angle = curjpos_arry[indexi]
+        axis_angle[indexi].min_angle = curjpos_arry[indexi]
+    ENDFOR        
+
+    LOOP::
+        curjpos_arry = GET_CURJPOS                    -- Get current joint positions
+        FOR indexi = 1 TO 6 DO
+            axis_angle[indexi].max_angle = MAX(curjpos_arry[indexi], axis_angle[indexi].max_angle)
+            axis_angle[indexi].min_angle = MIN(curjpos_arry[indexi], axis_angle[indexi].min_angle)
+        ENDFOR
+        DELAY 20                                     -- Delay 20ms before next reading
+        GOTO LOOP
+END MON_AXIS
