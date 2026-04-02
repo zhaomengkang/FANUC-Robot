@@ -1,0 +1,351 @@
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-- Function : Output DCS Configuration
+-- Author   : Zhao,Mengkang
+-- Date     : 2026/03/03
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+PROGRAM CPY_DCS
+%NOLOCKGROUP
+%NOBUSYLAMP
+%NOPAUSESHFT
+%NOPAUSE = ERROR + TPENABLE + COMMAND
+%COMMENT = 'Copy DCS Config'
+%SYSTEM
+
+CONST
+CPC_MAX = 32
+JPC_MAX = 40
+JSC_MAX = 40
+UM_MAX  = 16
+SFIO_MAX = 64
+VAR
+    var_lis :ARRAY[100] OF STRING[254]
+    indexi,indexj,indexk:INTEGER
+    var_name  :STRING[254]
+
+    wrt_f :FILE
+    entry :INTEGER
+    
+    out_dev_path:STRING[50]
+    file_path:STRING[50]
+    dev_index:INTEGER
+    
+    
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+-- Routine   : CNV_INT2STR
+-- Function  : Convert INTEGER to STRING (without leading space)
+-- Param
+--   in_int[in]: Integer value to convert.
+-- Return   : String representation.
+--
+-- Author   : Zhao,Mengkang
+-- Date     : 2025/09/20
+--%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ROUTINE CNV_INT2STR(in_int:INTEGER):STRING
+VAR
+str     :STRING[254]
+BEGIN
+    IF UNINIT(in_int) THEN POST_ERR(38092,'[CNV_INT2STR]in_int not init',0,2);ABORT;ENDIF
+    CNV_INT_STR(in_int,0,0,str)
+    RETURN(SUB_STR(str,2,STR_LEN(str)-1))
+END CNV_INT2STR
+
+ROUTINE CLR_WND
+BEGIN
+	WRITE TPDISPLAY(CHR(128),CHR(137))
+	WRITE TPPROMPT(CHR(128),CHR(137))
+	WRITE TPSTATUS(CHR(128),CHR(137))
+    WRITE TPFUNC(CHR(128),CHR(137))
+END CLR_WND
+
+ROUTINE SYSVAR_CM(var_name:STRING):STRING
+VAR
+    int_val   :INTEGER
+    real_val  :REAL
+    bool_val  :BOOLEAN
+    str_val	  :STRING[254]
+    
+    unint:BOOLEAN
+    prog_name:STRING[254]
+    type_name:STRING[20]
+    type_value:INTEGER
+    dims: ARRAY[3] OF INTEGER
+    slen :INTEGER
+    sta :INTEGER
+    
+    str_result :STRING[254]
+BEGIN
+	prog_name = '*SYSTEM*'
+	str_result = '!!!! ' + var_name + ' No Exist'
+	VAR_INFO(prog_name,var_name,unint,type_name,type_value,dims,slen,sta)
+	IF(unint)THEN
+		RETURN('!!!! ' + var_name + ' Uninitialized')
+	ENDIF
+	IF(sta <> 0)THEN	
+		RETURN('!!!! ' + var_name + ' No Exist')
+	ENDIF
+		
+	IF (type_name = 'INTEGER')THEN
+		GET_VAR(entry,prog_name,var_name,int_val,sta)
+		IF(sta = 0) AND (NOT UNINIT(int_val))THEN
+			CNV_INT_STR(int_val,0,0,str_result)
+			RETURN('SETVAR '+ var_name + ' '+ str_result )
+		ENDIF
+	ENDIF
+	
+	IF (type_name = 'REAL')THEN
+		GET_VAR(entry,prog_name,var_name,real_val,sta)
+		IF(sta = 0) AND (NOT UNINIT(real_val))THEN
+			CNV_REAL_STR(real_val,0,6,str_result)
+			RETURN('SETVAR '+ var_name + ' '+ str_result )
+		ENDIF
+	ENDIF
+	
+	IF(type_name = 'STRING')THEN
+		GET_VAR(entry,prog_name,var_name,str_val,sta)
+		IF(sta = 0) AND (NOT UNINIT(str_val))THEN
+			RETURN('KCL SET VAR '+ var_name + '=' + CHR(39) + str_val + CHR(39) )
+		ENDIF
+	ENDIF
+	
+	IF (type_name = 'BOOLEAN')THEN
+		GET_VAR(entry,prog_name,var_name,bool_val,sta)
+		IF(sta = 0) AND (NOT UNINIT(bool_val))THEN
+			IF (bool_val) THEN
+				RETURN('SETVAR '+ var_name + ' ' + '1' )
+			ELSE
+				RETURN('SETVAR '+ var_name + ' ' + '0' )
+			ENDIF
+		ENDIF
+	ENDIF 
+	
+	RETURN('')
+END SYSVAR_CM
+
+BEGIN
+	
+	sel_dev::
+	CLR_WND
+	FORCE_SPMENU(TP_PANEL,SPI_TPUSER,1)
+	WRITE TPSTATUS('Copy DCS Tool V25.7.28')
+	WRITE TPDISPLAY('Select save device:',CR)
+	WRITE TPDISPLAY('1 :Mem Card  (MC: )',CR)
+	WRITE TPDISPLAY('2 :USB Disk  (UD1:)',CR)
+	WRITE TPDISPLAY('3 :USB on TP (UT1:)',CR,CR)
+	WRITE TPDISPLAY('4 :Exit',CR)
+	WRITE TPPROMPT('Your select: ')
+	READ TPPROMPT(dev_index)
+	IF(UNINIT(dev_index))THEN dev_index = 0;ENDIF
+	SELECT dev_index OF
+		CASE(1):out_dev_path = 'MC:\'
+		CASE(2):out_dev_path = 'UD1:\'
+		CASE(3):out_dev_path = 'UT1:\'
+		CASE(4):
+				CLR_WND
+				RETURN
+	ELSE:
+		POST_ERR(38092,'Device invalid',0,0)
+		GOTO sel_dev
+	ENDSELECT
+	file_path = out_dev_path + 'dcsconfig.cm'
+	WRITE TPERROR(CHR(128),CHR(137))	
+	WRITE TPERROR(file_path+' file start output')
+	CLR_WND
+	
+	CLOSE FILE wrt_f
+    CLR_IO_STAT(wrt_f)
+    OPEN FILE wrt_f ('RW',file_path)
+    IF(IO_STATUS(wrt_f) <>0)THEN POST_ERR(IO_STATUS(wrt_f),'',0,0);ABORT;ENDIF
+    -- DCS IO
+    var_lis[1] = '$OPERATION'
+	var_lis[2] = '$L_TYP'
+	var_lis[3] = '$L_IDX'
+	var_lis[4] = '$R1_TYP'
+	var_lis[5] = '$R1_IDX'
+	var_lis[6] = '$R2_TYP'
+	var_lis[7] = '$R2_IDX'
+	
+	WRITE wrt_f('! DCS Connect IO config ',CR)
+	WRITE wrt_f('PRINT "Config DCS IO Table"',CR)
+	FOR indexj = 1 TO 64 DO
+	    FOR indexi = 1 TO 7 DO
+	    	var_name = '$DCSS_IOC['+CNV_INT2STR(indexj)+'].'+ var_lis[indexi]
+	    	WRITE wrt_f(SYSVAR_CM(var_name),CR)
+	    ENDFOR
+	    WRITE wrt_f(CR)
+	ENDFOR
+	WRITE wrt_f('PRINT "Config DCS CSI Comment"',CR)
+	FOR indexi = 1 TO SFIO_MAX DO
+    	var_name = '$DCS_C_CSI['+CNV_INT2STR(indexi)+']'
+    	WRITE wrt_f(SYSVAR_CM(var_name),CR)
+	ENDFOR
+	WRITE wrt_f('PRINT "Config DCS CSO Comment"',CR)
+	FOR indexi = 1 TO SFIO_MAX DO
+    	var_name = '$DCS_C_CSO['+CNV_INT2STR(indexi)+']'
+    	WRITE wrt_f(SYSVAR_CM(var_name),CR)
+	ENDFOR
+	
+	-- DCS JPC
+	var_lis[1] = '$COMMENT'
+	var_lis[2] = '$ENABLE'
+	var_lis[3] = '$MODE'
+	var_lis[4] = '$GRP_NUM'
+	var_lis[5] = '$UPR_LIM'
+	var_lis[6] = '$LWR_LIM'
+	var_lis[7] = '$STOP_TYP'
+	var_lis[8] = '$DSBIO_TYP'
+	var_lis[9] = '$DSBIO_IDX'
+	var_lis[10] = '$ENBL_CALMD'
+	WRITE wrt_f('! DCS JPC Part ',CR)
+	FOR indexj = 1 TO JPC_MAX DO
+		WRITE wrt_f('PRINT "Config DCS JPC['+ CNV_INT2STR(indexj) +  ']"',CR)
+	    FOR indexi = 1 TO 10 DO
+	    	var_name = '$DCSS_JPC['+CNV_INT2STR(indexj)+'].'+ var_lis[indexi]
+	    	WRITE wrt_f(SYSVAR_CM(var_name),CR)
+	    ENDFOR
+	    WRITE wrt_f(CR)
+	ENDFOR	
+	
+	-- DCS JSC
+	var_lis[1] = '$COMMENT'
+	var_lis[2] = '$ENABLE'
+	var_lis[3] = '$MODE'
+	var_lis[4] = '$GRP_NUM'
+	var_lis[5] = '$AXS_NUM'
+	var_lis[6] = '$SPD_LIM'
+	var_lis[7] = '$STOP_TYP'
+	var_lis[8] = '$DSBIO_TYP'
+	var_lis[9] = '$DSBIO_IDX'
+	var_lis[10] = '$STOP_TOL'
+	WRITE wrt_f('! DCS JSC Part ',CR)
+	FOR indexj = 1 TO JSC_MAX DO
+		WRITE wrt_f('PRINT "Config DCS JSC['+ CNV_INT2STR(indexj) +  ']"',CR)
+	    FOR indexi = 1 TO 10 DO
+	    	var_name = '$DCSS_JSC['+CNV_INT2STR(indexj)+'].'+ var_lis[indexi]
+	    	WRITE wrt_f(SYSVAR_CM(var_name),CR)
+	    ENDFOR
+	    WRITE wrt_f(CR)
+	ENDFOR	
+	
+	
+	-- DCS CPC	
+    var_lis[1]  = '$COMMENT'
+    var_lis[2]  = '$ENABLE'
+    var_lis[3]  = '$MODE'
+    var_lis[4]  = '$GRP_NUM'
+    var_lis[5]  = '$MODEL_NUM[1]'
+    var_lis[6]  = '$MODEL_NUM[2]'
+    var_lis[7]  = '$MODEL_NUM[3]'
+    var_lis[8]  = '$UFRM_NUM'
+    var_lis[9]  = '$NUM_VTX'
+    var_lis[10] = '$X[1]'
+    var_lis[11] = '$X[2]'
+    var_lis[12] = '$X[3]'
+    var_lis[13] = '$X[4]'
+    var_lis[14] = '$X[5]'
+    var_lis[15] = '$X[6]'
+    var_lis[16] = '$X[7]'
+    var_lis[17] = '$X[8]'
+    var_lis[18] = '$Y[1]'
+    var_lis[19] = '$Y[2]'
+    var_lis[20] = '$Y[3]'
+    var_lis[21] = '$Y[4]'
+    var_lis[22] = '$Y[5]'
+    var_lis[23] = '$Y[6]'
+    var_lis[24] = '$Y[7]'
+    var_lis[25] = '$Y[8]'
+    var_lis[26] = '$Z1'
+    var_lis[27] = '$Z2'
+    var_lis[28] = '$STOP_TYP'
+    var_lis[29] = '$DSBIO_TYP'
+    var_lis[30] = '$DSBIO_IDX'
+    var_lis[31] = '$ENBL_CALMD'
+    var_lis[32] = '$USE_PREDICT'
+    var_lis[33] = '$DELAY_TIME'
+    var_lis[34] = '$SPEED_CTRL'
+    var_lis[35] = '$OVR_LIMT[1]'
+    var_lis[36] = '$OVR_LIMT[2]'
+    var_lis[37] = '$OVR_LIMT[3]'
+    var_lis[38] = '$OVR_LIMT[4]'
+    var_lis[39] = '$SPD_LIMT[1]'
+    var_lis[40] = '$SPD_LIMT[2]'
+    var_lis[41] = '$SPD_LIMT[3]'
+    var_lis[42] = '$SPD_LIMT[4]'
+    var_lis[43] = '$DSBL_TYP[1]'
+    var_lis[44] = '$DSBL_TYP[2]'
+    var_lis[45] = '$DSBL_TYP[3]'
+    var_lis[46] = '$DSBL_TYP[4]'
+    var_lis[47] = '$DSBL_IDX[1]'
+    var_lis[48] = '$DSBL_IDX[2]'
+    var_lis[49] = '$DSBL_IDX[3]'
+    var_lis[50] = '$DSBL_IDX[4]'
+    var_lis[51] = '$UTOOL_NUM'
+    var_lis[52] = '$STOP_TOL'
+
+    WRITE wrt_f('! DCS CPC Part ',CR)
+	FOR indexj = 1 TO CPC_MAX DO
+		WRITE wrt_f('PRINT "Config DCS CPC['+ CNV_INT2STR(indexj) +  ']"',CR)
+	    FOR indexi = 1 TO 52 DO
+	    	var_name = '$DCSS_CPC['+CNV_INT2STR(indexj)+'].'+ var_lis[indexi]
+	    	WRITE wrt_f(SYSVAR_CM(var_name),CR)
+	    ENDFOR
+	    WRITE wrt_f(CR)
+	ENDFOR
+	
+	-- DCS CSC
+	var_lis[1] = '$COMMENT'
+	var_lis[2] = '$ENABLE'
+	var_lis[3] = '$MODE'
+	var_lis[4] = '$GRP_NUM'
+	var_lis[5] = '$TCP'
+	var_lis[6] = '$UFRM_NUM'
+	var_lis[7] = '$SPD_LIM'
+	var_lis[8] = '$STOP_TYP'
+	var_lis[9] = '$DSBIO_TYP'
+	var_lis[10] = '$DSBIO_IDX'
+	var_lis[11] = '$STOP_TOL'
+	WRITE wrt_f('! DCS CSC Part ',CR)
+	FOR indexj = 1 TO JSC_MAX DO
+		WRITE wrt_f('PRINT "Config DCS CSC['+ CNV_INT2STR(indexj) +  ']"',CR)
+	    FOR indexi = 1 TO 10 DO
+	    	var_name = '$DCSS_CSC['+CNV_INT2STR(indexj)+'].'+ var_lis[indexi]
+	    	WRITE wrt_f(SYSVAR_CM(var_name),CR)
+	    ENDFOR
+	    WRITE wrt_f(CR)
+	ENDFOR	
+	
+			
+	-- User model
+	var_lis[1]  = '$COMMENT'
+    var_lis[2]  = '$USE'
+    var_lis[3]  = '$LINK_NO'
+    var_lis[4]  = '$LINK_TYPE'
+    var_lis[5]  = '$UTOOL_NUM'
+    var_lis[6]  = '$SHAPE'
+    var_lis[7]  = '$SIZE[1]'
+    var_lis[8]  = '$SIZE[2]'
+    var_lis[9]  = '$DATA[1]'
+    var_lis[10] = '$DATA[2]'
+    var_lis[11] = '$DATA[3]'
+    var_lis[12] = '$DATA[4]'
+    var_lis[13] = '$DATA[5]'
+    var_lis[14] = '$DATA[6]'
+	
+	
+	WRITE wrt_f('! DCS User Model Part ',CR)
+	FOR indexk = 1 TO UM_MAX DO
+		WRITE wrt_f('PRINT "Config DCS UM['+ CNV_INT2STR(indexk) +  ']"',CR)
+		var_name = '$DCSS_MODEL['+CNV_INT2STR(indexk)+'].'+ var_lis[1]
+		WRITE wrt_f(SYSVAR_CM(var_name),CR)
+		FOR indexj = 1 TO 10 DO
+			FOR indexi = 2 TO 14 DO
+				var_name = '$DCSS_MODEL['+CNV_INT2STR(indexk)+'].'+ '$ELEM[' + CNV_INT2STR(indexj) + '].' + var_lis[indexi]
+				WRITE wrt_f(SYSVAR_CM(var_name),CR)
+			ENDFOR
+		ENDFOR
+		WRITE wrt_f(CR)
+	ENDFOR
+    CLOSE FILE wrt_f
+    WRITE TPERROR(CHR(128),CHR(137))
+	WRITE TPERROR(file_path+' file saved.')
+	
+END CPY_DCS
