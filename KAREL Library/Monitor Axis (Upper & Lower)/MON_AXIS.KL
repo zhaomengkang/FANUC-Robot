@@ -24,7 +24,6 @@ VAR
     axis_angle      : ARRAY[6] OF AXIS_ANGL_T   -- Array to store max/min angles per axis
     curjpos_arry   : ARRAY[6] OF REAL           -- Current joint positions array
     indexi          : INTEGER                     -- Loop counter/index
-    test			: JOINTPOS5
   
 
 --%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
