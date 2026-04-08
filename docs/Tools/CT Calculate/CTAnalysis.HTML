@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>CT 甘特风格工具（任务+时间）</title>
+<style>
+:root{
+--border:#d9d9d9;
+--header:#f6f7f9;
+--text:#1f2937;
+--muted:#6b7280;
+--rowH:44px;
+--inputH:32px;
+--pxPerSec:28; /* 视觉比例：1秒=28px */
+--gridSmall:28px; /* 1秒一格（与 pxPerSec 对齐） */
+--gridLarge:140px; /* 5秒一粗格 */
+}
+
+body{
+font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+margin: 18px;
+color: var(--text);
+background:#fff;
+}
+h1{
+text-align:center;
+margin: 6px 0 14px;
+font-size:20px;
+letter-spacing:.5px;
+}
+
+.bar-row{
+display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+margin: 8px 0;
+}
+label{ font-weight:600; color:#111827; }
+input[type="text"], input[type="number"]{
+height: var(--inputH);
+padding: 0 10px;
+border:1px solid var(--border);
+border-radius:8px;
+outline:none;
+background:#fff;
+}
+input[type="text"]:focus, input[type="number"]:focus{
+border-color:#93c5fd;
+box-shadow: 0 0 0 3px rgba(147,197,253,.35);
+}
+button{
+height: var(--inputH);
+padding: 0 12px;
+border:1px solid var(--border);
+background:#fff;
+border-radius:8px;
+cursor:pointer;
+color:#111827;
+}
+button.primary{
+background:#2563eb;
+border-color:#2563eb;
+color:#fff;
+}
+button.danger{
+background:#ef4444;
+border-color:#ef4444;
+color:#fff;
+}
+button:active{ transform: translateY(1px); }
+
+textarea{
+width:100%;
+min-height: 110px;
+border:1px solid var(--border);
+border-radius:10px;
+padding:10px;
+font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+font-size:12px;
+outline:none;
+}
+
+/* 主容器：左列表 + 右甘特 */
+.wrap{
+border:1px solid var(--border);
+border-radius:14px;
+overflow:hidden;
+display:grid;
+grid-template-columns: 520px 1fr;
+min-height: 320px;
+box-shadow: 0 8px 20px rgba(0,0,0,.04);
+}
+
+/* 左侧 */
+.left{
+border-right:1px solid var(--border);
+background:#fff;
+overflow:auto;
+max-height: 560px;
+}
+.left .head, .left .row{
+display:grid;
+grid-template-columns: 44px 44px 1fr 110px 70px 70px;
+align-items:center;
+gap:8px;
+padding: 8px 10px;
+box-sizing:border-box;
+}
+.left .head{
+position:sticky; top:0; z-index:5;
+background: var(--header);
+border-bottom:1px solid var(--border);
+font-size:12px;
+color:#374151;
+font-weight:700;
+height: 44px;
+}
+.left .row{
+height: var(--rowH);
+border-bottom:1px solid #f1f5f9;
+}
+.left .row:hover{ background:#fafafa; }
+
+.drag{
+user-select:none;
+cursor:grab;
+width: 34px; height: 30px;
+display:flex; align-items:center; justify-content:center;
+border-radius:8px;
+border:1px solid transparent;
+color:#111827;
+}
+.drag:hover{ background:#f3f4f6; border-color:#e5e7eb; }
+.row.dragging{ opacity:.55; }
+
+.cell-task input{ width:100%; }
+.cell-time input{ width:100%; text-align:right; }
+.pill{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+height: 26px;
+padding: 0 10px;
+border-radius:999px;
+background:#f3f4f6;
+border:1px solid #e5e7eb;
+font-size:12px;
+color:#374151;
+width: fit-content;
+justify-self:center;
+}
+
+/* 右侧 */
+.right{
+position:relative;
+overflow:auto;
+max-height: 560px;
+background:
+repeating-linear-gradient(to right, rgba(0,0,0,0.06) 0 1px, transparent 1px var(--gridSmall)),
+repeating-linear-gradient(to right, rgba(0,0,0,0.10) 0 1px, transparent 1px var(--gridLarge));
+}
+.timeline-head{
+position:sticky; top:0; z-index:6;
+height:44px;
+background: #fff;
+border-bottom:1px solid var(--border);
+display:flex;
+align-items:flex-end;
+padding-left:10px;
+box-sizing:border-box;
+}
+.tick{
+position:relative;
+height:44px;
+border-left:1px solid rgba(0,0,0,.08);
+flex: 0 0 auto;
+box-sizing:border-box;
+}
+.tick span{
+position:absolute;
+bottom:8px; left:6px;
+font-size:12px;
+color:#374151;
+white-space:nowrap;
+}
+
+.lanes{ position:relative; }
+.lane{
+height: var(--rowH);
+border-bottom:1px solid rgba(0,0,0,.06);
+position:relative;
+}
+.bar{
+position:absolute;
+top: 8px;
+height: 28px;
+border-radius:8px;
+background: #16a34a;
+color:#fff;
+font-size:12px;
+line-height:28px;
+padding: 0 10px;
+box-sizing:border-box;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+box-shadow: 0 6px 14px rgba(22,163,74,.20);
+}
+.bar.parallel{
+background:#2563eb;
+box-shadow: 0 6px 14px rgba(37,99,235,.22);
+}
+
+.meta{
+margin-top:10px;
+color: var(--muted);
+font-size:12px;
+display:flex;
+justify-content:space-between;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.file{
+display:inline-flex;
+align-items:center;
+gap:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>节拍（CT）甘特风格（仅任务+时间）</h1>
+
+<div class="bar-row">
+<label>任务</label>
+<input id="task" type="text" placeholder="例如：Press, Pick Rotor" style="width:340px;">
+<label>时间(秒)</label>
+<input id="time" type="number" min="0" step="0.01" placeholder="例如：8.5" style="width:160px;">
+<button class="primary" onclick="add()">添加</button>
+</div>
+
+<div class="bar-row">
+<label>并行组</label>
+<input id="pg" type="number" min="0" value="0" style="width:120px;">
+<button onclick="setPG()">对勾选任务设置并行组</button>
+<button onclick="compute()">计算/刷新</button>
+<button class="danger" onclick="deleteSelected()">删除勾选</button>
+<button onclick="downloadJSON()">导出JSON</button>
+<span class="file">
+<label>导入JSON</label>
+<input type="file" accept="application/json" onchange="importFile(event)">
+</span>
+</div>
+
+<textarea id="jsonArea" placeholder='可粘贴JSON数组：[{ "task":"A", "time":8, "parallelGroup":0 }...]'></textarea>
+<div class="bar-row">
+<button onclick="exportToText()">导出到文本</button>
+<button onclick="importFromText()">从文本导入</button>
+</div>
+
+<div class="wrap">
+<!-- 左 -->
+<div class="left">
+<div class="head">
+<div>选</div>
+<div>拖</div>
+<div>任务</div>
+<div>时间(s)</div>
+<div>组</div>
+<div>删除</div>
+</div>
+<div id="list"></div>
+</div>
+
+<!-- 右 -->
+<div class="right">
+<div id="timeHead" class="timeline-head"></div>
+<div id="lanes" class="lanes"></div>
+</div>
+</div>
+
+<div class="meta">
+<div id="summary">总CT：0 秒</div>
+<div>说明：相邻且同并行组号(>0)的任务合并为并行块，块长度取最大时间。</div>
+</div>
+
+<script>
+let tasks = [];
+let idCounter = 1;
+
+const pxPerSec = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pxPerSec')) || 28;
+
+function add(){
+const task = document.getElementById("task").value.trim();
+const time = Number(document.getElementById("time").value);
+if(!task) return alert("请输入任务名");
+if(!Number.isFinite(time) || time<=0) return alert("请输入有效时间(>0)");
+
+tasks.push({ id:idCounter++, task, time, parallelGroup:0, selected:false });
+document.getElementById("task").value="";
+document.getElementById("time").value="";
+renderList();
+compute();
+}
+
+function renderList(){
+const list = document.getElementById("list");
+list.innerHTML = "";
+
+tasks.forEach((t, idx)=>{
+const row = document.createElement("div");
+row.className = "row";
+row.dataset.index = idx;
+row.draggable = false; // 只允许手柄触发拖拽
+
+row.innerHTML = `
+<div><input type="checkbox" ${t.selected?"checked":""}></div>
+<div class="drag" title="拖拽调整顺序" draggable="true">≡</div>
+<div class="cell-task"><input type="text" value="${escapeHtml(t.task)}"></div>
+<div class="cell-time"><input type="number" min="0" step="0.01" value="${t.time}"></div>
+<div><span class="pill">${t.parallelGroup}</span></div>
+<div><button class="danger" style="height:28px;padding:0 10px;border-radius:8px;" title="删除该任务">删</button></div>
+`;
+
+// 事件绑定
+const cb = row.querySelector('input[type="checkbox"]');
+cb.addEventListener("change", e => { tasks[idx].selected = e.target.checked; });
+
+const taskInput = row.querySelector(".cell-task input");
+taskInput.addEventListener("input", e => { tasks[idx].task = e.target.value; compute(); });
+
+const timeInput = row.querySelector(".cell-time input");
+timeInput.addEventListener("input", e => { tasks[idx].time = Number(e.target.value)||0; compute(); });
+
+const delBtn = row.querySelector("button.danger");
+delBtn.addEventListener("click", ()=>{ deleteOne(idx); });
+
+// 拖拽仅手柄
+const handle = row.querySelector(".drag");
+handle.addEventListener("dragstart", (e)=>dragStart(e, idx, row));
+handle.addEventListener("dragend", ()=>row.classList.remove("dragging"));
+
+// 放置区域：整行都能 drop
+row.addEventListener("dragover", e=>e.preventDefault());
+row.addEventListener("drop", e=>dropRow(e, idx));
+
+list.appendChild(row);
+});
+}
+
+function deleteOne(index){
+tasks.splice(index, 1);
+renderList();
+compute();
+}
+
+function deleteSelected(){
+const before = tasks.length;
+tasks = tasks.filter(t=>!t.selected);
+if(tasks.length === before) return alert("没有勾选任务");
+renderList();
+compute();
+}
+
+function setPG(){
+const g = parseInt(document.getElementById("pg").value, 10);
+if(!Number.isInteger(g) || g<0) return alert("并行组需为>=0整数");
+const any = tasks.some(t=>t.selected);
+if(!any) return alert("请先勾选任务");
+tasks.forEach(t=>{ if(t.selected) t.parallelGroup = g; });
+renderList();
+compute();
+}
+
+// 拖拽排序
+let dragFrom = null;
+function dragStart(e, idx, row){
+dragFrom = idx;
+row.classList.add("dragging");
+e.dataTransfer.effectAllowed = "move";
+}
+function dropRow(e, toIdx){
+e.preventDefault();
+if(dragFrom===null || dragFrom===toIdx) return;
+const item = tasks.splice(dragFrom, 1)[0];
+tasks.splice(toIdx, 0, item);
+dragFrom = null;
+renderList();
+compute();
+}
+
+// 并行块：相邻同组(>0)合并
+function buildBlocks(){
+const blocks = [];
+let i=0, cursor=0;
+while(i<tasks.length){
+const g = tasks[i].parallelGroup;
+if(g===0){
+blocks.push({ start:cursor, group:0, rows:[tasks[i]], dur: tasks[i].time });
+cursor += tasks[i].time;
+i++;
+}else{
+const rows=[tasks[i]]; i++;
+while(i<tasks.length && tasks[i].parallelGroup===g){
+rows.push(tasks[i]); i++;
+}
+const dur = Math.max(...rows.map(r=>r.time));
+blocks.push({ start:cursor, group:g, rows, dur });
+cursor += dur;
+}
+}
+return { blocks, total: cursor };
+}
+
+function compute(){
+// 基本校验
+for(const t of tasks){
+if(!t.task?.trim()) { renderGantt([], 0); return; }
+if(!Number.isFinite(t.time) || t.time<=0) { renderGantt([], 0); return; }
+}
+const { blocks, total } = buildBlocks();
+
+const rows = tasks.map(t=>{
+const b = blocks.find(bb=>bb.rows.includes(t));
+return {
+task:t.task, time:t.time, group:t.parallelGroup,
+start:b.start, width:t.time
+};
+});
+
+renderGantt(rows, total);
+document.getElementById("summary").innerHTML = `总CT：<b>${total.toFixed(2)}</b> 秒（比例：1秒=${pxPerSec}px）`;
+}
+
+function renderGantt(rows, total){
+const timeHead = document.getElementById("timeHead");
+const lanes = document.getElementById("lanes");
+timeHead.innerHTML = "";
+lanes.innerHTML = "";
+
+const totalPx = Math.max(720, total * pxPerSec + 80);
+timeHead.style.width = totalPx + "px";
+lanes.style.width = totalPx + "px";
+
+// 刻度：小格1s（背景网格已画）；这里画粗刻度数字
+let step = 5;
+if(total < 30) step = 1;
+if(total > 180) step = 10;
+
+for(let t=0; t<=Math.ceil(total); t+=step){
+const tick = document.createElement("div");
+tick.className="tick";
+tick.style.width = (step * pxPerSec) + "px";
+const s = document.createElement("span");
+s.textContent = `${t}s`;
+tick.appendChild(s);
+timeHead.appendChild(tick);
+}
+
+// lanes 数量与左侧行对齐
+const laneCount = Math.max(tasks.length, rows.length);
+for(let i=0; i<laneCount; i++){
+const lane = document.createElement("div");
+lane.className="lane";
+lanes.appendChild(lane);
+}
+
+// bars
+rows.forEach((r, i)=>{
+const lane = lanes.children[i];
+if(!lane) return;
+
+const bar = document.createElement("div");
+bar.className = "bar" + (r.group>0 ? " parallel":"");
+bar.style.left = (r.start * pxPerSec) + "px";
+bar.style.width = Math.max(10, r.width * pxPerSec) + "px";
+bar.title = `${r.task} | ${r.time}s | start=${r.start.toFixed(2)}s | 组=${r.group}`;
+bar.textContent = `${r.task} (${r.time.toFixed(2)}s)`;
+lane.appendChild(bar);
+});
+}
+
+// 导入导出
+function exportToText(){
+const data = tasks.map(t=>({ task:t.task, time:t.time, parallelGroup:t.parallelGroup }));
+document.getElementById("jsonArea").value = JSON.stringify(data, null, 2);
+}
+function importFromText(){
+const txt = document.getElementById("jsonArea").value.trim();
+if(!txt) return alert("文本为空");
+let data;
+try{ data = JSON.parse(txt); }catch{ return alert("JSON解析失败"); }
+importData(data);
+}
+function importFile(e){
+const f = e.target.files?.[0];
+if(!f) return;
+const r = new FileReader();
+r.onload = ()=>{
+try{ importData(JSON.parse(r.result)); }
+catch{ alert("JSON解析失败"); }
+};
+r.readAsText(f, "utf-8");
+e.target.value="";
+}
+function importData(data){
+if(!Array.isArray(data)) return alert("必须是JSON数组");
+const nt = [];
+idCounter = 1;
+for(const it of data){
+const task = String(it.task ?? "").trim();
+const time = Number(it.time);
+let pg = Number(it.parallelGroup ?? 0);
+if(!Number.isInteger(pg) || pg<0) pg=0;
+if(!task) return alert("存在空任务名");
+if(!Number.isFinite(time) || time<=0) return alert("存在无效时间(<=0)");
+nt.push({ id:idCounter++, task, time, parallelGroup:pg, selected:false });
+}
+tasks = nt;
+renderList();
+compute();
+}
+function downloadJSON(){
+const data = tasks.map(t=>({ task:t.task, time:t.time, parallelGroup:t.parallelGroup }));
+const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json;charset=utf-8"});
+const url = URL.createObjectURL(blob);
+const a = document.createElement("a");
+a.href=url; a.download="ct_tasks.json";
+document.body.appendChild(a); a.click(); a.remove();
+URL.revokeObjectURL(url);
+}
+
+function escapeHtml(str){
+return String(str).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+.replaceAll('"',"&quot;").replaceAll("'","&#039;");
+}
+
+renderList();
+compute();
+</script>
+</body>
+</html>
