@@ -1,0 +1,42 @@
+[
+  {
+    "task": "TrayIn, Pick Rotor",
+    "time": 8,
+    "parallelGroup": 1
+  },
+  {
+    "task": "Press, Action2- Target",
+    "time": 8,
+    "parallelGroup": 1
+  },
+  {
+    "task": "Press, Pick Rotor ASM",
+    "time": 6.93,
+    "parallelGroup": 0
+  },
+  {
+    "task": "Press, Drop Rotor",
+    "time": 9.3,
+    "parallelGroup": 0
+  },
+  {
+    "task": "Press, Action1- Bearing & Circlip",
+    "time": 30,
+    "parallelGroup": 2
+  },
+  {
+    "task": "TrayOut, Drop Rotor ASM",
+    "time": 7.61,
+    "parallelGroup": 2
+  },
+  {
+    "task": "TrayIn, Pick Target",
+    "time": 8,
+    "parallelGroup": 2
+  },
+  {
+    "task": "Press, Drop Target",
+    "time": 10.99,
+    "parallelGroup": 0
+  }
+]
