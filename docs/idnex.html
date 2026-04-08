@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FANUC Robot Tools Navigation</title>
+    <style>
+        /* Reset部分 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #f0f4f8;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.8rem;
+            color: #2a4058;
+            margin-bottom: 6px;
+        }
+        header p {
+            font-size: 1.1rem;
+            color: #6c7a89;
+        }
+        nav {
+            width: 100%;
+            max-width: 600px;
+        }
+        ul.nav-list {
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+        @media(min-width: 480px) {
+            ul.nav-list {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
+        a.nav-link {
+            display: block;
+            background: #fff;
+            padding: 18px 22px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+            text-decoration: none;
+            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            color: #2a4058;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        a.nav-link:hover, a.nav-link:focus {
+            background: #2a4058;
+            color: #f0f4f8;
+            box-shadow: 0 8px 18px rgba(42, 64, 88, 0.4);
+            transform: translateY(-3px);
+            outline: none;
+        }
+        footer {
+            margin-top: 60px;
+            color: #9aa6b1;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>FANUC Robot Tools</h1>
+    </header>
+    <nav>
+        <ul class="nav-list">
+            <li><a class="nav-link" href="https://zhaomengkang.github.io/FANUC-Robot/docs/R-50iA%20DataID%20List/R-50iA%20DataID%20List.html" target="_blank" rel="noopener">R-50iA Data ID List</a></li>
+            <li><a class="nav-link" href="https://zhaomengkang.github.io/FANUC-Robot/docs/Tools/CT%20Calculate/CTAnalysis.HTML" target="_blank" rel="noopener">CT (CycleTime) Analysis</a></li>
+            <li><a class="nav-link" href="https://zhaomengkang.github.io/FANUC-Robot/docs/Tools/DCS/DCSPolygonAnalyzer.HTML" target="_blank" rel="noopener">DCS Polygon Analyzer</a></li>
+            <li><a class="nav-link" href="https://zhaomengkang.github.io/FANUC-Robot/docs/Tools/Frame4/Frame4.html" target="_blank" rel="noopener">Frame4 Calculate</a></li>
+            <li><a class="nav-link" href="https://zhaomengkang.github.io/FANUC-Robot/docs/Tools/IEEE-754 Floating Point Converter/IEEE-754 Floating Point Converter.html" target="_blank" rel="noopener">IEEE-754 Floating Point Converter</a></li>
+            <li><a class="nav-link" href="https://zhaomengkang.github.io/FANUC-Robot/docs/Tools/发那科机器人6轴零点恢复计算工具V2025.09.14/发那科机器人6轴零点恢复计算工具V2025.09.14.html" target="_blank" rel="noopener">Robot Axis Mastering Recovery</a></li>
+        </ul>
+    </nav>
+    <footer>
+        &copy; 2024 FANUC Robot Tools by zhaomengkang
+    </footer>
+</body>
+</html>
