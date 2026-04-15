@@ -39,8 +39,7 @@ ROUTINE replace_str(
     str_in     : STRING;
     params     : ARRAY OF STRING;
     param_count: INTEGER;
-    result     : STRING
-)
+    result     : STRING)
 VAR
     str_lenth   : INTEGER
     str_index   : INTEGER
@@ -96,8 +95,7 @@ ROUTINE get_param(
     result_int : INTEGER;
     result_real: REAL;
     result_str : STRING;
-    status     : INTEGER
-)
+    status     : INTEGER)
 VAR
     data_type : INTEGER
     int_val   : INTEGER
