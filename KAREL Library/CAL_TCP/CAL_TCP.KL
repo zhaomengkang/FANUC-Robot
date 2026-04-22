@@ -1,0 +1,138 @@
+PROGRAM CAL_TCP
+----------------------------------------------------
+-- Creation date: 2026.04.22
+-- Created by: Zhao Mengkang
+----------------------------------------------------
+-- Version: 2026.04.22 - 1
+----------------------------------------------------
+-- Function: Calculate the sphere center from 4 points
+----------------------------------------------------
+-- Last modified: 2026.04.22
+-- Last modified by: Zhao Mengkang
+----------------------------------------------------
+%COMMENT = 'Test'
+%ALPHABETIZE
+%NOLOCKGROUP
+%NOBUSYLAMP
+%NOPAUSESHFT
+%NOPAUSE = ERROR + COMMAND + TPENABLE
+%SYSTEM
+
+CONST
+EPS = 0.000001
+
+VAR
+pos1    :XYZWPR
+pos2    :XYZWPR
+pos3    :XYZWPR
+pos4    :XYZWPR
+
+tcp		:XYZWPR
+
+center	:XYZWPR
+
+status  :INTEGER
+
+ROUTINE CALCSPH(p1:XYZWPR;p2:XYZWPR;p3:XYZWPR;p4:XYZWPR;center:XYZWPR;status:INTEGER)
+VAR
+A   :ARRAY[3,3] OF REAL
+B   :ARRAY[3] OF REAL
+X   :ARRAY[3] OF REAL
+
+P   :ARRAY[4] OF XYZWPR
+s1  :REAL
+
+i  :INTEGER
+j  :INTEGER
+k  :INTEGER
+max_row :INTEGER
+
+tmp :REAL
+tb  :REAL
+factor  :REAL
+
+sum :REAL
+BEGIN
+    P[1] = p1
+    P[2] = p2
+    P[3] = p3
+    P[4] = p4
+
+    status = 0
+
+    s1 = p1.x*p1.x + p1.y*p1.y + p1.z*p1.z
+    
+    -- Build the linear system A * X = B
+    -- X = [center.x, center.y, center.z]
+    -- Each row is derived by subtracting the first sphere equation from the others
+    FOR i = 1 TO 3 DO
+        j = i + 1
+        A[i,1] = 2.0 * (P[j].x - P[1].x)
+        A[i,2] = 2.0 * (P[j].y - P[1].y)
+        A[i,3] = 2.0 * (P[j].z - P[1].z)
+
+        B[i] = P[j].x*P[j].x + P[j].y*P[j].y + P[j].z*P[j].z - s1
+    ENDFOR
+
+    -- Gaussian elimination with partial pivoting
+    FOR i = 1 TO 3 DO
+        max_row = i
+        -- Find the row with the largest pivot value in the current column
+        FOR k = i + 1 TO 3 DO
+            IF ABS(A[k,i]) > ABS(A[max_row,i]) THEN
+                max_row = k
+            ENDIF
+        ENDFOR
+
+        -- Abort if the matrix is singular or nearly singular
+        IF ABS(A[max_row,i]) < EPS THEN
+            status = -1
+            RETURN
+        ENDIF
+
+        -- Swap current row with pivot row
+        IF max_row <> i THEN
+            FOR k = i TO 3 DO
+                tmp = A[i,k]
+                A[i,k] = A[max_row,k]
+                A[max_row,k] = tmp
+            ENDFOR
+
+            tb = B[i]
+            B[i] = B[max_row]
+            B[max_row] = tb
+        ENDIF
+
+        -- Eliminate values below the pivot
+        FOR k = i + 1 TO 3 DO
+            factor = A[k,i] / A[i,i]
+            FOR j = i TO 3 DO
+                A[k,j] = A[k,j] - factor * A[i,j]
+            ENDFOR
+            B[k] = B[k] - factor * B[i]
+        ENDFOR
+    ENDFOR
+
+    -- Back substitution
+    FOR i = 3 DOWNTO 1 DO
+        sum = B[i]
+        FOR j = i + 1 TO 3 DO
+            sum = sum - A[i,j] * X[j]
+        ENDFOR
+        X[i] = sum / A[i,i]
+    ENDFOR
+
+    -- Write the calculated sphere center to the output structure
+    center.x = X[1]
+    center.y = X[2]
+    center.z = X[3]
+
+END CALCSPH
+
+----------------------------------------------------
+-- BEGIN Main
+----------------------------------------------------
+BEGIN
+    CALCSPH(pos1,pos2,pos3,pos4,center,status)
+    -- tcp = center : INV((pos1))
+END CAL_TCP
