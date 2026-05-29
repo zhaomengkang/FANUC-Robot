@@ -1,37 +1,737 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" []>
-<!--
-     (Please keep all copyright notices.)
-     This document includes the Treeview script.
-     Script found at: http://www.treeview.net
-     Author: Marcelino Alves Martins
--->
-<html VERSION='-//W3C//DTD HTML 4.0//EN'>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Document Navigation</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document Navigation</title>
+  <style>
+    body {
+      margin: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #222;
+      background: #fff;
+    }
 
-<link rel="stylesheet" href="HolySheet.css" type="text/css"/>
+    .header {
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
 
-<script type="text/javascript" src="menu_files/ua_js.js"></script>
-<script type="text/javascript" src="menu_files/ftiens4_js.js"></script>
-<script type="text/javascript" src="menu_files/menu_js.js"></script>
+    .header .links {
+      margin: 6px 0 0 0;
+      font-size: 13px;
+    }
 
+    .header a {
+      color: #0b57d0;
+      text-decoration: none;
+    }
+
+    .header a:hover {
+      text-decoration: underline;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    ul.tree {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    ul.tree ul {
+      list-style: none;
+      margin: 4px 0 4px 18px;
+      padding-left: 14px;
+      border-left: 1px solid #d9e2ef;
+    }
+
+    li.group {
+      margin: 6px 0;
+      padding: 6px 10px;
+      background: #f6f9fc;
+      border-left: 4px solid #0b57d0;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    li.subgroup {
+      margin: 4px 0;
+      padding: 4px 8px;
+      background: #fbfcfe;
+      border-left: 3px solid #9ab7e8;
+      border-radius: 5px;
+      font-weight: 700;
+    }
+
+    li.node {
+      margin: 3px 0;
+    }
+
+    li.node a {
+      color: #0b57d0;
+      text-decoration: none;
+    }
+
+    li.node a:hover {
+      text-decoration: underline;
+    }
+
+    .small-note {
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px solid #ddd;
+      color: #666;
+      font-size: 12px;
+    }
+  </style>
 </head>
+<body>
+  <div class="header">
+    <p class="title">Document Navigation</p>
+    <p class="links">
+      <a href="hotline.pdf" target="main">Customer Resource Center</a> |
+      <a href="license.txt" target="main">License</a>
+    </p>
+  </div>
 
+  <ul class="tree">
+    <li class="group">Active Manuals
+      <ul>
+        <li class="subgroup">Electrical Manuals
+          <ul>
+            <li class="subgroup">I/O and Connections
+              <ul>
+                <li class="node"><a href="../MARMGIOMA12801E_REV_C/book.pdf" target="main">I/O Unit Model A Connection and Maintenance</a></li>
+                <li class="node"><a href="../MARFIOUMB04701E_REV_B/toc.htm" target="main">I/O Unit Model B Connection and Maintenance</a></li>
+              </ul>
+            </li>
 
-<body bgcolor="#FFFFFF" topmargin=16 marginheight=16>
-<p class='file-links'>
-<a href="hotline.pdf" target="main"> Customer Resource Center </a> | <a href="license.txt" target="main"> License </a>
-</p>
-<p class='toc-title'>Table of Contents</p>
-<!-- Build the browser's objects and display default view of the 
-     tree. -->
-<script type="text/javascript">initializeDocument()</script>
-<noscript>
-A tree for site navigation will open here if you enable JavaScript in your browser.
-</noscript>
+            <li class="subgroup">Motors and Amps
+              <ul>
+                <li class="node"><a href="../MARMALPSE01801E_REV_B/book.pdf" target="main">Alpha Series Servo Motor Maintenance</a></li>
+                <li class="node"><a href="../MARD3SAAD05011E_REV_C/book.pdf" target="main">Alpha i Series Servo Amplifier Descriptions</a></li>
+                <li class="node"><a href="../MARDALPHS06011E_REV_A/book.pdf" target="main">Alpha i Series Servo Motor Descriptions</a></li>
+                <li class="node"><a href="../MARMISMAI09011E_REV_A/book.pdf" target="main">Alpha i Series Servo Motor Maintenance</a></li>
+                <li class="node"><a href="../MARDBSRVM05021E_REV_A/book.pdf" target="main">Beta Series Servo Motor Descriptions</a></li>
+              </ul>
+            </li>
 
-<p class='file-links'>
-<a href="hotline.pdf" target="main"> Customer Resource Center </a> | <a href="license.txt" target="main"> License </a>
-</p>
+            <li class="subgroup">R-J Controller
+              <ul>
+                <li class="node"><a href="../MARMMTRBL02303E_REV_A/book.pdf" target="main">Controller Maintenance</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">R-J2 Controller
+              <ul>
+                <li class="node"><a href="../MARP2CONT01504E_REV_A/toc.htm" target="main">Controller Parts</a></li>
+                <li class="node"><a href="../MARMMOSH205502E_REV_A/toc.htm" target="main">Electrical Troubleshooting</a></li>
+                <li class="node"><a href="../MARO2P10203704E_REV_B/book.pdf" target="main">P-10, P-15, and P-200 Controller Maintenance</a></li>
+                <li class="node"><a href="../MARE2RS1C04801E_REV_A/toc.htm" target="main">RS-1 Controller Maintenance</a></li>
+                <li class="node"><a href="../MARX2RELI09703E_REV_A/toc.htm" target="main">RS-1/RS-4 Option Maintenance Addendum</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">R-J3 Controller
+              <ul>
+                <li class="node"><a href="../MARM3CONM10801E_REV_E/toc.htm" target="main">Controller Maintenance</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">R-J3 RIA Controller
+              <ul>
+                <li class="node"><a href="../MARMRIAMT05001E_REV_B/book.pdf" target="main">Controller Maintenance</a></li>
+                <li class="node"><a href="../MARPRIAPT05001E_REV_A/toc.htm" target="main">Controller Parts</a></li>
+                <li class="node"><a href="../MARO3HSIP12901E_REV_A/book.pdf" target="main">HSI Pulse Module</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">R-J3iB Controller
+              <ul>
+                <li class="node"><a href="../MAREIBAUX11011E_REV_B/book.pdf" target="main">Auxiliary Axis Connection and Maintenance</a></li>
+                <li class="node"><a href="../MARMIBRIA03011E_REV_D/book.pdf" target="main">Connection and Maintenance</a></li>
+                <li class="node"><a href="../MARPIBRIA04011E_REV_C/book.pdf" target="main">Controller Parts</a></li>
+                <li class="node"><a href="MARXIBRIA10011E_REV_B/GM Maintenance Addendum" target="main">GM Maintenance Addendum</a></li>
+                <li class="node"><a href="../MARO3HSIP12901E_REV_B/book.pdf" target="main">HSI Pulse Module</a></li>
+                <li class="node"><a href="../MARMINOBT11011E_REV_A/book.pdf" target="main">Nobot Connection and Maintenance</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">R-J3iB Mate Controller
+              <ul>
+                <li class="node"><a href="../MARMIBRIA01021E_REV_A/book.pdf" target="main">Controller Maintenance</a></li>
+                <li class="node"><a href="../MARPIBRIA02021E_REV_A/book.pdf" target="main">Controller Parts</a></li>
+                <li class="node"><a href="../MARMIBENT02021E_REV_A/book.pdf" target="main">Ethernet Connections and Maintenance Addendum</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li class="subgroup">Mechanical Manuals
+          <ul>
+            <li class="subgroup">A-520i
+              <ul>
+                <li class="node"><a href="../MARM3A52I10801E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3A52010801E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">ARC Mate 100i/M-6i
+              <ul>
+                <li class="node"><a href="../MARM3AMM609801E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">ARC Mate 100iB/M-6iB
+              <ul>
+                <li class="node"><a href="../MARMIBARC11011E_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARPIBARC11011E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">ARC Mate 120i/iL & M-16i/iL
+              <ul>
+                <li class="node"><a href="../MARM3AR1609801E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">ARC Mate 120i/iL/iLT & M-16i/iT/iLT
+              <ul>
+                <li class="node"><a href="../MARP3AR1609801E_REV_B/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">ARC Mate 120iB, 120iB/10L, M-16iB/20, M-16iB/10L
+              <ul>
+                <li class="node"><a href="../MARMI120I07021E_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">ARC Mate Positioner
+              <ul>
+                <li class="node"><a href="../MARM3FEWH03901E_REV_A/toc.htm" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">F-200i
+              <ul>
+                <li class="node"><a href="../MARM3F20008901E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3F20007901E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">F-200iB
+              <ul>
+                <li class="node"><a href="../MARMIF20004021E_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARPIF20004021E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">GM RS-1/RS-4
+              <ul>
+                <li class="node"><a href="../MARI3RS1407901E_REV_A/toc.htm" target="main">R-J3 Mechanical Unit Installation</a></li>
+                <li class="node"><a href="../MARFIBRSM03021E_REV_A/book.pdf" target="main">R-J3iB Mechanical Unit Installation</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">IAD
+              <ul>
+                <li class="node"><a href="../MARQ3IADV01011E_REV_A/book.pdf" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">LR Mate 100iB
+              <ul>
+                <li class="node"><a href="../MARMIBLRM12011E_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARPLRM1I04021E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">LR Mate 200i/iL & ARC Mate 50i/iL
+              <ul>
+                <li class="node"><a href="../MARM2LR2002901E_REV_B/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3LR2001011E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">LR Mate 200iB/3L & ARC Mate 50iB/3L
+              <ul>
+                <li class="node"><a href="../MARMIBLR203021E_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARPIM23L04021E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">LR Mate 200iB/ARC Mate 50iB
+              <ul>
+                <li class="node"><a href="../MARPLRM2I04021E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-410iHS/HW
+              <ul>
+                <li class="node"><a href="../MARM3M41009801E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3M41009801E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-420iA & M-421iA
+              <ul>
+                <li class="node"><a href="../MARMIB42A04021E_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARMI42IA04021E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-500i
+              <ul>
+                <li class="node"><a href="../MARM3M50007901E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3M50007901E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-6i to P-90
+              <ul>
+                <li class="node"><a href="../MARX3M6IC08011E_REV_A/book.pdf" target="main">Conversion</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-6i/iT & ARC Mate 100i/iT
+              <ul>
+                <li class="node"><a href="../MARP3AMM609801E_REV_B/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-6iT, M-16iT, M-16iLT
+              <ul>
+                <li class="node"><a href="../MARF3M6IT03901E_REV_B/toc.htm" target="main">Installation</a></li>
+                <li class="node"><a href="../MARP3M6IT04901E_REV_C/toc.htm" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-710i
+              <ul>
+                <li class="node"><a href="../MARM3710I09801E_REV_B/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3M71009801E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-710iB/45/45E
+              <ul>
+                <li class="node"><a href="../MARMI710I03021E_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARPI710I0302E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-710iT
+              <ul>
+                <li class="node"><a href="../MARP3710T02001E_REV_B/toc.htm" target="main">Carriage, Rail and Column Parts and Service</a></li>
+                <li class="node"><a href="../MARM3710P12901E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3710P12901E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">M-710iW
+              <ul>
+                <li class="node"><a href="../MARM3M71010801E_REV_B/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3M71W11801E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">P-10 & P-15 Openers
+              <ul>
+                <li class="node"><a href="../MARP2P15S10701E_REV_A/book.pdf" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">P-10E & P-15E Openers
+              <ul>
+                <li class="node"><a href="../MARP3P15S11011E_REV_A/book.pdf" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">P-120
+              <ul>
+                <li class="node"><a href="../MARP3P12007801E_REV_A/toc.htm" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">P-145
+              <ul>
+                <li class="node"><a href="../MARP3P14507801E_REV_B/toc.htm" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">P-155
+              <ul>
+                <li class="node"><a href="../MARPMP15506204E_REV_B/book.pdf" target="main">Mechanical Unit Parts</a></li>
+                <li class="node"><a href="../MARRPP15506204E_REV_B/book.pdf" target="main">Mechanical Unit Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">P-200 Pedestal and In-Booth Rail
+              <ul>
+                <li class="node"><a href="../MARP2P20007604E_REV_A/book.pdf" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">P-200 Pedestal, In Booth Rail, & Clean Wall Rail
+              <ul>
+                <li class="node"><a href="../MARP3P2CW01901E_REV_B/toc.htm" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">P-200E Pedestal, Clean Wall Rail, In-booth Rail
+              <ul>
+                <li class="node"><a href="../MARP3200E06011E_REV_B/book.pdf" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">R-2000iA
+              <ul>
+                <li class="node"><a href="../MARMIBR2I03011E_REV_C/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARPIBR2I03011E_REV_C/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">R-2000iA/200T
+              <ul>
+                <li class="node"><a href="../MARMI2IAT0702IE_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARPI2IAT08021E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">Robot Transfer Unit
+              <ul>
+                <li class="node"><a href="../MARP3RTU010211E_REV_A/book.pdf" target="main">Mechanical Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">S-420i Series
+              <ul>
+                <li class="node"><a href="../MARRS42IF05502E_REV_A/toc.htm" target="main">Mechanical Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">S-420iF/W/S/L/R
+              <ul>
+                <li class="node"><a href="../MARP2420I02801E_REV_B/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">S-430i
+              <ul>
+                <li class="node"><a href="../MARM3S43009801E_REV_D/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3S43009801E_REV_B/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">S-430i Series GM RS-1
+              <ul>
+                <li class="node"><a href="../MARM3GMS408901E_REV_C/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">S-500i
+              <ul>
+                <li class="node"><a href="../MARM3S50007901E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3S50001001E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">S-900i
+              <ul>
+                <li class="node"><a href="../MARM3S90008901E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARP3S90008901E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">S-900iB
+              <ul>
+                <li class="node"><a href="../MARMIBS9007021E_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                <li class="node"><a href="../MARPIS90007021E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">ServoBell Applicator
+              <ul>
+                <li class="node"><a href="../MARPGWBBL02021E_REV_A/book.pdf" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">VersaBell Atomizer
+              <ul>
+                <li class="node"><a href="../MARPGBELL12011E_REV_B/book.pdf" target="main">Parts and Service</a></li>
+              </ul>
+            </li>
+
+            <li class="subgroup">R-J3iB
+              <ul>
+                <li class="subgroup">A-520i
+                  <ul>
+                    <li class="node"><a href="MARM3A52I10801E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3A52010801E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">ARC Mate 100i/M-6i
+                  <ul>
+                    <li class="node"><a href="MARM3AMM609801E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">ARC Mate 100iB/M-6iB
+                  <ul>
+                    <li class="node"><a href="MARMIBARC11011E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARPIBARC11011E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">ARC Mate 120i/iL & M-16i/iL
+                  <ul>
+                    <li class="node"><a href="MARM3AR1609801E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">ARC Mate 120i/iL/iLT & M-16i/iT/iLT
+                  <ul>
+                    <li class="node"><a href="MARP3AR1609801E_REV_B/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">ARC Mate 120iB, 120iB/10L, M-16iB/20, M-16iB/10L
+                  <ul>
+                    <li class="node"><a href="MARMI120I07021E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">ARC Mate Positioner
+                  <ul>
+                    <li class="node"><a href="MARM3FEWH03901E_REV_A/" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">F-200i
+                  <ul>
+                    <li class="node"><a href="MARM3F20008901E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3F20007901E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">F-200iB
+                  <ul>
+                    <li class="node"><a href="MARMIF20004021E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARPIF20004021E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">GM RS-1/RS-4
+                  <ul>
+                    <li class="node"><a href="MARI3RS1407901E_REV_A/" target="main">R-J3 Mechanical Unit Installation</a></li>
+                    <li class="node"><a href="MARFIBRSM03021E_REV_A/" target="main">R-J3iB Mechanical Unit Installation</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">IAD
+                  <ul>
+                    <li class="node"><a href="MARQ3IADV01011E_REV_A/" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">LR Mate 100iB
+                  <ul>
+                    <li class="node"><a href="MARMIBLRM12011E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARPLRM1I04021E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">LR Mate 200i/iL & ARC Mate 50i/iL
+                  <ul>
+                    <li class="node"><a href="MARM2LR2002901E_REV_B/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3LR2001011E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">LR Mate 200iB/3L & ARC Mate 50iB/3L
+                  <ul>
+                    <li class="node"><a href="MARMIBLR203021E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARPIM23L04021E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">LR Mate 200iB/ARC Mate 50iB
+                  <ul>
+                    <li class="node"><a href="MARPLRM2I04021E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-410iHS/HW
+                  <ul>
+                    <li class="node"><a href="MARM3M41009801E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3M41009801E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-420iA & M-421iA
+                  <ul>
+                    <li class="node"><a href="MARMIB42A04021E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARMI42IA04021E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-500i
+                  <ul>
+                    <li class="node"><a href="MARM3M50007901E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3M50007901E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-6i to P-90
+                  <ul>
+                    <li class="node"><a href="MARX3M6IC08011E_REV_A/" target="main">Conversion</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-6i/iT & ARC Mate 100i/iT
+                  <ul>
+                    <li class="node"><a href="MARP3AMM609801E_REV_B/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-6iT, M-16iT, M-16iLT
+                  <ul>
+                    <li class="node"><a href="MARF3M6IT03901E_REV_B/" target="main">Installation</a></li>
+                    <li class="node"><a href="MARP3M6IT04901E_REV_C/" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-710i
+                  <ul>
+                    <li class="node"><a href="MARM3710I09801E_REV_B/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3M71009801E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-710iB/45/45E
+                  <ul>
+                    <li class="node"><a href="MARMI710I03021E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARPI710I0302E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-710iT
+                  <ul>
+                    <li class="node"><a href="MARP3710T02001E_REV_B/" target="main">Carriage, Rail and Column Parts and Service</a></li>
+                    <li class="node"><a href="MARM3710P12901E_REV_A/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3710P12901E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">M-710iW
+                  <ul>
+                    <li class="node"><a href="MARM3M71010801E_REV_B/" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3M71W11801E_REV_A/" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">P-10 & P-15 Openers
+                  <ul>
+                    <li class="node"><a href="MARP2P15S10701E_REV_A/" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">P-10E & P-15E Openers
+                  <ul>
+                    <li class="node"><a href="MARP3P15S11011E_REV_A/" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">P-120
+                  <ul>
+                    <li class="node"><a href="MARP3P12007801E_REV_A/" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">P-145
+                  <ul>
+                    <li class="node"><a href="MARP3P14507801E_REV_B/" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">P-155
+                  <ul>
+                    <li class="node"><a href="MARPMP15506204E_REV_B/book.pdf" target="main">Mechanical Unit Parts</a></li>
+                    <li class="node"><a href="MARRPP15506204E_REV_B/book.pdf" target="main">Mechanical Unit Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">P-200 Pedestal and In-Booth Rail
+                  <ul>
+                    <li class="node"><a href="MARP2P20007604E_REV_A/book.pdf" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">P-200 Pedestal, In Booth Rail, & Clean Wall Rail
+                  <ul>
+                    <li class="node"><a href="MARP3P2CW01901E_REV_B/toc.htm" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">P-200E Pedestal, Clean Wall Rail, In-booth Rail
+                  <ul>
+                    <li class="node"><a href="MARP3200E06011E_REV_B/book.pdf" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">R-2000iA
+                  <ul>
+                    <li class="node"><a href="MARMIBR2I03011E_REV_C/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARPIBR2I03011E_REV_C/book.pdf" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">R-2000iA/200T
+                  <ul>
+                    <li class="node"><a href="MARMI2IAT0702IE_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARPI2IAT08021E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">Robot Transfer Unit
+                  <ul>
+                    <li class="node"><a href="MARP3RTU010211E_REV_A/book.pdf" target="main">Mechanical Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">S-420i Series
+                  <ul>
+                    <li class="node"><a href="MARRS42IF05502E_REV_A/toc.htm" target="main">Mechanical Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">S-420iF/W/S/L/R
+                  <ul>
+                    <li class="node"><a href="MARP2420I02801E_REV_B/book.pdf" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">S-430i
+                  <ul>
+                    <li class="node"><a href="MARM3S43009801E_REV_D/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3S43009801E_REV_B/toc.htm" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">S-430i Series GM RS-1
+                  <ul>
+                    <li class="node"><a href="MARM3GMS408901E_REV_C/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">S-500i
+                  <ul>
+                    <li class="node"><a href="MARM3S50007901E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3S50001001E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">S-900i
+                  <ul>
+                    <li class="node"><a href="MARM3S90008901E_REV_A/toc.htm" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARP3S90008901E_REV_A/toc.htm" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">S-900iB
+                  <ul>
+                    <li class="node"><a href="MARMIBS9007021E_REV_A/book.pdf" target="main">Mechanical Unit Maintenance</a></li>
+                    <li class="node"><a href="MARPIS90007021E_REV_A/book.pdf" target="main">Mechanical Unit Parts</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">ServoBell Applicator
+                  <ul>
+                    <li class="node"><a href="MARPGWBBL02021E_REV_A/book.pdf" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+                <li class="subgroup">VersaBell Atomizer
+                  <ul>
+                    <li class="node"><a href="MARPGBELL12011E_REV_B/book.pdf" target="main">Parts and Service</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="small-note">
+    Static list version based on index_js.js structure.
+  </div>
 </body>
 </html>
