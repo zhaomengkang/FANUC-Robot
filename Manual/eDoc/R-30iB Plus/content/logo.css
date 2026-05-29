@@ -1,0 +1,137 @@
+/*This is a Cascading Style Sheet for the HTML Version of FANUC Technical Manuals.*/
+
+
+	/*This body style controls all background colors (white), font faces, and font sizes from within the 
+	<body> tag.*/
+BODY {
+	margin-left			: 10;
+	margin-right		: 0;
+	margin-top			: 0;
+}
+
+
+
+H1 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: large;
+	font-weight			: bold;
+	margin-left			: 0%;
+	text-transform 			: uppercase;}
+
+
+
+H2 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: medium;
+	font-weight			: bold;
+	margin-left			: 2%;
+	text-transform 			: uppercase;}
+
+
+
+H3 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: small;
+	font-weight			: normal;
+	margin-left			: 4%;}
+
+
+
+H4 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: x-small;}
+
+
+H5.toc-only-head {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: large;
+	font-weight			: bold;
+	margin-left			: -2%;
+	text-transform 			: uppercase;}
+
+
+HR.tof-marker {
+	background-color		: white;
+	color				: yellow;
+	height				: 16px;
+	width				: 95%;
+	margin-left			: 1%;
+	margin-right			: 1%;}
+
+
+HR.eof-marker {
+	background-color		: white;
+	color				: yellow;
+	height				: 4px;
+	width				: 95%;
+	margin-left			: 1%;
+	margin-right			: 1%;}
+
+
+P	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: small;}
+
+
+
+P.file-header {
+	font-family			: Helvetica, sans-serif, Arial;
+	margin-left			: 0%;}
+
+
+
+P.file-links {
+	font-family			: Helvetica, sans-serif, Arial;
+	text-align			: center;}
+
+
+
+P.footer-copyright {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: x-small;
+	font-weight			: bold;
+	margin-left			: 1%;}
+
+
+
+P.part-num-in-file-header {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: small;
+	font-weight			: bold;}
+
+
+
+P.title-in-file-header {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: medium;
+	font-weight			: bold;}
+
+
+
+P.toc-only-head {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: large;
+	font-weight			: bold;
+	margin-left			: 6%;
+	text-decoration		: underline;
+	text-transform 		: uppercase;}
+
+
+P.toc-title {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: large;
+	font-weight			: bold;
+	margin-left			: 2%;
+	margin-right		: 1%;
+	text-align  		: center;}
+
+
+P.version-in-file-header {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: small;
+	font-weight			: bold;}
+
+TABLE.file-header	{
+	background			: #FFE912;
+	margin-left			: 1%;
+	width    			: 100%;}

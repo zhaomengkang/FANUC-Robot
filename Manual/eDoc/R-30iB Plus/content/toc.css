@@ -1,0 +1,165 @@
+/*This is a Cascading Style Sheet for the HTML Version of FANUC Technical Manuals.*/
+
+
+	/*This body style controls all background colors (white), font faces, and font sizes from within the 
+	<body> tag.*/
+BODY {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: x-small;
+	margin-left			: 3%;
+	margin-right			: 1%;
+	text-align  			: left;}
+
+
+H1 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: large;
+	font-weight			: bold;
+	margin-left			: 0%;
+	text-transform 			: uppercase;}
+
+
+H1.create-toc-entry
+	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: large;
+	font-weight			: bold;
+	margin-left			: 0%;}
+	
+
+H2 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: medium;
+	font-weight			: bold;
+	margin-left			: 2%;
+	text-transform 			: uppercase;}
+
+
+H2.create-toc-entry 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: medium;
+	font-weight			: bold;
+	margin-left			: 2%;
+	text-transform 			: uppercase;}
+
+
+
+H3 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: small;
+	margin-left			: 4%;}
+
+
+H3.create-toc-entry
+	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: small;
+	margin-left			: 4%;}
+
+
+H4 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: x-small;}
+
+
+H5.toc-only-head {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: large;
+	font-weight			: bold;
+	margin-left			: -2%;
+	text-transform 			: uppercase;}
+
+
+HR.eof-marker {
+	background-color		: white;
+	color				: yellow;
+	height				: 4px;
+	width				: 95%;
+	margin-left			: 1%;
+	margin-right			: 1%;}
+
+
+P	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: x-small;}
+
+
+
+P.file-header {
+	font-family			: Helvetica, sans-serif, Arial;
+	margin-left			: 0%;}
+
+
+
+P.file-links {
+	font-family			: Helvetica, sans-serif, Arial;
+	text-align			: center;}
+
+
+
+P.footer-copyright {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: x-small;
+	font-weight			: bold;
+	margin-left			: 1%;}
+
+
+
+P.part-num-in-file-header {
+	font-family			: Courier, Monospace;
+	font-size			: small;
+	font-weight			: bold;}
+
+
+
+P.title-in-file-header {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: medium;
+	font-weight			: bold;}
+
+
+
+P.toc-only-head {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: large;
+	font-weight			: bold;
+	margin-left			: 6%;
+	text-decoration		: underline;
+	text-transform 		: uppercase;}
+
+
+P.toc-title {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: large;
+	font-weight			: bold;
+	margin-left			: 2%;
+	margin-right		: 1%;
+	text-align  		: center;}
+
+
+P.version-in-file-header {
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: small;
+	font-weight			: bold;}
+
+
+TABLE.file-header	{
+	background			: #FFE912;
+	margin-left			: -2%;
+	width    			: 100%;}
+
+	/*This table data style controls the font face and font size of each cell's text.*/
+
+TD 	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: x-small;}
+
+
+TH	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: small;
+	font-weight			: bold;}
+
+UL	{
+	font-family			: Helvetica, sans-serif, Arial;
+	font-size			: x-small;}

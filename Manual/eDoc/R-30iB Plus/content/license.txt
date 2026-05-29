@@ -1,0 +1,128 @@
+FANUC AMERICA CORPORATION
+eDoc SOFTWARE LICENSE AGREEMENT
+
+1.  	AGREEMENT TO BE BOUND.  YOUR USE OF THE SOFTWARE PROVIDED 
+	WITH THIS SOFTWARE LICENSE AGREEMENT ("LICENSE") CONSTITUTES
+ 	YOUR AGREEMENT TO BE BOUND BY AND YOUR ACCEPTANCE OF THE
+ 	TERMS AND CONDITIONS OF THIS LICENSE.  IN THE EVENT THAT YOU 
+	CHOOSE NOT TO ENTER INTO THIS LICENSE, YOU MUST IMMEDIATELY 
+	RETURN THE SOFTWARE UNUSED TO FANUC AMERICA CORPORATION.
+
+2.  	GRANT OF LICENSE.  This License is non-exclusive and permits you to
+	use one copy of FANUC America Corporation's Electronic Documentation 
+	("SOFTWARE") on any single CPU.  If you have multiple Licenses for the 
+	SOFTWARE, then at any time you may have as many copies of the SOFTWARE 
+	in use as you have Licenses.  The SOFTWARE is "in use" on a CPU when 
+	it is loaded into the temporary memory (i.e., RAM) or installed into the 
+	permanent memory (e.g., hard disk, CD-ROM, or other storage device) 
+	of that CPU.  If the anticipated number of users of the SOFTWARE will 
+	exceed the number of applicable Licenses, then you must have a 
+	reasonable mechanism or process in place to assure that the number of
+ 	persons using the SOFTWARE concurrently does not exceed the number of 
+	Licenses.
+
+3.  	COPYRIGHT.  The software and all of the rights associated with the 
+	SOFTWARE are owned by FANUC America Corporation.  The SOFTWARE is protected 
+	by United States copyright laws.  You must therefore treat the SOFTWARE 
+	like any other copyrighted material (e.g., a book or musical recording).  
+	You may not copy the software in any form, in part or in whole, without 
+	the written permission of an authorized FANUC America Corporation representative.    
+	You may not copy any written materials accompanying the SOFTWARE.
+
+4.  	TRADE SECRET PROTECTION.  The source code for the SOFTWARE is a trade secret
+	of FANUC America Corporation.  You shall not reverse engineer or decompile 
+	the SOFTWARE.  You shall safeguard proprietary information with respect 
+	to the SOFTWARE furnished by FANUC America Corporation during the term of this 
+	License, and shall limit the use of such information to the exercise of 
+	the rights granted under this License.  You shall safeguard proprietary 
+	information with respect to the SOFTWARE in accordance with the practices 
+	and procedures and standards of care used to protect your own proprietary 	
+	information of like nature, but at a minimum you shall use due care in 
+	such safeguarding.  Your  obligations under this paragraph shall not 
+	apply to information which:
+
+	a) is released by FANUC America Corporation to others without restriction,
+	b) is in the public domain,
+	c) is independently developed or is received from others, without 
+	   reference to the SOFTWARE and without violation of this License.
+
+	If disclosed inadvertently despite the exercise of the degree of care 
+	required under this paragraph, you will, at your expense, take all 
+	necessary actions, legal or otherwise, necessary to recover the disclosed 	
+	proprietary information.  This will include, but not be limited to, the 
+	issuance of a restraining order until the information is recovered.
+
+	5.  OTHER RESTRICTIONS.  This License Agreement is your proof of license 
+	to exercise the rights granted herein and must be retained by you.  You may 
+	not rent or lease the SOFTWARE.  Any transfer of the SOFTWARE, which must 
+	be approved in writing by FANUC America Corporation, must include the most 
+	recent update and all prior versions of the SOFTWARE.
+
+	6.  U.S. GOVERNMENT RESTRICTED RIGHTS.  Use, duplication, or disclosure by the 
+	U.S. Government is subject to restrictions as set forth in subparagraphs 
+	(c)(1) and (c)(2) of the Commercial Computer Software-Restricted Rights 
+	clause at FAR 52.227-19 or subparagraph (c)(1)(ii) of the Rights in 
+	Technical Data and Computer Software clause at DFARS 252.227-7013, as 
+	applicable.
+
+7.  	LIMITED WARRANTY.  FANUC America Corporation warrants only that the SOFTWARE 
+	will perform substantially in accordance with the SOFTWARE's written 
+	instructions for a period of ninety (90) days from delivery to your 
+	facility, and you accept the SOFTWARE subject to this limited warranty.  
+	FANUC AMERICA CORPORATION EXPRESSLY DISCLAIMS ANY AND ALL OTHER 
+	WARRANTIES RESPECTING THE PERFORMANCE OF THE SOFTWARE, 
+	INCLUDING WITHOUT LIMITATION WARRANTIES OF MERCHANTABILITY 
+	OR OF FITNESS FOR A PARTICULAR PURPOSE.
+
+	
+8.  	NO LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES.  IN NO 
+	EVENT SHALL FANUC AMERICA CORPORATION BE LIABLE TO YOU FOR ANY DAMAGES 
+	WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS 
+	OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS 
+	INFORMATION, OR OTHER PECUNIARY LOSS) ARISING OUT OF THE USE 
+	OF, MISUSE OF, OR INABILITY TO USE THE SOFTWARE, EVEN IF FANUC 
+	AMERICA CORPORATION HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH 
+	DAMAGES.  BECAUSE SOME STATES DO NOT ALLOW THE EXCLUSION OR 
+	LIMITATION OF LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL 
+	DAMAGES, THE ABOVE LIMITATION MAY NOT APPLY TO YOU.
+
+9.  	CUSTOMER REMEDIES.  FANUC America Corporation's entire liability and your 
+	exclusive remedy in the event of a warranty claim shall be, at FANUC America 
+	Corporation's option, either (a) return of the price paid or (b) repair 
+	or replacement of the SOFTWARE that is returned to FANUC America Corporation 
+	with a copy of your receipt.
+
+10. 	TERMINATION.  If FANUC America Corporation has knowledge of facts indicating 
+	that you are in breach of any obligations of this License, notice shall be 
+	given to you requiring correction thereof within 30 days.  Should you fail 
+	to make correction in the allotted time, FANUC America Corporation may elect to
+	terminate this License by giving you at least 30 days written notice of termination.
+
+	Upon termination, you will return, at no cost to FANUC America Corporation, the 
+	SOFTWARE, all documentation and other data relating to the SOFTWARE, and 
+	you will refrain thereafter from using the SOFTWARE or any modification 
+	or improvement thereof without first obtaining FANUC America Corporation's written 
+	consent.  FANUC America Corporation shall have all other rights under existing laws 
+	against you arising from the breach of your obligations under this License 
+	including payment of actual damages sustained by FANUC America Corporation.  
+	Should either party bring any action to enforce the terms of this License, the 
+	prevailing party shall be entitled to all costs incurred in bringing such 
+	action including reasonable attorney fees.
+
+11. 	CONSTRUCTION.  This License constitutes the entire agreement between you 
+	and FANUC America Corporation relating to the SOFTWARE and is binding upon any 
+	successors and transferees.  No change shall be made in any of the terms 
+	contained herein, nor any provision waived, without the written agreement 
+	of both parties, and that written document must reference this License 
+	Agreement directly and by name in order to supersede any agreement stated 
+	herein.  This License will be construed and interpreted in accordance with 
+	the laws of the State of Michigan.  You agree not to utilize the SOFTWARE 
+	for any purpose which is contrary to the laws of any government having 
+	jurisdiction over you or FANUC America Corporation.
+
+12. 	MISCELLANEOUS.  This License shall be binding upon, and inure to the benefit 
+	of, the parties hereto, their respective successors and assigns; provided, 
+	however, you may not assign this License without the prior written consent 
+	of FANUC America Corporation. If any portion of this License is wholly or partially 
+	unenforceable, for any reasons, such unenforceability shall not affect 
+	the balance hereof.

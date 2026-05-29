@@ -1,0 +1,33 @@
+.zoom_ac_dropdown 
+{
+    font-family: Tahoma;
+    font-size: 10pt;
+    background-color: white;
+    border: 1px solid black;
+    position: absolute;
+    cursor: default;
+    overflow: auto;
+    overflow-x: hidden;    
+    max-height: 150px;
+}
+
+.zoom_ac_item 
+{
+    padding: 1px;
+    padding-left: 5px;
+    color: black;
+    width: 100%;    
+}
+
+.zoom_ac_item a { width: 100%; text-decoration: none; }
+.zoom_ac_item a:hover { background-color: #00DDDD; width:100%; text-decoration: none; }
+
+.zoom_ac_item_hl
+{
+	padding: 1px;
+    padding-left: 5px;
+    color: #FFFFFF;
+    background-color: #00DDDD;    
+    text-decoration: none;
+}
+.zoom_ac_item_hl a:hover { background-color: #00DDDD; width:100%; text-decoration: none; }

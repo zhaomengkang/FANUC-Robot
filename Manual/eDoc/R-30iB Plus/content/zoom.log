@@ -1,0 +1,516 @@
+02|05/12/21 16:24:54|Config file loaded: C:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom.zcfg
+08|05/12/21 16:24:54|Failed to open .ini file (C:\ProgramData\Wrensoft\Zoom Search Engine Indexer V7\zoom.ini)
+08|05/12/21 16:25:00|Failed to open .ini file (C:\ProgramData\Wrensoft\Zoom Search Engine Indexer V7\zoom.ini)
+02|05/12/21 16:25:00|Config file saved: C:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom.zcfg
+07|05/12/21 16:25:01|Core Engine: Version 7.1 (Build: 1002) on Windows 8 [Professional Edition]
+02|05/12/21 16:25:01|Config file loaded: C:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom.zcfg
+10|05/12/21 16:25:01|Start indexing (offline mode) at Wed May 12 16:25:01 2021
+02|05/12/21 16:25:01|Maximum number of files: 8192
+02|05/12/21 16:25:01|Maximum file size: 33554432
+02|05/12/21 16:25:01|Will scan files with extensions
+02|05/12/21 16:25:01|     .pdf
+02|05/12/21 16:25:01|Search root directory: c:\CDROM staging area\MURAUIBPL07171E_REV_I\content
+02|05/12/21 16:25:01|Web site URL: ./
+02|05/12/21 16:25:01|Estimated RAM required during index process: 206500 KB
+06|05/12/21 16:25:02|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\A-42148E-022_REV_A\book.pdf
+00|05/12/21 16:25:03|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\A-42148E-022_REV_A\book.pdf
+06|05/12/21 16:25:03|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-80687EN_REV_17\book.pdf
+00|05/12/21 16:25:04|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-80687EN_REV_17\book.pdf
+06|05/12/21 16:25:04|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82274EN1201_REV_A\book.pdf
+00|05/12/21 16:25:04|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82274EN1201_REV_A\book.pdf
+06|05/12/21 16:25:04|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82534EN_REV_01\book.pdf
+08|05/12/21 16:25:04|[PDF plugin error] This file is protected by Acrobat Security settings which prohibit content from being extracted. (c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82534EN_REV_01\book.pdf)
+01|05/12/21 16:25:04|Skipping c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82534EN_REV_01\book.pdf (Plugin failed)
+06|05/12/21 16:25:04|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82654EN0401_REV_A\book.pdf
+00|05/12/21 16:25:04|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82654EN0401_REV_A\book.pdf
+06|05/12/21 16:25:04|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82864EN_REV_06\book.pdf
+00|05/12/21 16:25:07|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82864EN_REV_06\book.pdf
+06|05/12/21 16:25:07|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82874EN_REV_13\book.pdf
+08|05/12/21 16:25:07|[PDF plugin error] This file is protected by Acrobat Security settings which prohibit content from being extracted. (c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82874EN_REV_13\book.pdf)
+01|05/12/21 16:25:07|Skipping c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-82874EN_REV_13\book.pdf (Plugin failed)
+06|05/12/21 16:25:07|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83004EN_REV_09\book.pdf
+00|05/12/21 16:25:17|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83004EN_REV_09\book.pdf
+06|05/12/21 16:25:17|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83014EN_REV_09\book.pdf
+00|05/12/21 16:25:53|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83014EN_REV_09\book.pdf
+06|05/12/21 16:25:53|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83074EN_REV_05\book.pdf
+00|05/12/21 16:25:55|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83074EN_REV_05\book.pdf
+06|05/12/21 16:25:55|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83084EN_REV_10\book.pdf
+08|05/12/21 16:25:56|[PDF plugin error] This file is protected by Acrobat Security settings which prohibit content from being extracted. (c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83084EN_REV_10\book.pdf)
+01|05/12/21 16:25:56|Skipping c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83084EN_REV_10\book.pdf (Plugin failed)
+06|05/12/21 16:25:56|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83184EN_REV_11\book.pdf
+00|05/12/21 16:26:04|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83184EN_REV_11\book.pdf
+06|05/12/21 16:26:04|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83195EN091_REV_A\book.pdf
+00|05/12/21 16:26:04|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83195EN091_REV_A\book.pdf
+06|05/12/21 16:26:04|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83195EN_REV_11\book.pdf
+00|05/12/21 16:26:58|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83195EN_REV_11\book.pdf
+06|05/12/21 16:26:58|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83254EN_REV_03\book.pdf
+00|05/12/21 16:27:10|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83254EN_REV_03\book.pdf
+06|05/12/21 16:27:11|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83284EN-2_REV_09\book.pdf
+00|05/12/21 16:27:32|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83284EN-2_REV_09\book.pdf
+06|05/12/21 16:27:32|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83284EN_REV_09\book.pdf
+08|05/12/21 16:27:34|[PDF plugin error] This file is protected by Acrobat Security settings which prohibit content from being extracted. (c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83284EN_REV_09\book.pdf)
+01|05/12/21 16:27:34|Skipping c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83284EN_REV_09\book.pdf (Plugin failed)
+06|05/12/21 16:27:34|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83525EN071_REV_A\book.pdf
+00|05/12/21 16:27:34|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83525EN071_REV_A\book.pdf
+06|05/12/21 16:27:34|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83525EN_REV_09\book.pdf
+00|05/12/21 16:27:56|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83525EN_REV_09\book.pdf
+06|05/12/21 16:27:56|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83534EN031_REV_A\book.pdf
+00|05/12/21 16:27:56|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83534EN031_REV_A\book.pdf
+06|05/12/21 16:27:56|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83534EN_REV_06\book.pdf
+00|05/12/21 16:27:57|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83534EN_REV_06\book.pdf
+06|05/12/21 16:27:57|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83555EN061_REV_A\book.pdf
+00|05/12/21 16:27:58|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83555EN061_REV_A\book.pdf
+06|05/12/21 16:27:58|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83555EN_REV_08\book.pdf
+00|05/12/21 16:28:09|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83555EN_REV_08\book.pdf
+06|05/12/21 16:28:09|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83584EN_REV_07\book.pdf
+00|05/12/21 16:28:21|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83584EN_REV_07\book.pdf
+06|05/12/21 16:28:21|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83644EN_REV_07\book.pdf
+00|05/12/21 16:28:37|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83644EN_REV_07\book.pdf
+06|05/12/21 16:28:37|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83654EN_REV_06\book.pdf
+00|05/12/21 16:28:44|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83654EN_REV_06\book.pdf
+06|05/12/21 16:28:44|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83684EN_REV_05\book.pdf
+00|05/12/21 16:28:56|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83684EN_REV_05\book.pdf
+06|05/12/21 16:28:56|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83724EN_REV_03\book.pdf
+00|05/12/21 16:29:12|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83724EN_REV_03\book.pdf
+06|05/12/21 16:29:12|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83734EN0101_REV_A\book.pdf
+00|05/12/21 16:29:12|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83734EN0101_REV_A\book.pdf
+06|05/12/21 16:29:12|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83734EN0102_REV_A\book.pdf
+00|05/12/21 16:29:12|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83734EN0102_REV_A\book.pdf
+06|05/12/21 16:29:12|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83744EN0102_REV_A\book.pdf
+00|05/12/21 16:29:13|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83744EN0102_REV_A\book.pdf
+06|05/12/21 16:29:13|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83744EN0103_REV_A\book.pdf
+00|05/12/21 16:29:13|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83744EN0103_REV_A\book.pdf
+06|05/12/21 16:29:13|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83744EN_REV_04\book.pdf
+00|05/12/21 16:29:14|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83744EN_REV_04\book.pdf
+06|05/12/21 16:29:14|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83774EN0201_REV_A\book.pdf
+00|05/12/21 16:29:14|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83774EN0201_REV_A\book.pdf
+06|05/12/21 16:29:14|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83774EN_REV_04\book.pdf
+00|05/12/21 16:29:21|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83774EN_REV_04\book.pdf
+06|05/12/21 16:29:21|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-1_REV_04\book.pdf
+00|05/12/21 16:29:40|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-1_REV_04\book.pdf
+06|05/12/21 16:29:40|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-2_REV_02\book.pdf
+00|05/12/21 16:29:45|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-2_REV_02\book.pdf
+06|05/12/21 16:29:45|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-3_REV_02\book.pdf
+08|05/12/21 16:29:45|[PDF plugin error] This file is protected by Acrobat Security settings which prohibit content from being extracted. (c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-3_REV_02\book.pdf)
+01|05/12/21 16:29:45|Skipping c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-3_REV_02\book.pdf (Plugin failed)
+06|05/12/21 16:29:45|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-4_REV_02\book.pdf
+00|05/12/21 16:29:51|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-4_REV_02\book.pdf
+06|05/12/21 16:29:51|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-5_REV_02\book.pdf
+00|05/12/21 16:29:52|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-5_REV_02\book.pdf
+06|05/12/21 16:29:52|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-6_REV_02\book.pdf
+08|05/12/21 16:29:53|[PDF plugin error] This file is protected by Acrobat Security settings which prohibit content from being extracted. (c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-6_REV_02\book.pdf)
+01|05/12/21 16:29:53|Skipping c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83914EN-6_REV_02\book.pdf (Plugin failed)
+06|05/12/21 16:29:53|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83924EN_REV_02\book.pdf
+00|05/12/21 16:30:09|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83924EN_REV_02\book.pdf
+06|05/12/21 16:30:09|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83934EN-1_REV_02\book.pdf
+00|05/12/21 16:30:13|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83934EN-1_REV_02\book.pdf
+06|05/12/21 16:30:13|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83944EN_REV_04\book.pdf
+00|05/12/21 16:30:20|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83944EN_REV_04\book.pdf
+06|05/12/21 16:30:21|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83984EN_REV_03\book.pdf
+00|05/12/21 16:30:27|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-83984EN_REV_03\book.pdf
+06|05/12/21 16:30:27|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84014EN_REV_02\book.pdf
+00|05/12/21 16:30:32|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84014EN_REV_02\book.pdf
+06|05/12/21 16:30:32|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84024EN_REV_05\book.pdf
+00|05/12/21 16:30:35|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84024EN_REV_05\book.pdf
+06|05/12/21 16:30:35|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84035EN_REV_04\book.pdf
+00|05/12/21 16:31:00|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84035EN_REV_04\book.pdf
+06|05/12/21 16:31:00|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84064EN_REV_04\book.pdf
+00|05/12/21 16:31:05|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84064EN_REV_04\book.pdf
+06|05/12/21 16:31:05|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84074EN_REV_04\book.pdf
+00|05/12/21 16:31:14|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84074EN_REV_04\book.pdf
+06|05/12/21 16:31:14|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84114EN_REV_01\book.pdf
+00|05/12/21 16:31:18|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84114EN_REV_01\book.pdf
+06|05/12/21 16:31:18|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84124EN_REV_02\book.pdf
+00|05/12/21 16:31:23|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84124EN_REV_02\book.pdf
+06|05/12/21 16:31:23|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84154EN_REV_01\book.pdf
+00|05/12/21 16:31:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84154EN_REV_01\book.pdf
+06|05/12/21 16:31:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84164EN_REV_02\book.pdf
+00|05/12/21 16:31:27|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84164EN_REV_02\book.pdf
+06|05/12/21 16:31:27|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84175EN_REV_02\book.pdf
+00|05/12/21 16:31:37|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84175EN_REV_02\book.pdf
+06|05/12/21 16:31:37|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84194EN_REV_01\book.pdf
+00|05/12/21 16:31:40|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84194EN_REV_01\book.pdf
+06|05/12/21 16:31:40|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84204EN_REV_01\book.pdf
+00|05/12/21 16:31:44|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84204EN_REV_01\book.pdf
+06|05/12/21 16:31:44|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84214EN_REV_01\book.pdf
+00|05/12/21 16:31:45|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84214EN_REV_01\book.pdf
+06|05/12/21 16:31:45|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84244_REV_01\book.pdf
+00|05/12/21 16:31:45|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84244_REV_01\book.pdf
+06|05/12/21 16:31:46|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84254EN_REV_01\book.pdf
+00|05/12/21 16:31:46|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84254EN_REV_01\book.pdf
+06|05/12/21 16:31:46|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84274EN_REV_02\book.pdf
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\B-84274EN_REV_02\book.pdf
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\HolySheet.css
+06|05/12/21 16:31:48|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\hotline.pdf
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\hotline.pdf
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\index.htm
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\index.htm.proto
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\indextxt.htm
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\indextxttest.htm
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\license.txt
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\license_old.txt
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\logo.css
+00|05/12/21 16:31:48|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\logo.gif
+00|05/12/21 16:31:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\logo.htm
+06|05/12/21 16:31:48|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARAC710C02061E_REV_L\book.pdf
+00|05/12/21 16:31:58|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARAC710C02061E_REV_L\book.pdf
+06|05/12/21 16:31:58|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARACTPPD03081E_REV_D\book.pdf
+00|05/12/21 16:31:58|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARACTPPD03081E_REV_D\book.pdf
+06|05/12/21 16:31:58|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARAUCR1509181E_REV_A\book.pdf
+00|05/12/21 16:32:05|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARAUCR1509181E_REV_A\book.pdf
+06|05/12/21 16:32:05|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAREBAUXA07131E_REV_A\book.pdf
+00|05/12/21 16:32:05|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAREBAUXA07131E_REV_A\book.pdf
+06|05/12/21 16:32:05|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAREBLSTO02131E_REV_A\book.pdf
+00|05/12/21 16:32:06|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAREBLSTO02131E_REV_A\book.pdf
+06|05/12/21 16:32:06|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAREYCMTE08201E_REV_A\book.pdf
+00|05/12/21 16:32:20|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAREYCMTE08201E_REV_A\book.pdf
+06|05/12/21 16:32:20|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARFISVTC11021E_REV_F\book.pdf
+00|05/12/21 16:32:20|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARFISVTC11021E_REV_F\book.pdf
+06|05/12/21 16:32:20|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARFUINS912171E_REV_D\book.pdf
+00|05/12/21 16:32:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARFUINS912171E_REV_D\book.pdf
+06|05/12/21 16:32:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGGCRXR07201E_REV_B\book.pdf
+00|05/12/21 16:32:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGGCRXR07201E_REV_B\book.pdf
+06|05/12/21 16:32:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGGGPSG08171E_REV_B\book.pdf
+00|05/12/21 16:32:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGGGPSG08171E_REV_B\book.pdf
+06|05/12/21 16:32:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGGPTVT11171E_REV_A\book.pdf
+00|05/12/21 16:32:27|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGGPTVT11171E_REV_A\book.pdf
+06|05/12/21 16:32:27|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGPPM2008181E_REV_B\book.pdf
+00|05/12/21 16:32:27|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGPPM2008181E_REV_B\book.pdf
+06|05/12/21 16:32:27|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGT200D11161E_REV_F\book.pdf
+00|05/12/21 16:32:28|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGT200D11161E_REV_F\book.pdf
+06|05/12/21 16:32:28|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGTAM5011161E_REV_C\book.pdf
+00|05/12/21 16:32:28|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGTAM5011161E_REV_C\book.pdf
+06|05/12/21 16:32:28|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGTM1IA06171E_REV_B\book.pdf
+00|05/12/21 16:32:28|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGTM1IA06171E_REV_B\book.pdf
+06|05/12/21 16:32:28|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGTP40A05081E_REV_B\book.pdf
+00|05/12/21 16:32:29|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGTP40A05081E_REV_B\book.pdf
+06|05/12/21 16:32:29|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGTSI8301161E_REV_C\book.pdf
+00|05/12/21 16:32:29|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGTSI8301161E_REV_C\book.pdf
+06|05/12/21 16:32:29|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUCR1507191E_REV_B\book.pdf
+00|05/12/21 16:32:30|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUCR1507191E_REV_B\book.pdf
+06|05/12/21 16:32:30|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUCR3504171E_REV_C\book.pdf
+00|05/12/21 16:32:30|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUCR3504171E_REV_C\book.pdf
+06|05/12/21 16:32:30|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUCR7A02171E_REV_F\book.pdf
+00|05/12/21 16:32:31|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUCR7A02171E_REV_F\book.pdf
+06|05/12/21 16:32:31|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUDR3I04211E_REV_A\book.pdf
+00|05/12/21 16:32:31|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUDR3I04211E_REV_A\book.pdf
+06|05/12/21 16:32:31|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUM10A04171E_REV_D\book.pdf
+00|05/12/21 16:32:32|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUM10A04171E_REV_D\book.pdf
+06|05/12/21 16:32:32|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUM2IB04171E_REV_C\book.pdf
+00|05/12/21 16:32:32|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUM2IB04171E_REV_C\book.pdf
+06|05/12/21 16:32:32|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUM2M306171E_REV_B\book.pdf
+00|05/12/21 16:32:33|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUM2M306171E_REV_B\book.pdf
+06|05/12/21 16:32:33|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUP50I07201E_REV_A\book.pdf
+00|05/12/21 16:32:33|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUP50I07201E_REV_A\book.pdf
+06|05/12/21 16:32:33|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUR2IC10161E_REV_C\book.pdf
+00|05/12/21 16:32:34|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUR2IC10161E_REV_C\book.pdf
+06|05/12/21 16:32:34|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUSR3601181E_REV_B\book.pdf
+00|05/12/21 16:32:34|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGUSR3601181E_REV_B\book.pdf
+06|05/12/21 16:32:34|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGXSR3605181E_REV_A\book.pdf
+00|05/12/21 16:32:35|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGXSR3605181E_REV_A\book.pdf
+06|05/12/21 16:32:35|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGXSR3606181E_REV_E\book.pdf
+00|05/12/21 16:32:35|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARGXSR3606181E_REV_E\book.pdf
+06|05/12/21 16:32:35|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARMC200T02071E_REV_F\book.pdf
+00|05/12/21 16:32:42|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARMC200T02071E_REV_F\book.pdf
+06|05/12/21 16:32:42|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARMGPDCT08171E_REV_A\book.pdf
+00|05/12/21 16:32:43|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARMGPDCT08171E_REV_A\book.pdf
+06|05/12/21 16:32:43|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARMGPROC08171E_REV_A\book.pdf
+00|05/12/21 16:32:47|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARMGPROC08171E_REV_A\book.pdf
+06|05/12/21 16:32:47|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARO3HSIP12901E_REV_F\book.pdf
+00|05/12/21 16:32:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARO3HSIP12901E_REV_F\book.pdf
+06|05/12/21 16:32:48|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROB25IB05161E_REV_A\book.pdf
+00|05/12/21 16:32:53|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROB25IB05161E_REV_A\book.pdf
+06|05/12/21 16:32:53|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROB25IB07151E_REV_C\book.pdf
+00|05/12/21 16:33:41|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROB25IB07151E_REV_C\book.pdf
+06|05/12/21 16:33:42|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROB81CM04081E_REV_E\book.pdf
+00|05/12/21 16:33:43|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROB81CM04081E_REV_E\book.pdf
+06|05/12/21 16:33:43|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBBI8204121E_REV_F\book.pdf
+00|05/12/21 16:33:44|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBBI8204121E_REV_F\book.pdf
+06|05/12/21 16:33:44|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBCR3509151E_REV_B\book.pdf
+00|05/12/21 16:33:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBCR3509151E_REV_B\book.pdf
+06|05/12/21 16:33:48|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBDCPN01141E_REV_F\book.pdf
+00|05/12/21 16:33:49|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBDCPN01141E_REV_F\book.pdf
+06|05/12/21 16:33:49|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBDG8204121E_REV_E\book.pdf
+00|05/12/21 16:33:49|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBDG8204121E_REV_E\book.pdf
+06|05/12/21 16:33:49|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBDSGN07121E_REV_B\book.pdf
+00|05/12/21 16:33:51|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBDSGN07121E_REV_B\book.pdf
+06|05/12/21 16:33:51|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBDWLD10151E_REV_A\book.pdf
+00|05/12/21 16:33:55|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBDWLD10151E_REV_A\book.pdf
+06|05/12/21 16:33:55|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBECAT06141E_REV_B\book.pdf
+00|05/12/21 16:33:57|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBECAT06141E_REV_B\book.pdf
+06|05/12/21 16:33:57|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBENOR11121E_REV_D\book.pdf
+00|05/12/21 16:33:57|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBENOR11121E_REV_D\book.pdf
+06|05/12/21 16:33:57|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBFLNT10121E_REV_D\book.pdf
+00|05/12/21 16:34:00|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBFLNT10121E_REV_D\book.pdf
+06|05/12/21 16:34:00|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBHNGD05171E_REV_B\book.pdf
+00|05/12/21 16:34:03|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBHNGD05171E_REV_B\book.pdf
+06|05/12/21 16:34:03|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBLPCN02141E_REV_B\book.pdf
+00|05/12/21 16:34:03|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBLPCN02141E_REV_B\book.pdf
+06|05/12/21 16:34:03|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBM22503161E_REV_C\book.pdf
+00|05/12/21 16:34:10|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBM22503161E_REV_C\book.pdf
+06|05/12/21 16:34:10|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBM2IA01131E_REV_E\book.pdf
+00|05/12/21 16:34:16|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBM2IA01131E_REV_E\book.pdf
+06|05/12/21 16:34:16|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBM97009121E_REV_D\book.pdf
+00|05/12/21 16:34:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBM97009121E_REV_D\book.pdf
+06|05/12/21 16:34:24|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBMA8203131E_REV_B\book.pdf
+00|05/12/21 16:34:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBMA8203131E_REV_B\book.pdf
+06|05/12/21 16:34:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBMTES09121E_REV_C\book.pdf
+00|05/12/21 16:34:27|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBMTES09121E_REV_C\book.pdf
+06|05/12/21 16:34:27|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBMWLD02131E_REV_D\book.pdf
+00|05/12/21 16:34:27|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBMWLD02131E_REV_D\book.pdf
+06|05/12/21 16:34:27|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBP10007131E_REV_D\book.pdf
+00|05/12/21 16:34:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBP10007131E_REV_D\book.pdf
+06|05/12/21 16:34:48|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBP35006151E_REV_E\book.pdf
+00|05/12/21 16:34:58|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBP35006151E_REV_E\book.pdf
+06|05/12/21 16:34:58|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBP35A06141E_REV_B\book.pdf
+00|05/12/21 16:35:01|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBP35A06141E_REV_B\book.pdf
+06|05/12/21 16:35:02|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBP7IB04161E_REV_D\book.pdf
+00|05/12/21 16:35:50|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBP7IB04161E_REV_D\book.pdf
+06|05/12/21 16:35:50|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBPLOG04121E_REV_C\book.pdf
+00|05/12/21 16:35:51|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBPLOG04121E_REV_C\book.pdf
+06|05/12/21 16:35:51|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBPPEB03201E_REV_A\book.pdf
+00|05/12/21 16:35:55|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBPPEB03201E_REV_A\book.pdf
+06|05/12/21 16:35:55|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBRZNE02121E_REV_F\book.pdf
+00|05/12/21 16:35:56|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBRZNE02121E_REV_F\book.pdf
+06|05/12/21 16:35:56|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBSGUN05121E_REV_E\book.pdf
+00|05/12/21 16:36:12|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBSGUN05121E_REV_E\book.pdf
+06|05/12/21 16:36:12|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBSHGD02191E_REV_A\book.pdf
+00|05/12/21 16:36:13|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBSHGD02191E_REV_A\book.pdf
+06|05/12/21 16:36:13|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBSKSW02151E_REV_C\book.pdf
+00|05/12/21 16:36:13|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBSKSW02151E_REV_C\book.pdf
+06|05/12/21 16:36:13|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBZGID11171E_REV_A\book.pdf
+00|05/12/21 16:36:14|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROBZGID11171E_REV_A\book.pdf
+06|05/12/21 16:36:14|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROC200B05061E_REV_K\book.pdf
+00|05/12/21 16:36:39|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROC200B05061E_REV_K\book.pdf
+06|05/12/21 16:36:39|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROC410708081E_REV_E\book.pdf
+00|05/12/21 16:36:45|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROC410708081E_REV_E\book.pdf
+06|05/12/21 16:36:45|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROC75DV07091E_REV_D\book.pdf
+00|05/12/21 16:36:46|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROC75DV07091E_REV_D\book.pdf
+06|05/12/21 16:36:46|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCA20T07091E_REV_H\book.pdf
+00|05/12/21 16:36:55|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCA20T07091E_REV_H\book.pdf
+06|05/12/21 16:36:55|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCAM1010071E_REV_P\book.pdf
+00|05/12/21 16:37:06|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCAM1010071E_REV_P\book.pdf
+06|05/12/21 16:37:06|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCCCIE09141E_REV_B\book.pdf
+00|05/12/21 16:37:07|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCCCIE09141E_REV_B\book.pdf
+06|05/12/21 16:37:07|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCDENG04071E_REV_D\book.pdf
+00|05/12/21 16:37:08|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCDENG04071E_REV_D\book.pdf
+06|05/12/21 16:37:08|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCEGDA08051E_REV_F\book.pdf
+00|05/12/21 16:37:09|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCEGDA08051E_REV_F\book.pdf
+06|05/12/21 16:37:09|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCIBPX04071E_REV_C\book.pdf
+00|05/12/21 16:37:12|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCIBPX04071E_REV_C\book.pdf
+06|05/12/21 16:37:12|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCIERH02131E_REV_B\book.pdf
+00|05/12/21 16:37:14|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCIERH02131E_REV_B\book.pdf
+06|05/12/21 16:37:14|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCINSE06091E_REV_D\book.pdf
+00|05/12/21 16:37:16|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCINSE06091E_REV_D\book.pdf
+06|05/12/21 16:37:16|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCM3IA05101E_REV_F\book.pdf
+00|05/12/21 16:37:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCM3IA05101E_REV_F\book.pdf
+06|05/12/21 16:37:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCM40H05101E_REV_D\book.pdf
+00|05/12/21 16:37:34|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCM40H05101E_REV_D\book.pdf
+06|05/12/21 16:37:34|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCM71009061E_REV_I\book.pdf
+00|05/12/21 16:37:42|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCM71009061E_REV_I\book.pdf
+06|05/12/21 16:37:42|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCM71T11061E_REV_F\book.pdf
+00|05/12/21 16:37:47|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCM71T11061E_REV_F\book.pdf
+06|05/12/21 16:37:48|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCMODB06071E_REV_C\book.pdf
+00|05/12/21 16:37:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCMODB06071E_REV_C\book.pdf
+06|05/12/21 16:37:48|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCMTOL08091E_REV_D\book.pdf
+00|05/12/21 16:37:52|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCMTOL08091E_REV_D\book.pdf
+06|05/12/21 16:37:52|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCPM2001091E_REV_C\book.pdf
+00|05/12/21 16:37:55|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCPM2001091E_REV_C\book.pdf
+06|05/12/21 16:37:55|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCPRDP04071E_REV_C\book.pdf
+00|05/12/21 16:37:56|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCPRDP04071E_REV_C\book.pdf
+06|05/12/21 16:37:56|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCRMVL07061E_REV_D\book.pdf
+00|05/12/21 16:37:57|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCRMVL07061E_REV_D\book.pdf
+06|05/12/21 16:37:57|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCUCCLK0817E_REV_A\book.pdf
+00|05/12/21 16:37:59|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCUCCLK0817E_REV_A\book.pdf
+06|05/12/21 16:37:59|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCWTCM04071E_REV_C\book.pdf
+00|05/12/21 16:38:00|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROCWTCM04071E_REV_C\book.pdf
+06|05/12/21 16:38:00|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROGRMIM11191E_REV_B\book.pdf
+00|05/12/21 16:38:01|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROGRMIM11191E_REV_B\book.pdf
+06|05/12/21 16:38:01|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROGRTU203181E_REV_A\book.pdf
+00|05/12/21 16:38:12|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROGRTU203181E_REV_A\book.pdf
+06|05/12/21 16:38:12|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROISPIN12041E_REV_D\book.pdf
+00|05/12/21 16:38:14|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROISPIN12041E_REV_D\book.pdf
+06|05/12/21 16:38:14|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROJDTFO06801E_REV_A\book.pdf
+00|05/12/21 16:38:15|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROJDTFO06801E_REV_A\book.pdf
+06|05/12/21 16:38:15|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROP40IA07171E_REV_B\book.pdf
+00|05/12/21 16:38:21|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROP40IA07171E_REV_B\book.pdf
+06|05/12/21 16:38:21|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROPOSR302201E_REV_A\book.pdf
+00|05/12/21 16:38:56|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROPOSR302201E_REV_A\book.pdf
+06|05/12/21 16:38:56|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROT200D01121E_REV_G\book.pdf
+00|05/12/21 16:39:00|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROT200D01121E_REV_G\book.pdf
+06|05/12/21 16:39:00|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROT50IB12141E_REV_C\book.pdf
+00|05/12/21 16:39:17|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROT50IB12141E_REV_C\book.pdf
+06|05/12/21 16:39:18|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROTID4S06131E_REV_E\book.pdf
+00|05/12/21 16:39:21|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROTID4S06131E_REV_E\book.pdf
+06|05/12/21 16:39:21|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROU91EN02171E_REV_C\book.pdf
+00|05/12/21 16:39:22|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROU91EN02171E_REV_C\book.pdf
+06|05/12/21 16:39:22|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUAR9102171E_REV_G\book.pdf
+00|05/12/21 16:39:38|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUAR9102171E_REV_G\book.pdf
+06|05/12/21 16:39:39|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUAR9307191E_REV_C\book.pdf
+00|05/12/21 16:39:55|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUAR9307191E_REV_C\book.pdf
+06|05/12/21 16:39:56|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUCPAT01171E_REV_C\book.pdf
+00|05/12/21 16:39:57|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUCPAT01171E_REV_C\book.pdf
+06|05/12/21 16:39:57|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUFSEN11171E_REV_A\book.pdf
+00|05/12/21 16:40:08|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUFSEN11171E_REV_A\book.pdf
+06|05/12/21 16:40:08|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUGLCF07171E_REV_B\book.pdf
+00|05/12/21 16:40:09|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUGLCF07171E_REV_B\book.pdf
+06|05/12/21 16:40:09|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUHT9102171E_REV_G\book.pdf
+00|05/12/21 16:40:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUHT9102171E_REV_G\book.pdf
+06|05/12/21 16:40:24|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUHT9307191E_REV_C\book.pdf
+00|05/12/21 16:40:39|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUHT9307191E_REV_C\book.pdf
+06|05/12/21 16:40:40|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUIN9010171E_REV_H\book.pdf
+00|05/12/21 16:40:41|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUIN9010171E_REV_H\book.pdf
+06|05/12/21 16:40:41|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROULNTK01171E_REV_D\book.pdf
+00|05/12/21 16:40:43|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROULNTK01171E_REV_D\book.pdf
+06|05/12/21 16:40:43|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUPLT902171E_REV_B\book.pdf
+00|05/12/21 16:40:48|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUPLT902171E_REV_B\book.pdf
+06|05/12/21 16:40:48|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUPT9102171E_REV_A\book.pdf
+00|05/12/21 16:41:02|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUPT9102171E_REV_A\book.pdf
+06|05/12/21 16:41:02|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUPT9307191E_REV_A\book.pdf
+00|05/12/21 16:41:15|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUPT9307191E_REV_A\book.pdf
+06|05/12/21 16:41:16|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROURTCH05181E_REV_A\book.pdf
+00|05/12/21 16:41:17|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROURTCH05181E_REV_A\book.pdf
+06|05/12/21 16:41:17|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUST9102171E_REV_G\book.pdf
+00|05/12/21 16:41:34|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUST9102171E_REV_G\book.pdf
+06|05/12/21 16:41:35|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUST9307191E_REV_C\book.pdf
+00|05/12/21 16:41:52|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROUST9307191E_REV_C\book.pdf
+06|05/12/21 16:41:52|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROWFTPS12181E_REV_A\book.pdf
+00|05/12/21 16:41:59|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MAROWFTPS12181E_REV_A\book.pdf
+06|05/12/21 16:41:59|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARRC75KR07091E_REV_L\book.pdf
+00|05/12/21 16:42:07|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARRC75KR07091E_REV_L\book.pdf
+06|05/12/21 16:42:07|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARRUCSTO02171E_REV_C\book.pdf
+00|05/12/21 16:42:10|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARRUCSTO02171E_REV_C\book.pdf
+06|05/12/21 16:42:11|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARRUEROR02171E_REV_I\book.pdf
+00|05/12/21 16:42:18|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARRUEROR02171E_REV_I\book.pdf
+06|05/12/21 16:42:19|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUBCSTK03151E_REV_C\book.pdf
+00|05/12/21 16:42:20|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUBCSTK03151E_REV_C\book.pdf
+06|05/12/21 16:42:20|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUBDPMO02141E_REV_B\book.pdf
+00|05/12/21 16:42:20|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUBDPMO02141E_REV_B\book.pdf
+06|05/12/21 16:42:20|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUBFLPC06141E_REV_B\book.pdf
+00|05/12/21 16:42:20|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUBFLPC06141E_REV_B\book.pdf
+06|05/12/21 16:42:21|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUBSGTD09131E_REV_B\book.pdf
+00|05/12/21 16:42:21|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUBSGTD09131E_REV_B\book.pdf
+06|05/12/21 16:42:21|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUCHMID06121E_REV_B\book.pdf
+00|05/12/21 16:42:21|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUCHMID06121E_REV_B\book.pdf
+06|05/12/21 16:42:21|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUCHOPM05191E_REV_A\book.pdf
+00|05/12/21 16:42:22|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUCHOPM05191E_REV_A\book.pdf
+06|05/12/21 16:42:22|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUCNCPR06121E_REV_D\book.pdf
+00|05/12/21 16:42:22|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUCNCPR06121E_REV_D\book.pdf
+06|05/12/21 16:42:22|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUGPLCR01181E_REV_B\book.pdf
+00|05/12/21 16:42:23|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUGPLCR01181E_REV_B\book.pdf
+06|05/12/21 16:42:23|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUGZDTA10191E_REV_B\book.pdf
+00|05/12/21 16:42:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUGZDTA10191E_REV_B\book.pdf
+06|05/12/21 16:42:24|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUUIPCU02201E_REV_A\book.pdf
+00|05/12/21 16:42:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUUIPCU02201E_REV_A\book.pdf
+06|05/12/21 16:42:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUULPRC08181E_REV_B\book.pdf
+00|05/12/21 16:42:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARUULPRC08181E_REV_B\book.pdf
+06|05/12/21 16:42:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXCG2OR07151E_REV_B\book.pdf
+00|05/12/21 16:42:26|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXCG2OR07151E_REV_B\book.pdf
+06|05/12/21 16:42:26|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXTP40A02181E_REV_A\book.pdf
+00|05/12/21 16:42:30|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXTP40A02181E_REV_A\book.pdf
+06|05/12/21 16:42:30|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXU10AU10191E_REV_B\book.pdf
+00|05/12/21 16:42:42|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXU10AU10191E_REV_B\book.pdf
+06|05/12/21 16:42:43|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUP25A07191E_REV_A\book.pdf
+00|05/12/21 16:42:55|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUP25A07191E_REV_A\book.pdf
+06|05/12/21 16:42:55|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUP25G10191E_REV_A\book.pdf
+00|05/12/21 16:43:04|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUP25G10191E_REV_A\book.pdf
+06|05/12/21 16:43:04|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUP35010201E_REV_A\book.pdf
+00|05/12/21 16:43:10|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUP35010201E_REV_A\book.pdf
+06|05/12/21 16:43:10|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUP7AU10191E_REV_A\book.pdf
+00|05/12/21 16:43:23|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUP7AU10191E_REV_A\book.pdf
+06|05/12/21 16:43:23|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUSVAR06181E_REV_A\book.pdf
+00|05/12/21 16:43:23|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\MARXUSVAR06181E_REV_A\book.pdf
+00|05/12/21 16:43:23|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\diffDoc.gif
+00|05/12/21 16:43:23|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\diffFolder.gif
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftiens4_js.asp
+09|05/12/21 16:43:24|Suspected invalid HTML (possible unmatched quote characters) after line 282 on page: c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftiens4_js.asp (content may not be correctly indexed)
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2blank.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2doc.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2folderclosed.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2folderopen.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2lastnode.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2link.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2mlastnode.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2mnode.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2node.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2plastnode.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2pnode.gif
+00|05/12/21 16:43:24|Indexing filename only for c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ftv2vertline.gif
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\General_js.asp
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\General_js.asp.old
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\index_js.asp
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\menu_js.asp
+00|05/12/21 16:43:24|Indexing filename only for binary file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\Thumbs.db
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Menu_files\ua_js.asp
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\nav.htm
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\nothing.htm
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\search.html
+00|05/12/21 16:43:24|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\search.js
+06|05/12/21 16:43:24|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\SERGGI80902181E_REV_A\book.pdf
+00|05/12/21 16:43:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\SERGGI80902181E_REV_A\book.pdf
+06|05/12/21 16:43:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\SERGGIVMA03181E_REV_D\book.pdf
+00|05/12/21 16:43:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\SERGGIVMA03181E_REV_D\book.pdf
+00|05/12/21 16:43:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\settings.js
+00|05/12/21 16:43:25|Indexing filename only for binary file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\Thumbs.db
+06|05/12/21 16:43:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR-B8328410410_REV_A\book.pdf
+00|05/12/21 16:43:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR-B8328410410_REV_A\book.pdf
+06|05/12/21 16:43:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR-B83304EN060101_REV_A\book.pdf
+00|05/12/21 16:43:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR-B83304EN060101_REV_A\book.pdf
+06|05/12/21 16:43:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR-B83744E0104_REV_A\book.pdf
+00|05/12/21 16:43:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR-B83744E0104_REV_A\book.pdf
+06|05/12/21 16:43:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR016B83744EN_REV_A\book.pdf
+00|05/12/21 16:43:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR016B83744EN_REV_A\book.pdf
+06|05/12/21 16:43:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR02105EA75163_REV_A\book.pdf
+00|05/12/21 16:43:25|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR02105EA75163_REV_A\book.pdf
+06|05/12/21 16:43:25|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR16052EB83724EN022_REV_A\book.pdf
+00|05/12/21 16:43:26|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR16052EB83724EN022_REV_A\book.pdf
+06|05/12/21 16:43:26|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR18004B83304EN0402_REV_A\book.pdf
+00|05/12/21 16:43:27|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR18004B83304EN0402_REV_A\book.pdf
+06|05/12/21 16:43:27|Processing PDF file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR20002E_REV_A\book.pdf
+00|05/12/21 16:43:28|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\TMR20002E_REV_A\book.pdf
+00|05/12/21 16:43:28|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\toc.css
+00|05/12/21 16:43:28|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\welcome2.htm
+08|05/12/21 16:43:28|Error: File has been locked by external application. Could not open file: c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom.log
+01|05/12/21 16:43:28|Skipping c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom.log (Could not open or read from file)
+00|05/12/21 16:43:28|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom.zcfg
+00|05/12/21 16:43:28|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom_autocomplete.css
+00|05/12/21 16:43:28|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom_autocomplete.js
+00|05/12/21 16:43:28|Indexing filename only for binary file c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom_autocomplete.zdat
+00|05/12/21 16:43:34|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom_index.js
+08|05/12/21 16:43:36|Error: File has been locked by external application. Could not open file: c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom_pagedata.tmp
+01|05/12/21 16:43:36|Skipping c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom_pagedata.tmp (Could not open or read from file)
+00|05/12/21 16:43:36|Indexing c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom_pageinfo.js
+08|05/12/21 16:43:37|Error: File has been locked by external application. Could not open file: c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom_pageinfo.tmp
+01|05/12/21 16:43:37|Skipping c:\CDROM staging area\MURAUIBPL07171E_REV_I\content\zoom_pageinfo.tmp (Could not open or read from file)
+03|05/12/21 16:43:37|All index files will be written to: c:\CDROM staging area\MURAUIBPL07171E_REV_I\content
+03|05/12/21 16:43:37|Writing index data for JavaScript search... (Please wait)
+03|05/12/21 16:43:38|Dictionary written out to zoom_index.js
+03|05/12/21 16:43:38|Pagedata written out to zoom_pagedata.tmp
+03|05/12/21 16:43:38|Pageinfo written out to zoom_pageinfo.tmp
+03|05/12/21 16:43:38|Skip words data written out to zoom_index.js
+03|05/12/21 16:43:38|Created script settings file (settings.js)
+10|05/12/21 16:43:38|Indexing completed at Wed May 12 16:43:38 2021
+12|05/12/21 16:43:38|INDEX SUMMARY
+12|05/12/21 16:43:38|Files indexed: 245
+12|05/12/21 16:43:38|Files skipped: 9
+12|05/12/21 16:43:38|Files filtered: 0
+12|05/12/21 16:43:38|Emails indexed: 0
+12|05/12/21 16:43:38|Unique words found: 116241
+12|05/12/21 16:43:38|Variant words found: 59753
+12|05/12/21 16:43:38|Total words found: 14080913
+12|05/12/21 16:43:38|Avg. unique words per page: 474.45
+12|05/12/21 16:43:38|Avg. words per page: 57473
+12|05/12/21 16:43:38|Peak physical memory used: 106 MB
+12|05/12/21 16:43:38|Peak virtual memory used: 293 MB
+12|05/12/21 16:43:38|Errors: 9
+12|05/12/21 16:43:38|Total bytes scanned/downloaded: 1952580937
+12|05/12/21 16:43:38|File extensions: 
+12|05/12/21 16:43:38|    .pdf indexed: 200
+12|05/12/21 16:43:38|    No extensions indexed: 45
+02|05/12/21 16:43:38|Cleaning up memory used for index data... please wait.
+02|05/12/21 16:43:38|Finished cleaning up memory.
+03|05/12/21 16:43:39|Created autocomplete file (zoom_autocomplete.zdat)
+03|05/12/21 16:43:39|Successfully created all required files
+08|05/12/21 16:50:56|Failed to open .ini file (C:\ProgramData\Wrensoft\Zoom Search Engine Indexer V7\zoom.ini)
+08|05/12/21 16:50:56|Failed to open .ini file (C:\ProgramData\Wrensoft\Zoom Search Engine Indexer V7\zoom.ini)
+08|05/12/21 16:50:56|Failed to open .ini file (C:\ProgramData\Wrensoft\Zoom Search Engine Indexer V7\zoom.ini)
