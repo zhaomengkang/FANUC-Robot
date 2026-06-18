@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>var / id_name</title>
+  <style>
+    :root{
+      --bg:#0b1220; --card:#121a2a; --text:#e7eefc; --muted:#9fb0d0;
+      --line:#24314c; --danger:#ff5a6b; --ok:#2dd4bf;
+    }
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+      background:linear-gradient(180deg,var(--bg),#060a14);
+      color:var(--text);
+    }
+    .wrap{ max-width:1100px; margin:28px auto; padding:0 16px; }
+    h1{ margin:0 0 12px 0; font-size:18px; }
+    .card{
+      background:rgba(18,26,42,.92);
+      border:1px solid rgba(36,49,76,.85);
+      border-radius:14px;
+      padding:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.28);
+    }
+    .row{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .row + .row{ margin-top:10px; }
+    .btn{
+      background:#17233a;
+      border:1px solid rgba(36,49,76,.9);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:10px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .btn.primary{
+      background:linear-gradient(180deg,#1f6feb,#1b56c9);
+      border-color:rgba(78,161,255,.55);
+    }
+    .btn.danger{ background:#2a1520; border-color:rgba(255,90,107,.4); }
+    .btn.ok{ background:#0d2a2a; border-color:rgba(45,212,191,.4); }
+
+    input[type="file"]{ display:none; }
+    .fileTag{
+      display:flex; gap:10px; align-items:center;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px dashed rgba(36,49,76,.9);
+      background:rgba(15,23,41,.65);
+      min-width:320px;
+    }
+    .fileName{
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:680px;
+    }
+    .badge{
+      display:inline-block;
+      font-size:11px;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid rgba(36,49,76,.9);
+      background:rgba(15,23,41,.6);
+      color:#cfe0ff;
+    }
+    .search, .headerInput{
+      flex:1;
+      min-width:240px;
+      background:rgba(15,23,41,.65);
+      border:1px solid rgba(36,49,76,.9);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:10px;
+      outline:none;
+      font-size:13px;
+    }
+    .headerInput{ min-width:420px; }
+    .meta{ display:flex; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:12px; }
+    .pill{
+      border:1px solid rgba(36,49,76,.9);
+      background:rgba(15,23,41,.6);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .msg{ margin-top:10px; font-size:12px; color:var(--muted); }
+    .msg.error{ color:#ffb4bd; }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      margin-top:12px;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid rgba(36,49,76,.9);
+    }
+    thead th{
+      text-align:left;
+      font-weight:600;
+      font-size:12px;
+      color:#cfe0ff;
+      background:rgba(15,23,41,.85);
+      border-bottom:1px solid rgba(36,49,76,.9);
+      padding:10px;
+      position:sticky;
+      top:0;
+    }
+    tbody td{
+      padding:10px;
+      border-bottom:1px solid rgba(36,49,76,.55);
+      font-size:13px;
+      vertical-align:top;
+    }
+    tbody tr:hover td{ background:rgba(78,161,255,.06); }
+    tbody tr:last-child td{ border-bottom:none; }
+    .mono{ font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; }
+    .sectionLabel{
+      font-size:12px;
+      color:var(--muted);
+      min-width:72px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>多文件提取：<span class="mono">type</span> / <span class="mono">var</span> / <span class="mono">id_name</span></h1>
+
+    <div class="card">
+      <div class="row">
+        <span class="sectionLabel">表头信息</span>
+        <input id="headerInfo" class="headerInput" value="R-50iA Data List(Robot Version: V10.10P-29)" />
+      </div>
+
+      <div class="row">
+        <label class="btn" for="fileInput">选择 XML 文件（可多选）</label>
+        <input id="fileInput" type="file" multiple accept=".xml,.txt,text/plain,text/xml,application/xml" />
+
+        <div class="fileTag" title="当前选择的文件">
+          <span class="badge">文件</span>
+          <div id="fileName" class="fileName">未选择</div>
+        </div>
+
+        <button id="btnParse" class="btn primary">解析</button>
+        <button id="btnClear" class="btn danger">清空</button>
+        <button id="btnExport" class="btn ok">导出 CSV</button>
+        <button id="btnExportXLS" class="btn ok">导出 XLS</button>
+        <button id="btnExportHTML" class="btn ok">导出 HTML</button>
+      </div>
+
+      <div class="row">
+        <input id="search" class="search" placeholder="搜索（支持 type / var / id_name）" />
+        <div class="meta">
+          <div class="pill">文件数：<span id="fileCount">0</span></div>
+          <div class="pill">总条目：<span id="totalCount">0</span></div>
+          <div class="pill">过滤后：<span id="filteredCount">0</span></div>
+        </div>
+      </div>
+
+      <div id="msg" class="msg"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width:70px;">#</th>
+            <th style="width:220px;">type</th>
+            <th>var</th>
+            <th>id_name</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="4" style="color:#9fb0d0;">请选择文件并点击“解析”。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const fileNameEl = document.getElementById('fileName');
+    const btnParse = document.getElementById('btnParse');
+    const btnClear = document.getElementById('btnClear');
+    const btnExport = document.getElementById('btnExport');
+    const btnExportXLS = document.getElementById('btnExportXLS');
+    const btnExportHTML = document.getElementById('btnExportHTML');
+    const tbody = document.getElementById('tbody');
+    const msg = document.getElementById('msg');
+    const fileCountEl = document.getElementById('fileCount');
+    const totalCountEl = document.getElementById('totalCount');
+    const filteredCountEl = document.getElementById('filteredCount');
+    const searchEl = document.getElementById('search');
+    const headerInfoEl = document.getElementById('headerInfo');
+
+    let allRows = [];
+
+    fileInput.addEventListener('change', () => {
+      const files = Array.from(fileInput.files || []);
+      fileNameEl.textContent = files.length ? files.map(f => f.name).join(" ; ") : "未选择";
+      fileCountEl.textContent = String(files.length);
+      setMsg("");
+    });
+
+    btnParse.addEventListener('click', async () => {
+      const files = Array.from(fileInput.files || []);
+      if (!files.length) return setMsg("未选择文件。", true);
+
+      setMsg("解析中...");
+      allRows = [];
+
+      try{
+        const texts = await Promise.all(files.map(f => f.text()));
+        for (const text of texts){
+          allRows.push(...extractRows(text));
+        }
+
+        allRows = allRows.map((r, i) => ({ idx: i + 1, ...r }));
+
+        const filtered = getFilteredRows();
+        renderTable(filtered);
+        setCounts(files.length, allRows.length, filtered.length);
+        setMsg(`解析完成：${files.length} 个文件，共找到 ${allRows.length} 条记录。`);
+      }catch(e){
+        setMsg("解析失败：" + e.message, true);
+      }
+    });
+
+    btnClear.addEventListener('click', () => {
+      fileInput.value = "";
+      fileNameEl.textContent = "未选择";
+      searchEl.value = "";
+      allRows = [];
+      renderTable([]);
+      setCounts(0,0,0);
+      setMsg("");
+    });
+
+    btnExport.addEventListener('click', () => {
+      const rows = getFilteredRows();
+      if (!rows.length) return setMsg("当前没有可导出的数据。", true);
+
+      const header = ["index","type","var","id_name"];
+      const csv = [
+        header.join(","),
+        ...rows.map(r => [r.idx, csvEsc(r.type), csvEsc(r.varValue), csvEsc(r.idName)].join(","))
+      ].join("\n");
+
+      const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "var_id_name_export.csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      setMsg(`已导出 ${rows.length} 条记录。`);
+    });
+
+    btnExportXLS.addEventListener('click', () => {
+      const rows = getFilteredRows();
+      if (!rows.length) return setMsg("当前没有可导出的数据。", true);
+
+      const ws_data = [
+        ["#", "type", "var", "id_name"],
+        ...rows.map(r => [r.idx, r.type, r.varValue, r.idName])
+      ];
+
+      const ws = XLSX.utils.aoa_to_sheet(ws_data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "数据");
+
+      const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+
+      const blob = new Blob([wbout], { type: "application/octet-stream" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "var_id_name_export.xlsx";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      setMsg(`已导出 ${rows.length} 条记录（XLS格式）。`);
+    });
+
+    btnExportHTML.addEventListener('click', () => {
+      const rows = getFilteredRows();
+      if (!rows.length) return setMsg("当前没有可导出的数据。", true);
+
+      const headerText = (headerInfoEl.value || "").trim() || "R-50iA Data List";
+      const styles = [...document.querySelectorAll('style')].map(s => s.outerHTML).join("\n");
+      const table = document.querySelector('table').cloneNode(true);
+
+      const tbodyExport = table.querySelector('tbody');
+      tbodyExport.innerHTML = "";
+      for (const r of rows){
+        const tr = document.createElement("tr");
+        tr.appendChild(tdEl(r.idx));
+        tr.appendChild(tdEl(r.type));
+        tr.appendChild(tdEl(r.varValue, "mono"));
+        tr.appendChild(tdEl(r.idName, "mono"));
+        tbodyExport.appendChild(tr);
+      }
+
+      const htmlContent = 
+`<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>${escapeHtml(headerText)}</title>
+${styles}
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1 style="margin:0 0 12px 0;">${escapeHtml(headerText)}</h1>
+      ${table.outerHTML}
+    </div>
+  </div>
+</body>
+</html>`;
+
+      const blob = new Blob([htmlContent], {type:"text/html;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "var_id_name_export.html";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      setMsg(`已导出 ${rows.length} 条记录（HTML格式）。`);
+    });
+
+    searchEl.addEventListener('input', () => {
+      const filtered = getFilteredRows();
+      renderTable(filtered);
+      setCounts(Array.from(fileInput.files || []).length, allRows.length, filtered.length);
+    });
+
+    function extractRows(text){
+      const s = text.replace(/<!--[\s\S]*?-->/g, "");
+
+      const tokenRe =
+        /<\s*ARRAY\b[^>]*>|<\s*\/\s*ARRAY\s*>|<\s*([A-Za-z_][\w:.-]*)\b[^>]*>/gi;
+
+      const varRe    = /\bvar\s*=\s*"([^"]*)"/i;
+      const idNameRe = /\bid_name\s*=\s*"([^"]*)"/i;
+      const prgRe    = /\bprg\s*=\s*"([^"]*)"/i;
+
+      const prefixStack = [];
+      const rows = [];
+
+      let m;
+      while ((m = tokenRe.exec(s)) !== null) {
+        const token = m[0];
+
+        if (/^<\s*ARRAY\b/i.test(token)) {
+          const mv = token.match(varRe);
+          const mp = token.match(prgRe);
+
+          const arrVar = mv ? mv[1] : null;
+          const arrPrg = mp ? mp[1] : null;
+
+          let segment = null;
+          if (arrVar && arrPrg) segment = `[${arrPrg}]${arrVar}[ ]`;
+          else if (arrVar)      segment = arrVar + "[ ]";
+          else if (arrPrg)      segment = `[${arrPrg}]`;
+
+          prefixStack.push(segment);
+          continue;
+        }
+
+        if (/^<\s*\/\s*ARRAY\s*>/i.test(token)) {
+          if (prefixStack.length) prefixStack.pop();
+          continue;
+        }
+
+        const mv = token.match(varRe);
+        const mi = token.match(idNameRe);
+        if (!mv || !mi) continue;
+
+        const tagName = (m[1] || "").toUpperCase();
+
+        const childVarRaw = mv[1];
+        let idName = mi[1];
+
+        const childPrg = (token.match(prgRe) || [])[1] || null;
+        const prefix = prefixStack.filter(Boolean).join(".");
+
+        let childVarFinal = childVarRaw;
+        if (childPrg) {
+          const prgToken = `[${childPrg}]`;
+          if (!prefix.includes(prgToken)) childVarFinal = prgToken + childVarRaw;
+        }
+
+        const fullVar = prefix ? `${prefix}.${childVarFinal}` : childVarFinal;
+        const arrayDepth = prefixStack.length;
+
+        const type = (arrayDepth > 0)
+          ? `${"ARRAY OF ".repeat(arrayDepth)}${tagName}`
+          : tagName;
+
+        if (arrayDepth > 0) {
+          idName = idName + "[ ]".repeat(arrayDepth);
+        }
+
+        rows.push({ type, varValue: fullVar, idName });
+      }
+
+      return rows;
+    }
+
+    function getFilteredRows(){
+      const q = (searchEl.value || "").trim().toLowerCase();
+      if (!q) return allRows.slice();
+      return allRows.filter(r =>
+        r.type.toLowerCase().includes(q) ||
+        r.varValue.toLowerCase().includes(q) ||
+        r.idName.toLowerCase().includes(q)
+      );
+    }
+
+    function renderTable(rows){
+      tbody.innerHTML = "";
+      if (!rows.length){
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 4;
+        td.style.color = "#9fb0d0";
+        td.textContent = allRows.length ? "无匹配结果（请调整搜索条件）。" : "暂无数据。";
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        return;
+      }
+
+      for (const r of rows){
+        const tr = document.createElement("tr");
+        tr.appendChild(tdEl(r.idx));
+        tr.appendChild(tdEl(r.type));
+        tr.appendChild(tdEl(r.varValue, "mono"));
+        tr.appendChild(tdEl(r.idName, "mono"));
+        tbody.appendChild(tr);
+      }
+    }
+
+    function tdEl(text, cls=""){
+      const el = document.createElement("td");
+      el.textContent = text ?? "";
+      if (cls) el.className = cls;
+      return el;
+    }
+
+    function setCounts(fileCount, total, filtered){
+      fileCountEl.textContent = String(fileCount);
+      totalCountEl.textContent = String(total);
+      filteredCountEl.textContent = String(filtered);
+    }
+
+    function setMsg(text, isError=false){
+      msg.textContent = text || "";
+      msg.classList.toggle("error", !!isError);
+    }
+
+    function csvEsc(s){
+      s = (s ?? "").toString();
+      if (/[,"\n]/.test(s)) return `"${s.replaceAll('"','""')}"`;
+      return s;
+    }
+
+    function escapeHtml(str){
+      return (str ?? "").toString()
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+  </script>
+</body>
+</html>
