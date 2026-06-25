@@ -125,7 +125,7 @@
   <p id="noteC"><b>c</b>：清除 SRVO-075 后的脉冲 <code>$DMR_GRP[1].$SPC_COUNT[1...6]</code></p>
   <p id="noteKnown"><b>公式计算(b已知)：</b><br>
   <code>d = a - 计数 × 524288</code><br>
-  其中 <code>计数 = floor(b / 524288) + (c > 0 ? 1 : 0)</code><br></p>
+  <code>计数 = floor(b / 524288) + (c > 0 ? 1 : 0)</code><br></p>
   <p id="noteUnknown"><b>公式计算(b未知)：</b><br>
   <code>d = a - 计数 × 524288</code><br></p>
   <p id="noteFinal"><br>说明：524288 脉冲 = 1 转</p>
@@ -215,9 +215,9 @@ const translations = {
     title: '发那科机器人6轴零点恢复',
     pageTitle: '发那科机器人6轴零点恢复Web版',
     pageMeta: '作者：赵梦康　日期：2025-09-14',
-    noteA: 'a：报警时的 Master 脉冲',
-    noteB: 'b：报警时的当前位置脉冲',
-    noteC: 'c：清除 SRVO-075 后的脉冲',
+    noteA: '报警时的 Master 脉冲',
+    noteB: '报警时的当前位置脉冲',
+    noteC: '清除 SRVO-075 后的脉冲',
     noteKnown: '公式计算(b已知)：',
     noteKnownFormula: 'd = a - 计数 × 524288',
     noteKnownDetail: '其中 计数 = floor(b / 524288) + (c > 0 ? 1 : 0)',
@@ -236,9 +236,9 @@ const translations = {
     title: 'FANUC Robot 6-Axis Zero Reset',
     pageTitle: 'FANUC Robot 6-Axis Zero Reset Web Tool',
     pageMeta: 'Author: Zhao Mengkang  Date: 2025-09-14',
-    noteA: 'a: Master pulse at alarm',
-    noteB: 'b: current position pulse at alarm',
-    noteC: 'c: pulse after clearing SRVO-075',
+    noteA: 'Master pulse at alarm',
+    noteB: 'current position pulse at alarm',
+    noteC: 'pulse after clearing SRVO-075',
     noteKnown: 'Formula when b is known:',
     noteKnownFormula: 'd = a - count × 524288',
     noteKnownDetail: 'where count = floor(b / 524288) + (c > 0 ? 1 : 0)',
@@ -274,7 +274,7 @@ function setLanguage(lang) {
   document.getElementById('noteC').innerHTML = '<b>c</b>：' + data.noteC + ' <code>$DMR_GRP[1].$SPC_COUNT[1...6]</code>';
   document.getElementById('noteKnown').innerHTML = '<b>' + data.noteKnown + '</b><br>';
   document.getElementById('noteKnown').innerHTML += '<code>' + data.noteKnownFormula + '</code><br>';
-  document.getElementById('noteKnown').innerHTML += data.noteKnownDetail ? '其中 <code>' + data.noteKnownDetail + '</code><br>' : '';
+  document.getElementById('noteKnown').innerHTML += data.noteKnownDetail ? '<code>' + data.noteKnownDetail + '</code><br>' : '';
   document.getElementById('noteUnknown').innerHTML = '<b>' + data.noteUnknown + '</b><br>';
   document.getElementById('noteUnknown').innerHTML += '<code>' + data.noteUnknownFormula + '</code><br>';
   document.getElementById('noteFinal').textContent = data.noteFinal;
