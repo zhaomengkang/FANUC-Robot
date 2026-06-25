@@ -223,7 +223,7 @@ const translations = {
     noteKnownDetail: '其中 计数 = floor(b / 524288) + (c > 0 ? 1 : 0)',
     noteUnknown: '公式计算(b未知)：',
     noteUnknownFormula: 'd = a - 计数 × 524288',
-    noteFinal: '说明：524288 脉冲 = 1 转',
+    noteFinal: '说明：524288 脉冲 = 1 转 (360 * $PARAM_GROUP[].$ENCSCALES * $PARAM_GROUP[].$GEAR_RATIO)',
     modeKnown: 'b 已知',
     modeUnknown: 'b 未知',
     thJoint: '关节',
@@ -233,8 +233,8 @@ const translations = {
     calcButton: '计算'
   },
   en: {
-    title: 'FANUC Robot 6-Axis Zero Reset',
-    pageTitle: 'FANUC Robot 6-Axis Zero Reset Web Tool',
+    title: 'FANUC Robot 6-Axis Mastering Recovery',
+    pageTitle: 'FANUC Robot 6-Axis Mastering Recovery Web Tool',
     pageMeta: 'Author: Zhao Mengkang  Date: 2025-09-14',
     noteA: 'Master pulse at alarm',
     noteB: 'current position pulse at alarm',
@@ -244,7 +244,7 @@ const translations = {
     noteKnownDetail: 'where count = floor(b / 524288) + (c > 0 ? 1 : 0)',
     noteUnknown: 'Formula when b is unknown:',
     noteUnknownFormula: 'd = a - count × 524288',
-    noteFinal: 'Note: 524288 pulses = 1 revolution',
+    noteFinal: 'Note: 524288 pulses = 1 revolution  (360 * $PARAM_GROUP[].$ENCSCALES * $PARAM_GROUP[].$GEAR_RATIO)',
     modeKnown: 'b known',
     modeUnknown: 'b unknown',
     thJoint: 'Joint',
