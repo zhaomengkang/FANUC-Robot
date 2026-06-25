@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame4 Coordinate System Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f7f7f7;
+            color: #222;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            gap: 8px;
+        }
+        .lang-switch button {
+            padding: 6px 12px;
+            border: 1px solid #555;
+            background: #fff;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .lang-switch button.active,
+        .lang-switch button:hover {
+            background: #333;
+            color: #fff;
+            border-color: #333;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        table {
+            margin-top: 20px;
+            border-collapse: separate;
+            width: 70%;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+        table, th, td {
+            border: 1px solid #999;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+        }
+        button.calculate-btn {
+            margin-top: 20px;
+            padding: 10px 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button.calculate-btn:hover {
+            background-color: #444;
+        }
+        #dataDialog {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            width: 480px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        #dialogOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.45);
+            z-index: 500;
+        }
+        .dialog-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .dialog-buttons button {
+            padding: 6px 12px;
+            cursor: pointer;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background: #fff;
+        }
+        .hint {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 12px;
+        }
+        #resultTable {
+            margin-top: 10px;
+            width: 70%;
+            display: none;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="top-bar lang-switch">
+    <button id="btnEn" class="active">English</button>
+    <button id="btnZh">中文</button>
+</div>
+
+<h2 id="pageTitle">Frame4 Coordinate System Calculator</h2>
+<p id="pageDescription">Enter the four reference points below, or click "Data Parse" to fill automatically.</p>
+
+<table id="inputTable">
+    <thead>
+        <tr>
+            <th id="thReference">Reference Point</th>
+            <th>X (mm)</th>
+            <th>Y (mm)</th>
+            <th>Z (mm)</th>
+            <th id="thParse">Data Parse</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td id="labelOriginX">X-axis Origin</td>
+            <td><input type="number" step="0.001" id="x0" placeholder="X"></td>
+            <td><input type="number" step="0.001" id="y0" placeholder="Y"></td>
+            <td><input type="number" step="0.001" id="z0" placeholder="Z"></td>
+            <td><button type="button" class="data-parse-button" onclick="openDataDialog(0)">Data Parse</button></td>
+        </tr>
+        <tr>
+            <td id="labelPointX">X Direction Point</td>
+            <td><input type="number" step="0.001" id="x1" placeholder="X"></td>
+            <td><input type="number" step="0.001" id="y1" placeholder="Y"></td>
+            <td><input type="number" step="0.001" id="z1" placeholder="Z"></td>
+            <td><button type="button" class="data-parse-button" onclick="openDataDialog(1)">Data Parse</button></td>
+        </tr>
+        <tr>
+            <td id="labelPointY">Y Direction Point</td>
+            <td><input type="number" step="0.001" id="x2" placeholder="X"></td>
+            <td><input type="number" step="0.001" id="y2" placeholder="Y"></td>
+            <td><input type="number" step="0.001" id="z2" placeholder="Z"></td>
+            <td><button type="button" class="data-parse-button" onclick="openDataDialog(2)">Data Parse</button></td>
+        </tr>
+        <tr>
+            <td id="labelOrigin">Coordinate Origin</td>
+            <td><input type="number" step="0.001" id="x3" placeholder="X"></td>
+            <td><input type="number" step="0.001" id="y3" placeholder="Y"></td>
+            <td><input type="number" step="0.001" id="z3" placeholder="Z"></td>
+            <td><button type="button" class="data-parse-button" onclick="openDataDialog(3)">Data Parse</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<button type="button" class="calculate-btn" id="calculateButton" onclick="calculateEulerAngles()">Calculate Euler Angles</button>
+
+<div id="dialogOverlay"></div>
+<div id="dataDialog">
+    <label for="dataInput" id="dialogLabel">Please enter the data:</label>
+    <textarea id="dataInput" rows="4" style="width:100%"></textarea>
+    <div class="dialog-buttons">
+        <button id="confirmButton" onclick="confirmData()">Confirm</button>
+        <button id="cancelButton" onclick="closeDataDialog()">Cancel</button>
+    </div>
+    <div class="hint" id="hintText">
+        Valid format:<br>
+        { X = * mm, Y = * mm, Z = * mm, ... }<br>
+        { X *, Y *, Z -*, ... }
+    </div>
+</div>
+
+<h3 id="resultTitle">Calculation Results</h3>
+<table id="resultTable">
+    <thead>
+        <tr>
+            <th>X</th>
+            <th>Y</th>
+            <th>Z</th>
+            <th>Rx (deg)</th>
+            <th>Ry (deg)</th>
+            <th>Rz (deg)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td id="resultX"></td>
+            <td id="resultY"></td>
+            <td id="resultZ"></td>
+            <td id="resultRoll"></td>
+            <td id="resultPitch"></td>
+            <td id="resultYaw"></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 id="matrixTitle">Rotation Matrix</h3>
+<table class="rotationMatrixTable">
+    <thead>
+        <tr>
+            <th>R11</th>
+            <th>R12</th>
+            <th>R13</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td id="r11"></td>
+            <td id="r12"></td>
+            <td id="r13"></td>
+        </tr>
+    </tbody>
+</table>
+<table class="rotationMatrixTable">
+    <thead>
+        <tr>
+            <th>R21</th>
+            <th>R22</th>
+            <th>R23</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td id="r21"></td>
+            <td id="r22"></td>
+            <td id="r23"></td>
+        </tr>
+    </tbody>
+</table>
+<table class="rotationMatrixTable">
+    <thead>
+        <tr>
+            <th>R31</th>
+            <th>R32</th>
+            <th>R33</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td id="r31"></td>
+            <td id="r32"></td>
+            <td id="r33"></td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+const translations = {
+    en: {
+        title: 'Frame4 Coordinate System Calculator',
+        description: 'Enter the four reference points below, or click "Data Parse" to fill automatically.',
+        thReference: 'Reference Point',
+        thParse: 'Data Parse',
+        labelOriginX: 'X-axis Origin',
+        labelPointX: 'X Direction Point',
+        labelPointY: 'Y Direction Point',
+        labelOrigin: 'Coordinate Origin',
+        dataParse: 'Data Parse',
+        calculateButton: 'Calculate Euler Angles',
+        dialogLabel: 'Please enter the data:',
+        confirmButton: 'Confirm',
+        cancelButton: 'Cancel',
+        hintText: 'Valid format:<br>{ X = * mm, Y = * mm, Z = * mm, ... }<br>{ X *, Y *, Z -*, ... }',
+        resultTitle: 'Calculation Results',
+        matrixTitle: 'Rotation Matrix',
+        invalidDataAlert: 'Invalid data format, please re-enter!'
+    },
+    zh: {
+        title: '四点法计算坐标系',
+        description: '请在下表中输入四个参考点的数据，或点击“数据解析”按钮自动填充。',
+        thReference: '参考点',
+        thParse: '数据解析',
+        labelOriginX: 'X轴原点',
+        labelPointX: 'X方向点',
+        labelPointY: 'Y方向点',
+        labelOrigin: '坐标原点',
+        dataParse: '数据解析',
+        calculateButton: '计算欧拉角',
+        dialogLabel: '请输入数据：',
+        confirmButton: '确认',
+        cancelButton: '取消',
+        hintText: '有效的数据格式:<br>{ X = * mm, Y = * mm, Z = * mm, ... }<br>{ X *, Y *, Z -*, ... }',
+        resultTitle: '计算结果',
+        matrixTitle: '旋转矩阵',
+        invalidDataAlert: '数据格式无效，请重新输入！'
+    }
+};
+
+function setLanguage(lang) {
+    const data = translations[lang];
+    if (!data) return;
+
+    document.documentElement.lang = lang;
+    document.title = data.title;
+    document.getElementById('pageTitle').textContent = data.title;
+    document.getElementById('pageDescription').textContent = data.description;
+    document.getElementById('thReference').textContent = data.thReference;
+    document.getElementById('thParse').textContent = data.thParse;
+    document.getElementById('labelOriginX').textContent = data.labelOriginX;
+    document.getElementById('labelPointX').textContent = data.labelPointX;
+    document.getElementById('labelPointY').textContent = data.labelPointY;
+    document.getElementById('labelOrigin').textContent = data.labelOrigin;
+    document.querySelectorAll('.data-parse-button').forEach(btn => btn.textContent = data.dataParse);
+    document.getElementById('calculateButton').textContent = data.calculateButton;
+    document.getElementById('dialogLabel').textContent = data.dialogLabel;
+    document.getElementById('confirmButton').textContent = data.confirmButton;
+    document.getElementById('cancelButton').textContent = data.cancelButton;
+    document.getElementById('hintText').innerHTML = data.hintText;
+    document.getElementById('resultTitle').textContent = data.resultTitle;
+    document.getElementById('matrixTitle').textContent = data.matrixTitle;
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    document.getElementById('btnZh').classList.toggle('active', lang === 'zh');
+}
+
+let currentRow = -1;
+function openDataDialog(rowIndex) {
+    currentRow = rowIndex;
+    document.getElementById('dataInput').value = '';
+    document.getElementById('dataDialog').style.display = 'block';
+    document.getElementById('dialogOverlay').style.display = 'block';
+}
+function closeDataDialog() {
+    document.getElementById('dataDialog').style.display = 'none';
+    document.getElementById('dialogOverlay').style.display = 'none';
+    currentRow = -1;
+}
+function confirmData() {
+    const inputData = document.getElementById('dataInput').value;
+    let xMatch = inputData.match(/X\s*=?\s*([\d\.-]+)/);
+    let yMatch = inputData.match(/Y\s*=?\s*([\d\.-]+)/);
+    let zMatch = inputData.match(/Z\s*=?\s*([\d\.-]+)/);
+    if (xMatch && yMatch && zMatch) {
+        document.getElementById(`x${currentRow}`).value = parseFloat(xMatch[1]);
+        document.getElementById(`y${currentRow}`).value = parseFloat(yMatch[1]);
+        document.getElementById(`z${currentRow}`).value = parseFloat(zMatch[1]);
+        closeDataDialog();
+    } else {
+        const lang = document.documentElement.lang;
+        alert(translations[lang].invalidDataAlert);
+    }
+}
+function calculateEulerAngles() {
+    let refPos = [];
+    for (let i = 0; i < 4; i++) {
+        refPos.push({
+            x: parseFloat(document.getElementById(`x${i}`).value),
+            y: parseFloat(document.getElementById(`y${i}`).value),
+            z: parseFloat(document.getElementById(`z${i}`).value)
+        });
+    }
+    let xAxisVector = normalize(subtract(refPos[1], refPos[0]));
+    let xyPlaneVector = normalize(subtract(refPos[2], refPos[0]));
+    let zAxisVector = normalize(crossProduct(xAxisVector, xyPlaneVector));
+    let yAxisVector = normalize(crossProduct(zAxisVector, xAxisVector));
+    let transformationMatrix = vectorsToMatrix(xAxisVector, yAxisVector, zAxisVector);
+    let resultRPY = matrixToEuler(transformationMatrix);
+    document.getElementById('resultX').innerText = refPos[3].x.toFixed(6);
+    document.getElementById('resultY').innerText = refPos[3].y.toFixed(6);
+    document.getElementById('resultZ').innerText = refPos[3].z.toFixed(6);
+    document.getElementById('resultRoll').innerText = resultRPY.roll.toFixed(6);
+    document.getElementById('resultPitch').innerText = resultRPY.pitch.toFixed(6);
+    document.getElementById('resultYaw').innerText = resultRPY.yaw.toFixed(6);
+    document.getElementById('r11').innerText = transformationMatrix[0][0].toFixed(6);
+    document.getElementById('r12').innerText = transformationMatrix[0][1].toFixed(6);
+    document.getElementById('r13').innerText = transformationMatrix[0][2].toFixed(6);
+    document.getElementById('r21').innerText = transformationMatrix[1][0].toFixed(6);
+    document.getElementById('r22').innerText = transformationMatrix[1][1].toFixed(6);
+    document.getElementById('r23').innerText = transformationMatrix[1][2].toFixed(6);
+    document.getElementById('r31').innerText = transformationMatrix[2][0].toFixed(6);
+    document.getElementById('r32').innerText = transformationMatrix[2][1].toFixed(6);
+    document.getElementById('r33').innerText = transformationMatrix[2][2].toFixed(6);
+    document.getElementById('resultTable').style.display = 'table';
+}
+function subtract(v1, v2) {
+    return { x: v1.x - v2.x, y: v1.y - v2.y, z: v1.z - v2.z };
+}
+function normalize(v) {
+    let length = Math.sqrt(v.x ** 2 + v.y ** 2 + v.z ** 2);
+    return { x: v.x / length, y: v.y / length, z: v.z / length };
+}
+function crossProduct(v1, v2) {
+    return {
+        x: v1.y * v2.z - v1.z * v2.y,
+        y: v1.z * v2.x - v1.x * v2.z,
+        z: v1.x * v2.y - v1.y * v2.x
+    };
+}
+function vectorsToMatrix(v1, v2, v3) {
+    return [
+        [v1.x, v2.x, v3.x],
+        [v1.y, v2.y, v3.y],
+        [v1.z, v2.z, v3.z]
+    ];
+}
+function matrixToEuler(matrix) {
+    let roll = Math.atan2(matrix[2][1], matrix[2][2]);
+    let pitch = Math.atan2(-matrix[2][0], Math.sqrt(matrix[2][1] ** 2 + matrix[2][2] ** 2));
+    let yaw = Math.atan2(matrix[1][0], matrix[0][0]);
+    return {
+        roll: roll * (180 / Math.PI),
+        pitch: pitch * (180 / Math.PI),
+        yaw: yaw * (180 / Math.PI)
+    };
+}
+document.getElementById('btnEn').addEventListener('click', () => setLanguage('en'));
+document.getElementById('btnZh').addEventListener('click', () => setLanguage('zh'));
+setLanguage('en');
+</script>
+</body>
+</html>

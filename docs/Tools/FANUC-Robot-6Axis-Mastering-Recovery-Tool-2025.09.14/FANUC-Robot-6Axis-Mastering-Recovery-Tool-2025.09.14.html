@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FANUC Robot 6-Axis Mastering Recovery</title>
+  <style>
+    body {
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+      margin: 40px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto 10px;
+    }
+    .lang-switch {
+      display: inline-flex;
+      gap: 8px;
+    }
+    .lang-switch button {
+      padding: 6px 12px;
+      border: 1px solid #bbb;
+      background: #fff;
+      color: #333;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .lang-switch button.active,
+    .lang-switch button:hover {
+      background: #4caf50;
+      color: #fff;
+      border-color: #4caf50;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #222;
+    }
+    .meta {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 900px;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    td, th {
+      border: 1px solid #bbb;
+      padding: 8px 12px;
+      text-align: right;
+    }
+    th {
+      background: #eee;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 100px;
+    }
+    button.action {
+      display: block;
+      margin: 20px auto;
+      padding: 8px 18px;
+      font-size: 15px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button.action:hover {
+      background: #45a049;
+    }
+    .note {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 1.6;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    code {
+      background: #f2f2f2;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .mode-select {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .count-input {
+      width: 80px;
+    }
+  </style>
+</head>
+<body>
+<div class="top-bar">
+  <div></div>
+  <div class="lang-switch">
+    <button id="btnZh">中文</button>
+    <button id="btnEn" class="active">English</button>
+  </div>
+</div>
+
+<h2 id="pageTitle">发那科机器人6轴零点恢复Web版</h2>
+<div class="meta" id="pageMeta">作者：赵梦康　日期：2025-09-14</div>
+
+<div class="note" id="noteBlock">
+  <p id="noteA"><b>a</b>：报警时的 Master 脉冲 <code>$DMR_GRP[1].$MASTER_COUN[1...6]</code></p>
+  <p id="noteB"><b>b</b>：报警时的当前位置脉冲 <code>$DMR_GRP[1].$SPC_COUNT[1...6]</code></p>
+  <p id="noteC"><b>c</b>：清除 SRVO-075 后的脉冲 <code>$DMR_GRP[1].$SPC_COUNT[1...6]</code></p>
+  <p id="noteKnown"><b>公式计算(b已知)：</b><br>
+  <code>d = a - 计数 × 524288</code><br>
+  其中 <code>计数 = floor(b / 524288) + (c > 0 ? 1 : 0)</code><br></p>
+  <p id="noteUnknown"><b>公式计算(b未知)：</b><br>
+  <code>d = a - 计数 × 524288</code><br></p>
+  <p id="noteFinal"><br>说明：524288 脉冲 = 1 转</p>
+</div>
+
+<div class="mode-select">
+  <label><input type="radio" name="mode" value="b_known" checked> <span id="labelKnown">b 已知</span></label>
+  <label style="margin-left:20px;"><input type="radio" name="mode" value="b_unknown"> <span id="labelUnknown">b 未知</span></label>
+</div>
+
+<table id="dataTable">
+  <thead>
+    <tr>
+      <th id="thJoint">关节</th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th class="count-input-header" id="thCountInput">计数(输入)</th>
+      <th class="count-display-header" id="thCountCalc">计数(计算)</th>
+      <th id="thD">d (计算结果)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>J1</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="count-input-cell"><input type="number" class="count-input"></td>
+      <td class="count-display"></td>
+      <td class="d"></td>
+    </tr>
+    <tr>
+      <td>J2</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="count-input-cell"><input type="number" class="count-input"></td>
+      <td class="count-display"></td>
+      <td class="d"></td>
+    </tr>
+    <tr>
+      <td>J3</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="count-input-cell"><input type="number" class="count-input"></td>
+      <td class="count-display"></td>
+      <td class="d"></td>
+    </tr>
+    <tr>
+      <td>J4</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="count-input-cell"><input type="number" class="count-input"></td>
+      <td class="count-display"></td>
+      <td class="d"></td>
+    </tr>
+    <tr>
+      <td>J5</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="count-input-cell"><input type="number" class="count-input"></td>
+      <td class="count-display"></td>
+      <td class="d"></td>
+    </tr>
+    <tr>
+      <td>J6</td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td><input type="number"></td>
+      <td class="count-input-cell"><input type="number" class="count-input"></td>
+      <td class="count-display"></td>
+      <td class="d"></td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="action" id="calcButton" onclick="calcD()">计算</button>
+
+<script>
+const BLOCK = 524288;
+const translations = {
+  zh: {
+    title: '发那科机器人6轴零点恢复',
+    pageTitle: '发那科机器人6轴零点恢复Web版',
+    pageMeta: '作者：赵梦康　日期：2025-09-14',
+    noteA: 'a：报警时的 Master 脉冲',
+    noteB: 'b：报警时的当前位置脉冲',
+    noteC: 'c：清除 SRVO-075 后的脉冲',
+    noteKnown: '公式计算(b已知)：',
+    noteKnownFormula: 'd = a - 计数 × 524288',
+    noteKnownDetail: '其中 计数 = floor(b / 524288) + (c > 0 ? 1 : 0)',
+    noteUnknown: '公式计算(b未知)：',
+    noteUnknownFormula: 'd = a - 计数 × 524288',
+    noteFinal: '说明：524288 脉冲 = 1 转',
+    modeKnown: 'b 已知',
+    modeUnknown: 'b 未知',
+    thJoint: '关节',
+    thCountInput: '计数(输入)',
+    thCountCalc: '计数(计算)',
+    thD: 'd (计算结果)',
+    calcButton: '计算'
+  },
+  en: {
+    title: 'FANUC Robot 6-Axis Zero Reset',
+    pageTitle: 'FANUC Robot 6-Axis Zero Reset Web Tool',
+    pageMeta: 'Author: Zhao Mengkang  Date: 2025-09-14',
+    noteA: 'a: Master pulse at alarm',
+    noteB: 'b: current position pulse at alarm',
+    noteC: 'c: pulse after clearing SRVO-075',
+    noteKnown: 'Formula when b is known:',
+    noteKnownFormula: 'd = a - count × 524288',
+    noteKnownDetail: 'where count = floor(b / 524288) + (c > 0 ? 1 : 0)',
+    noteUnknown: 'Formula when b is unknown:',
+    noteUnknownFormula: 'd = a - count × 524288',
+    noteFinal: 'Note: 524288 pulses = 1 revolution',
+    modeKnown: 'b known',
+    modeUnknown: 'b unknown',
+    thJoint: 'Joint',
+    thCountInput: 'Count (input)',
+    thCountCalc: 'Count (calculated)',
+    thD: 'd (result)',
+    calcButton: 'Calculate'
+  }
+};
+
+function floorDiv(x, y) {
+  let q = Math.trunc(x / y);
+  if (x < 0 && x % y !== 0) q -= 1;
+  return q;
+}
+
+function setLanguage(lang) {
+  const data = translations[lang];
+  if (!data) return;
+
+  document.documentElement.lang = lang;
+  document.title = data.title;
+  document.getElementById('pageTitle').textContent = data.pageTitle;
+  document.getElementById('pageMeta').textContent = data.pageMeta;
+  document.getElementById('noteA').innerHTML = '<b>a</b>：' + data.noteA + ' <code>$DMR_GRP[1].$MASTER_COUN[1...6]</code>';
+  document.getElementById('noteB').innerHTML = '<b>b</b>：' + data.noteB + ' <code>$DMR_GRP[1].$SPC_COUNT[1...6]</code>';
+  document.getElementById('noteC').innerHTML = '<b>c</b>：' + data.noteC + ' <code>$DMR_GRP[1].$SPC_COUNT[1...6]</code>';
+  document.getElementById('noteKnown').innerHTML = '<b>' + data.noteKnown + '</b><br>';
+  document.getElementById('noteKnown').innerHTML += '<code>' + data.noteKnownFormula + '</code><br>';
+  document.getElementById('noteKnown').innerHTML += data.noteKnownDetail ? '其中 <code>' + data.noteKnownDetail + '</code><br>' : '';
+  document.getElementById('noteUnknown').innerHTML = '<b>' + data.noteUnknown + '</b><br>';
+  document.getElementById('noteUnknown').innerHTML += '<code>' + data.noteUnknownFormula + '</code><br>';
+  document.getElementById('noteFinal').textContent = data.noteFinal;
+  document.getElementById('labelKnown').textContent = data.modeKnown;
+  document.getElementById('labelUnknown').textContent = data.modeUnknown;
+  document.getElementById('thJoint').textContent = data.thJoint;
+  document.getElementById('thCountInput').textContent = data.thCountInput;
+  document.getElementById('thCountCalc').textContent = data.thCountCalc;
+  document.getElementById('thD').textContent = data.thD;
+  document.getElementById('calcButton').textContent = data.calcButton;
+
+  document.getElementById('btnZh').classList.toggle('active', lang === 'zh');
+  document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+}
+
+function updateMode() {
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+  const rows = document.querySelectorAll('#dataTable tbody tr');
+
+  rows.forEach(row => {
+    const bInput = row.cells[2].querySelector('input');
+    const countInputCell = row.querySelector('.count-input-cell');
+    const countDisplay = row.querySelector('.count-display');
+    if (mode === 'b_known') {
+      bInput.disabled = false;
+      countInputCell.style.display = 'none';
+      countDisplay.style.display = 'table-cell';
+    } else {
+      bInput.disabled = true;
+      bInput.value = '';
+      countInputCell.style.display = 'table-cell';
+      countDisplay.style.display = 'none';
+    }
+  });
+
+  document.querySelector('.count-input-header').style.display = (mode === 'b_unknown') ? 'table-cell' : 'none';
+  document.querySelector('.count-display-header').style.display = (mode === 'b_known') ? 'table-cell' : 'none';
+}
+
+function calcD() {
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+  const rows = document.querySelectorAll('#dataTable tbody tr');
+
+  rows.forEach(row => {
+    const a = parseInt(row.cells[1].querySelector('input').value) || 0;
+    const c = parseInt(row.cells[3].querySelector('input').value) || 0;
+    let count, d;
+
+    if (mode === 'b_known') {
+      const b = parseInt(row.cells[2].querySelector('input').value) || 0;
+      let q = floorDiv(b, BLOCK);
+      let inc = c > 0 ? 1 : 0;
+      count = q + inc;
+      row.querySelector('.count-display').textContent = count;
+    } else {
+      count = parseInt(row.querySelector('.count-input').value) || 0;
+    }
+
+    d = a - count * BLOCK;
+    row.querySelector('.d').textContent = d;
+  });
+}
+
+document.querySelectorAll('input[name="mode"]').forEach(radio => {
+  radio.addEventListener('change', updateMode);
+});
+
+document.getElementById('btnZh').addEventListener('click', () => setLanguage('zh'));
+document.getElementById('btnEn').addEventListener('click', () => setLanguage('en'));
+
+setLanguage('en');
+updateMode();
+</script>
+</body>
+</html>
