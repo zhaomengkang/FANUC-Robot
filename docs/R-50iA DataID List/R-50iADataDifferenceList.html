@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>R-50iA Data Difference List</title>
+<style>
+  :root{--bg:#0b1220;--card:#121a2a;--text:#e7eefc;--muted:#9fb0d0;--line:#24314c;--danger:#ff5a6b;--ok:#2dd4bf}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(180deg,var(--bg),#060a14);color:var(--text)}
+  .wrap{max-width:1250px;margin:28px auto;padding:0 16px}
+  .card{background:rgba(18,26,42,.92);border:1px solid rgba(36,49,76,.85);border-radius:14px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+  h1{margin:0 0 12px;font-size:18px}
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.row+.row{margin-top:10px}
+  .btn{background:#17233a;border:1px solid rgba(36,49,76,.9);color:var(--text);padding:10px 12px;border-radius:10px;cursor:pointer;font-size:13px}
+  .btn.primary{background:linear-gradient(180deg,#1f6feb,#1b56c9);border-color:rgba(78,161,255,.55)}
+  .fileTag{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;border:1px dashed rgba(36,49,76,.9);background:rgba(15,23,41,.65);min-width:320px}
+  input[type=file]{display:none}.fileName{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:680px}
+  .badge{display:inline-block;font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid rgba(36,49,76,.9);background:rgba(15,23,41,.6);color:#cfe0ff}
+  .search{flex:1;min-width:240px;background:rgba(15,23,41,.65);border:1px solid rgba(36,49,76,.9);color:var(--text);padding:10px 12px;border-radius:10px;outline:none;font-size:13px}
+  .status{color:var(--muted);font-size:12px;min-height:18px}.status.error{color:var(--danger)}
+  .diff{font-weight:600}.diff.deleted{color:var(--danger)}.diff.added{color:var(--ok)}
+  .tableWrap{margin-top:14px;border:1px solid rgba(36,49,76,.85);border-radius:10px;overflow:auto;max-height:calc(100vh - 230px)}
+  table{width:100%;border-collapse:collapse;font-size:12px;min-width:900px}th,td{padding:9px 10px;border-bottom:1px solid rgba(36,49,76,.7);text-align:left;vertical-align:top}th{position:sticky;top:0;background:#17233a;color:#cfe0ff;font-weight:600;z-index:1}tbody tr:hover td{background:rgba(78,161,255,.06)}tbody tr:last-child td{border-bottom:none}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+  <h1>R-50iA Data Differences</h1>
+  <div class="row">
+    <label class="btn primary" for="compareOneFile">Select Compare 1</label><input id="compareOneFile" type="file" accept=".html,.htm">
+    <span class="fileTag"><span class="badge">Compare 1</span><span id="compareOneName" class="fileName">No file selected</span></span>
+  </div>
+  <div class="row">
+    <label class="btn primary" for="compareTwoFile">Select Compare 2</label><input id="compareTwoFile" type="file" accept=".html,.htm">
+    <span class="fileTag"><span class="badge">Compare 2</span><span id="compareTwoName" class="fileName">No file selected</span></span>
+  </div>
+  <div class="row"><input id="search" class="search" placeholder="Search number, type, variable, or description"><span id="count" class="badge">Deleted 0, Added 0</span></div>
+  <div id="status" class="status">Trying to load files from the same folder...</div>
+  <div class="tableWrap"><table><thead><tr><th style="width:80px">Difference</th><th style="width:70px">#</th><th style="width:220px">Type</th><th>Variable</th><th>ID Name</th></tr></thead><tbody id="tbody"></tbody></table></div>
+</div></div>
+<script>
+const compareOneInput = document.getElementById('compareOneFile');
+const compareTwoInput = document.getElementById('compareTwoFile');
+const compareOneName = document.getElementById('compareOneName');
+const compareTwoName = document.getElementById('compareTwoName');
+const status = document.getElementById('status');
+const tbody = document.getElementById('tbody');
+const count = document.getElementById('count');
+const search = document.getElementById('search');
+let differenceRows = [];
+
+function parseRows(html) {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  return [...doc.querySelectorAll('#tbody tr')].map(row => {
+    const cells = [...row.querySelectorAll('td')].map(cell => cell.textContent.trim());
+    return cells.length >= 4 ? { number: cells[0], type: cells[1], name: cells[2], description: cells[3] } : null;
+  }).filter(Boolean);
+}
+
+function render() {
+  const query = search.value.trim().toLowerCase();
+  const rows = differenceRows.filter(row => Object.values(row).some(value => value.toLowerCase().includes(query)));
+  tbody.innerHTML = rows.map(row => `<tr><td class="diff ${row.diff === 'Deleted' ? 'deleted' : 'added'}">${row.diff}</td><td>${escapeHtml(row.number)}</td><td>${escapeHtml(row.type)}</td><td class="mono">${escapeHtml(row.name)}</td><td class="mono">${escapeHtml(row.description)}</td></tr>`).join('');
+  const deleted = differenceRows.filter(row => row.diff === 'Deleted').length;
+  const added = differenceRows.filter(row => row.diff === 'Added').length;
+  count.textContent = `Deleted ${deleted}, Added ${added}${query ? `, Showing ${rows.length}` : ''}`;
+}
+
+function escapeHtml(value) {
+  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function compare(compareOneHtml, compareTwoHtml) {
+  const compareOneRows = parseRows(compareOneHtml);
+  const compareTwoRows = parseRows(compareTwoHtml);
+  const compareOneNames = new Set(compareOneRows.map(row => row.name));
+  const compareTwoNames = new Set(compareTwoRows.map(row => row.name));
+  const deletedRows = compareOneRows.filter(row => !compareTwoNames.has(row.name)).map(row => ({ ...row, diff: 'Deleted' }));
+  const addedRows = compareTwoRows.filter(row => !compareOneNames.has(row.name)).map(row => ({ ...row, diff: 'Added' }));
+  differenceRows = [...deletedRows, ...addedRows];
+  render();
+  status.textContent = `Compare 1: ${compareOneRows.length} records, Compare 2: ${compareTwoRows.length} records. Differences are matched by variable name.`;
+  status.className = 'status';
+}
+
+function readFile(file) { return file ? file.text() : Promise.reject(new Error('未选择文件')); }
+
+async function compareSelected() {
+  if (compareOneInput.files[0]) compareOneName.textContent = compareOneInput.files[0].name;
+  if (compareTwoInput.files[0]) compareTwoName.textContent = compareTwoInput.files[0].name;
+  if (!compareOneInput.files[0] || !compareTwoInput.files[0]) return;
+  try { compare(await readFile(compareOneInput.files[0]), await readFile(compareTwoInput.files[0])); }
+  catch (error) { status.textContent = error.message; status.className = 'status error'; }
+}
+
+compareOneInput.addEventListener('change', compareSelected);
+compareTwoInput.addEventListener('change', compareSelected);
+search.addEventListener('input', render);
+
+Promise.all([
+  fetch('R-50iA Data List(Robot Version_ V10.10P-34).html').then(response => response.text()),
+  fetch('var_id_name_export.html').then(response => response.text())
+]).then(([sourceHtml, exportHtml]) => compare(sourceHtml, exportHtml))
+  .catch(() => { status.textContent = 'Automatic loading failed. Please select both HTML files above.'; status.className = 'status error'; });
+</script>
+</body>
+</html>
