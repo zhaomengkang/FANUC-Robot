@@ -6,7 +6,6 @@
 -- 'R, SR, PR, DI/DO, RI/RO,AI/AO, GI/GO, F, M, UALM
 -- [Author]: Mengk
 -- [E-mail]: 964210817z@gmail.com
--- [Version]: V25.7.28  28/JUL/2025
 --%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 PROGRAM A_COMMENT
 %COMMENT = 'CommentTool'
@@ -23,6 +22,7 @@ PROGRAM A_COMMENT
 %INCLUDE kliotyps
 
 CONST
+VER     = ' V2026.10.03'
 TERM 	= '$#$'
 SPLIT	= ','
 MAX_CMD = 15
@@ -599,7 +599,7 @@ BEGIN
 				is_cr = TRUE
 			ENDIF
 		ENDIF
-	-- 2021-  ļ ĩ    
+	-- 2021-  募 末    
 	UNTIL  (file_sta = 2021) OR(s_len = 254) OR is_cr
 	IF(s_len>0)THEN
 		RETURN (c_str)
@@ -657,7 +657,7 @@ BEGIN
 	WRITE TPDISPLAY(CHR(128),CHR(137))
 	WRITE TPPROMPT(CHR(128),CHR(137))
 	WRITE TPSTATUS(CHR(128),CHR(137))
-    WRITE TPSTATUS('Comment Tool V25.7.28')
+    WRITE TPSTATUS('Comment Tool'+VER)
 	WRITE TPDISPLAY('Select Read RobotComment.CSV device:',CR)
 	WRITE TPDISPLAY('1 :Mem Card  (MC: )',CR)
 	WRITE TPDISPLAY('2 :USB Disk  (UD1:)',CR)
@@ -958,14 +958,13 @@ BEGIN
 	FORCE_SPMENU(TP_PANEL,SPI_TPUSER,1)
 	CLR_WND
 	
-	WRITE TPSTATUS('Comment Tool V25.7.28  Info')
+	WRITE TPSTATUS('Comment Tool'+VER)
 	WRITE TPDISPLAY('******************************************',CR)
 	WRITE TPDISPLAY('Import/export tool FOR:',CR)
 	WRITE TPDISPLAY('R, SR, PR, DI/DO, RI/RO,',CR)
 	WRITE TPDISPLAY('AI/AO, GI/GO, F, M, UALM',CR,CR)
 	WRITE TPDISPLAY('Author: Mengk',CR)
 	WRITE TPDISPLAY('E-mail: 964210817z@gmail.com',CR)
-	WRITE TPDISPLAY('Version: V25.7.28  28/JUL/2025',CR)
 	WRITE TPDISPLAY('******************************************',CR)
 	WRITE TPPROMPT('Please Enter 1:  ')
 	READ TPPROMPT(option_sel)
@@ -976,7 +975,7 @@ BEGIN
 	WRITE TPDISPLAY(CHR(128),CHR(137))
 	WRITE TPPROMPT(CHR(128),CHR(137))
 	WRITE TPSTATUS(CHR(128),CHR(137))
-	WRITE TPSTATUS('Comment Tool V25.7.28')
+	WRITE TPSTATUS('Comment Tool'+VER)
 	WRITE TPDISPLAY('Select Option:',CR)
 	WRITE TPDISPLAY('1 :Export comment -> (*.csv)',CR)
 	WRITE TPDISPLAY('2 :Import comment <-(*.csv)',CR)
